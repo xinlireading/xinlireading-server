@@ -19,14 +19,14 @@ body {
 .title {
 	font-size: 35;
 	color: white;
-	font-family: Verdana
+	font-family: Georgia, "Times New Roman", Times, serif;
 }
 .context {
 	color: white;
 	text-align: center;
 	font-size: 14;
 	color: white;
-	font-family: Verdana;
+	font-family: Georgia, "Times New Roman", Times, serif;
 	margin-left: 250;
 	margin-right: 250;
 }
