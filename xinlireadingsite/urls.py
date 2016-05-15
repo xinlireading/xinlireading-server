@@ -17,6 +17,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-	url(r'^xinlireading/', include('xinlireading.urls')),
+	url(r'^', include('xinlireading.urls')),
     url(r'^admin/', admin.site.urls),
 ]
