@@ -49,6 +49,11 @@ class Activity(models.Model):
 # 会员
 class Person(models.Model):
 	name = models.CharField(max_length=50)
+	favorite_books = models.ManyToManyField(
+		Book,
+		through = "PersonFavoriteBook",
+		through_fields = ('person', 'book'),
+	)
 
 	def __str__(self):
 		return self.name
@@ -66,7 +71,7 @@ class ReadingGroup(models.Model):
 	def __str__(self):
 		return self.name
 
-# 读书群会员资格
+# 读书群会员资格 Group-Person
 class ReadingGroupMembership(models.Model):
 	reading_group = models.ForeignKey(ReadingGroup, on_delete=models.CASCADE)
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -82,3 +87,11 @@ class Note(models.Model):
 
 	def __str__(self):
 		return self.title
+
+# 用户收藏书籍 Person-Book
+class PersonFavoriteBook(models.Model):
+	person = models.ForeignKey(Person, on_delete=models.CASCADE)
+	book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+	def __str__(self):
+		 return self.book.title + ": " + self.person.name
