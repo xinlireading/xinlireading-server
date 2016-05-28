@@ -30,7 +30,9 @@ class Article(models.Model):
 
 # 评分
 class Grade(models.Model):
-	book = models.ForeignKey(Book, on_delete=models.CASCADE)
+	book = models.OneToOneField(Book, on_delete=models.CASCADE)
+	reader_count = models.IntegerField(default=0)
+	score = models.FloatField(default=0)
 
 	def __str__(self):
 		return self.book.title
@@ -74,7 +76,7 @@ class ReadingGroupMembership(models.Model):
 
 # 读书笔记
 class Note(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	reading_group_membership = models.ForeignKey(ReadingGroupMembership, on_delete=models.CASCADE)
 	title = models.CharField(max_length=200)
 	content = models.CharField(max_length=100000)
 
