@@ -16,8 +16,13 @@ class Book(models.Model):
 	type = models.IntegerField()
 	title = models.CharField(max_length=200)
 
+	def __init__(self, type, title):
+		self.type = types
+		self.title = title
+
 	def __str__(self):
 		return self.title
+
 
 # 领读文章
 class Article(models.Model):
@@ -25,8 +30,14 @@ class Article(models.Model):
 	title = models.CharField(max_length=200)
 	content = models.CharField(max_length=900000)
 
+	def __init__(self, book, title, content):
+		self.book = book
+		self.title = title
+		self.content = content
+
 	def __str__(self):
 		return self.title
+
 
 # 评分
 class Grade(models.Model):
@@ -34,8 +45,14 @@ class Grade(models.Model):
 	reader_count = models.IntegerField(default=0)
 	score = models.FloatField(default=0)
 
+	def __init__(self, book, reader_count, score):
+		self.book = book
+		self.reader_count = reader_count
+		self.score = score
+
 	def __str__(self):
 		return self.book.title
+
 
 # 读书活动
 class Activity(models.Model):
@@ -43,8 +60,14 @@ class Activity(models.Model):
 	start_date = models.DateTimeField()
 	duration = models.IntegerField()
 
+	def __init__(self, book, start_date, duration):
+		self.book = book
+		self.start_date = start_date
+		self.duration = duration
+
 	def __str__(self):
 		return self.book.title + str(self.start_date)
+
 
 # 会员
 class Person(models.Model):
@@ -54,6 +77,7 @@ class Person(models.Model):
 		through = "PersonFavoriteBook",
 		through_fields = ('person', 'book'),
 	)
+
 
 	def __str__(self):
 		return self.name
@@ -85,13 +109,23 @@ class Note(models.Model):
 	title = models.CharField(max_length=200)
 	content = models.CharField(max_length=100000)
 
+	def __init__(self, reading_group_membership, title, content):
+		self.reading_group_membership = reading_group_membership
+		self.title = title
+		self.content = content
+
 	def __str__(self):
 		return self.title
+
 
 # 用户收藏书籍 Person-Book
 class PersonFavoriteBook(models.Model):
 	person = models.ForeignKey(Person, on_delete=models.CASCADE)
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
+	def __init__(self, person, book):
+		self.person = person
+		self.book = book
+		
 	def __str__(self):
 		 return self.book.title + ": " + self.person.name
