@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>心理读书会</title>
+		<title>心理读书会: 在线读书小组</title>
+		{% load staticfiles %}
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'xinlireading/images/icon.ico' %}" />
+
 	</head>
 
 	<body>
 		{% load staticfiles %}
-		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/style.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
 
-		<img class="logo" src="{% static 'xinlireading/images/logo.jpg' %}" />
+		<nav class="navbar navbar-inverse navbar-fixed-top navbar-fixed-top-custom">
+      <div class="container-fluid">
+        <div class="navbar-header navbar-header-custom">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">心理读书会</a>
+        </div>
 
-		<div class="container">
-			<p class="title">
-				心理读书会
-			</p>
-			<p class="context">
-				你有多久没有认真读完一本书了？让浮躁的内心安静下来，安静下来读一本不错的书。如果可以，每月泛读四本书、精读一本书应该是能够完成的吧！这样算下来一年就能看52本了。
-				<br />
-				加入心理读书会吧，全国首家心理类线上读书会，语音分享、思维导图、小组打卡，对抗这烦人的惰性！
-			</p>
+				<div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right navbar-right-custom">
+						<button type="button" class="btn btn-primary btn-primary-custom">注册</button>
+						<button type="button" class="btn btn-primary btn-primary-custom">登陆</button>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+		<div class="data">
+			<div class="blackboard">
+				<p class="title">
+					你有多久没有<br/>静下心来看一本书了
+				</p>
+				<p class="content">
+					在小组的督促下坚持每周共读一本书，<br/>享受共同成长的乐趣。
+				</p>
+				<button type="button" class="btn btn-primary btn-primary-custom">立刻开始</button>
+			</div>
 		</div>
+
 	<body>
 </html>

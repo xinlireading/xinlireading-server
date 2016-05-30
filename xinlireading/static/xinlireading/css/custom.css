@@ -1,0 +1,104 @@
+.container-fluid {
+  padding-right: 25px;
+  padding-left: 25px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.navbar-fixed-top-custom {
+  background-color: #ECA739;
+  border-color: #ECA739;
+  font-size: 10px;
+}
+.navbar-header-custom .navbar-brand {
+  font-size: 28px;
+}
+.navbar-right-custom {
+  margin-top: 12px;
+}
+
+.btn-primary-custom {
+  color: white;
+  background-color: #ECA739;
+  border-color: white;
+  padding: 2px 20px;
+  border-radius: 0px;
+  margin-left: 0px;
+  margin-right: 10px;
+  font-weight: lighter;
+}
+
+.btn-primary-custom:hover {
+  opacity: 0.7;
+  background-color: #ECA739;
+  border-color: white
+
+}
+.navbar-right-custom .btn-primary-custom:active {
+  background: #ECA739;
+  border-color: white;
+  outline: none
+}
+
+.btn-primary-custom:focus {
+  background-color: #ECA739;
+  border-color: white;
+  outline: none
+}
+.navbar-header-custom {
+}
+
+.navbar-header-custom .collapsed {
+  border-color: white
+}
+
+.navbar-header-custom .navbar-brand {
+  color: white
+}
+
+.data {
+  overflow: auto;
+  background-color: green;
+  height: 800px;
+  background-image: url(../images/books-reading-chinese-students.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.blackboard {
+  height: 350px;
+  width: 40%;
+  min-width: 310px;
+  max-width: 455px;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin-left: 80px;
+  margin-top: 160px;
+  text-align: center;
+
+}
+
+.blackboard .title {
+  color: white;
+  padding-top: 50px;
+  font-size: 30px;
+}
+
+.blackboard .content {
+  color: rgba(255, 255, 255, 0.7);;
+  font-size: 18px;
+  padding: 25px;
+  font-weight: lighter;
+
+}
+.blackboard .btn-primary-custom {
+  border-color: #ECA739;
+  align-items: center;
+  font-size: 16px;
+}
+
+.blackboard .btn-primary-custom:active {
+  background: #ECA739;
+  border-color: #ECA739;
+  align-items: center;
+  outline: none
+
+}
