@@ -20,5 +20,8 @@ from django.conf import settings
 
 urlpatterns = [
 	url(r'^', include('xinlireading.urls')),
+	url(r'^home/', include('xinlireading.urls')),
+    url(r'^signup/', include('xinlireading.urls')),
+    url(r'^signin/', include('xinlireading.urls')),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

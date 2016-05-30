@@ -1,4 +1,4 @@
-#from django.shortcuts import render
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
@@ -14,29 +14,36 @@ mobile_uas = [
 	'tosh','tsm-','upg1','upsi','vk-v','voda','wap-','wapa','wapi','wapp',
 	'wapr','webc','winw','winw','xda','xda-'
 	]
- 
+
 mobile_ua_hints = [ 'SymbianOS', 'Opera Mini', 'iPhone' ]
- 
+
 def mobileBrowser(request):
     ''' Super simple device detection, returns True for mobile devices '''
- 
+
     mobile_browser = False
     ua = request.META['HTTP_USER_AGENT'].lower()[0:4]
- 
+
     if (ua in mobile_uas):
         mobile_browser = True
     else:
         for hint in mobile_ua_hints:
             if request.META['HTTP_USER_AGENT'].find(hint) > 0:
                 mobile_browser = True
- 
+
     return mobile_browser
 
 # Create your views here.
-def index(request):
-	if mobileBrowser(request):
-		template = loader.get_template('xinlireading/m_index.html')
-	else:
-		template = loader.get_template('xinlireading/index.html')
-	return HttpResponse(template.render(request))
-	# return HttpResponse('aaa')
+def home(request):
+	context = {
+		'is_signup': True,
+		'is_signin': True
+	}
+	return render(request, 'xinlireading/home.html', context)
+
+def signup(request):
+	context = {'is_signup': True }
+	return render(request, 'xinlireading/signup.html', context)
+
+def signin(request):
+	context = {'is_signin': True }
+	return render(request, 'xinlireading/signin.html', context)

@@ -57,7 +57,7 @@
 
 .data {
   overflow: auto;
-  background-color: green;
+  background-color: white;
   height: 800px;
   background-image: url(../images/books-reading-chinese-students.jpg);
   background-size: 100%;
@@ -84,7 +84,7 @@
 
 .blackboard .content {
   color: rgba(255, 255, 255, 0.7);;
-  font-size: 18px;
+  font-size: 17px;
   padding: 25px;
   font-weight: lighter;
 
@@ -93,6 +93,7 @@
   border-color: #ECA739;
   align-items: center;
   font-size: 16px;
+  padding: 5px 26px;
 }
 
 .blackboard .btn-primary-custom:active {
