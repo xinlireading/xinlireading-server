@@ -124,41 +124,28 @@
   margin-right: 15px;
 }
 
-ul.content-ul li {
+ul.ul-content li {
   display: inline;
 }
 
-.footer-content-text {
+.copyright-content-text {
   color: #909090;
   font-size: 14px;
   font-family: 'PingFang SC';
   display: inline;
 }
 
-.btn-link-custom {
-  color: #909090;
-  display: inline;
-}
-
-.btn-link-custom:hover {
-  color: #c5c1c1
-}
-
-.footer-container {
-    height: auto;
-}
-
 .footer-container {
   padding-top: 12px;
   padding-left: 100px;
 }
-.div1 {
+.footer-container .div-social {
   float: left;
   height: 35px;
   width: 30%;
 }
 
-.div2 {
+.footer-container .div-copyright {
   float: left;
   height: 35px;
   width: 20%;
@@ -166,27 +153,27 @@ ul.content-ul li {
   padding-top: 7px;
 }
 
-.div3 {
+.footer-container .div-about-us {
   float: left;
   height: 35px;
   width: 40%;
   min-width: 190px;
   padding-top: 7px;
 }
-.div3 .content-ul li {
+.div-about-us .ul-content li {
   color: #909090;
 }
 
-.div3 .content-ul li:hover {
+.div-about-us .ul-content li:hover {
   color: #c5c1c1;
   cursor:pointer;
 }
 
-.div3 ul li:after {
+.div-about-us ul li:after {
   content: "|";
   padding: 0 .5em;
 }
 
-.div3 ul li:last-child::after {
+.div-about-us ul li:last-child::after {
   content: none;
 }
