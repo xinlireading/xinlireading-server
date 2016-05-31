@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.views.generic import View
 
 # list of mobile User Agents
 mobile_uas = [
@@ -44,6 +45,14 @@ def signup(request):
 	context = {'is_signup': True }
 	return render(request, 'xinlireading/signup.html', context)
 
-def signin(request):
+
+# def signin(request):
+# 	context = {'is_signin': True }
+# 	return render(request, 'xinlireading/signin.html', context)
+class SigninView(View):
+	template_name = 'xinlireading/signin.html'
 	context = {'is_signin': True }
-	return render(request, 'xinlireading/signin.html', context)
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, self.context)
+
+	# def post(self, request, *args, **kwargs):
