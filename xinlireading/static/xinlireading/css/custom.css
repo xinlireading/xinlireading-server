@@ -230,5 +230,16 @@ ul.ul-content li {
   height: 40px;
   margin: 15px 15px;
   margin-top: 40px;
+}
 
+.has-error .checkbox-custom {
+  color: #838383;
+  margin-left: 11px;
+  font-size: 12px;
+  font-weight: lighter;
+
+}
+
+.checkbox-custom .checkbox {
+  margin-top: 2px;
 }

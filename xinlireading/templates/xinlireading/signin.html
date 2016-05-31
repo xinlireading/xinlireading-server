@@ -1,3 +1,50 @@
 {% extends 'xinlireading/base-reg.html' %}
 
 {% block title %}登陆{% endblock %}
+
+{% block content %}
+
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
+<from>
+  <div class="div-content-signup-container">
+    <div class="div-content-signup-panel">
+      <p class="title">登陆</p>
+      <p class="subtitle">用电子邮箱登陆</p>
+
+      <div class="form-group form-group-custom">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope"></span>
+          </div>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+      </div>
+
+      <div class="form-group form-group-custom">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-lock"></span>
+          </div>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      </div>
+
+      <div class="has-error">
+    <div class="checkbox checkbox-custom">
+      <label>
+        <input class="checkbox" type="checkbox" id="checkboxError" value="option1">
+        保持我在这台电脑的登陆状态。
+      </label>
+    </div>
+  </div>
+
+
+      <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">登陆</button>
+
+      <p class="copyright"><a>忘记密码？</a></p>
+    </div>
+  </div>
+</from>
+{% endblock %}
