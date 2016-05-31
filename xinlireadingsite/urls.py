@@ -17,12 +17,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
-from xinlireading.views import SigninView
+from xinlireading.views import SignupView, SigninView
 
 urlpatterns = [
 	url(r'^', include('xinlireading.urls')),
 	url(r'^home/', include('xinlireading.urls')),
-    url(r'^signup/', include('xinlireading.urls')),
+    # url(r'^signup/', include('xinlireading.urls')),
+    url(r'^signup/', SignupView.as_view()),
     # url(r'^signin/', include('xinlireading.urls')),
     url(r'^signin/', SigninView.as_view()),
     url(r'^admin/', admin.site.urls),
