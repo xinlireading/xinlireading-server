@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.template import loader
+from django.template import loader, RequestContext
 from django.views.generic import View
+from xinlireading.forms import SigninForm
+# import pdb; pdb.set_trace()
 
 # list of mobile User Agents
 mobile_uas = [
@@ -55,4 +57,8 @@ class SigninView(View):
 	def get(self, request, *args, **kwargs):
 		return render(request, self.template_name, self.context)
 
-	# def post(self, request, *args, **kwargs):
+	def post(self, request, *args, **kwargs):
+		form = SigninForm(request.POST)
+		if form.is_valid():
+			return redirect('/dashboard/')
+		return render(request, self.template_name, {'form': form})

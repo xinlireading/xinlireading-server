@@ -7,7 +7,8 @@
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
-<from method="post" action="">
+<form method="post" action="/">
+  {% csrf_token %}
   <div class="div-content-signup-container">
     <div class="div-content-signup-panel">
       <p class="title">登陆</p>
@@ -46,5 +47,5 @@
       <p class="copyright"><a>忘记密码？</a></p>
     </div>
   </div>
-</from>
+</form>
 {% endblock %}
