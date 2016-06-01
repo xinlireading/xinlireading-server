@@ -84,11 +84,11 @@ class SigninView(View):
 	def post(self, request, *args, **kwargs):
 
 		# Method 1:
-		form = SigninForm(request.POST)
-		print(form)
-		if form.is_valid():
-			return redirect('/success/')
-		return redirect('/invalid/')
+		# form = SigninForm(request.POST)
+		# print(form)
+		# if form.is_valid():
+		# 	return redirect('/success/')
+		# return redirect('/invalid/')
 
 		# Method 2:
 		username = request.POST.get('username')
