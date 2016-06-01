@@ -27,4 +27,6 @@ urlpatterns = [
     # url(r'^signin/', include('xinlireading.urls')),
     url(r'^signin/', SigninView.as_view()),
     url(r'^admin/', admin.site.urls),
+    url(r'^invalid/', include('xinlireading.urls')),
+    url(r'^success/', include('xinlireading.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
