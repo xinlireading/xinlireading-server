@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
-from xinlireading.forms import XLRRegistrationForm, XLRAuthenticationForm
+from xinlireading.forms import XLRRegistrationForm, XLRAuthenticationForm, CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
@@ -70,10 +70,11 @@ class SignupView(View):
 	def post(self, request, *args, **kwargs):
 		print('post')
 		username = request.POST.get('username')
-		password = request.POST.get('password')
+		password = request.POST.get('password1')
 		print(username + ' password: ' + password)
 
-		form = XLRRegistrationForm(request.POST)
+		# form = XLRRegistrationForm(request.POST)
+		form = CustomUserCreationForm(request.POST)
 		print(form.errors)
 		if form.is_valid():
 			form.save()

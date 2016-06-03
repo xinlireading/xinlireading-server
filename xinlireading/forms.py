@@ -3,16 +3,22 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelForm
 
-class XLRRegistrationForm(ModelForm):
+class CustomUserCreationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        self.fields.pop('password2')
+        self.fields['username'].error_messages = {
+            'required': '邮箱不能为空',
+            'invalid': '请输入有效的邮箱地址'
+        }
 
-    # username = forms.EmailField(label='username', max_length=100)
-    # password = forms.CharField(label='password', max_length=100)
+class XLRRegistrationForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(XLRRegistrationForm, self).__init__(*args, **kwargs)
 
     error_messages = {
-        'duplicate_username': '此邮箱已经注册，你可以直接使用此邮箱登陆'
+        'duplicate_username': '此邮箱已经注册，你可以直接登陆'
     }
 
     def clean_username(self):
@@ -24,7 +30,6 @@ class XLRRegistrationForm(ModelForm):
         else:
             return username
 
-
     class Meta:
         model = User
         fields = ('username','password')
@@ -35,6 +40,7 @@ class XLRRegistrationForm(ModelForm):
         # user.email = self.cleaned_data['username']
         # user.set_password(self.cleaned_data['password'])
         user = User.objects.create_user(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+        user.email = self.cleaned_data['username']
         if commit:
             user.save()
         return user
