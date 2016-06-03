@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
-from xinlireading.forms import SignupForm, SigninForm
+from xinlireading.forms import XLRRegistrationForm, XLRAuthenticationForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 # import pdb; pdb.set_trace()
 
@@ -67,10 +68,29 @@ class SignupView(View):
 		return render(request, self.template_name, self.context)
 
 	def post(self, request, *args, **kwargs):
-		form = SignupView(request.POST)
+		print('post')
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		print(username + ' password: ' + password)
+
+		form = XLRRegistrationForm(request.POST)
+		print(form.errors)
 		if form.is_valid():
-			return redirect('/dashboard/')
-		return render(request, self.template_name, {'form': form})
+			form.save()
+			return redirect('/success/')
+		return redirect('/invalid/')
+
+
+		# # Check if an username exists
+		# if User.objects.filter(username = cleaned_info['username']).exists():
+		#
+		# else:
+		# 	u = User.objects.create_user(username=username, password=password)
+		# 	if u is not None:
+		# 		# login(request, u)
+		# 		return redirect('/success/')
+		# 	else:
+		# 		return redirect('/invalid/')
 
 # def signin(request):
 # 	context = {'is_signin': True }
