@@ -71,7 +71,7 @@ class SignupView(View):
 		print('post')
 		username = request.POST.get('username')
 		password = request.POST.get('password1')
-		print(username + ' password: ' + password)
+		# print(username + ' password: ' + password)
 
 		# form = XLRRegistrationForm(request.POST)
 		form = CustomUserCreationForm(request.POST)

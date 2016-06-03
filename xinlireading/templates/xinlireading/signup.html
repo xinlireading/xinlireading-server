@@ -7,7 +7,10 @@
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
-<form method="post" action="">
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
+
+<form method="post" action="" data-toggle="validator" role="form" name="myForm">
   {% csrf_token %}
   {{ form.errors }}
   {{ form.non_field_errors }}
@@ -21,8 +24,9 @@
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-envelope"></span>
           </div>
-          <input type="email" class="form-control" name="username" placeholder="Email">
+          <input type="email" data-error="Incorrect email address" class="form-control" name="username" placeholder="Email" required />
         </div>
+        <div class="help-block with-errors"></div>
       </div>
 
       <div class="form-group form-group-custom">
@@ -30,8 +34,10 @@
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-lock"></span>
           </div>
-          <input type="password" class="form-control" name="password1" placeholder="Password">
-      </div>
+          <input type="password" class="form-control" id="password1" name="password1" placeholder="Password" data-minlength="8" required />
+        </div>
+        <div class="help-block with-errors"></div>
+
       </div>
 
       <div class="form-group form-group-custom">
@@ -39,12 +45,17 @@
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-lock"></span>
           </div>
-          <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+          <input type="password" class="form-control" name="password2" placeholder="Confirm Password"
+                 data-match="#password1" data-match-error="Whoops, these don't match"
+           required />
       </div>
+      <div class="help-block with-errors"></div>
+
       </div>
 
-      <button type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">注册</button>
-
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">注册</button>
+      </div>
       <p class="copyright">创建帐户表示您接受我们的<a>服务条款</a>。</p>
     </div>
   </div>

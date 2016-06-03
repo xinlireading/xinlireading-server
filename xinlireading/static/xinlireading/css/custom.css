@@ -228,8 +228,8 @@ ul.ul-content li {
 .btn-primary-custom-submit {
   width: 336px;
   height: 40px;
-  margin: 15px 15px;
-  margin-top: 40px;
+  margin: 5px 15px;
+  margin-top: 30px;
 }
 
 .has-error .checkbox-custom {
