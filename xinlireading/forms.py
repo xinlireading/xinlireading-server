@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelForm
+from .models import UserProfile
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -22,13 +23,16 @@ class CustomUserCreationForm(UserCreationForm):
         #     'invalid': self.error_messages['invalid_username'],
         #     'unique': self.error_messages['duplicate_username']
         # }
-        
+
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         user.email = self.cleaned_data['username']
+        # user.is_activated = False
         if commit:
             user.save()
+            user_profile = UserProfile.objects.create(user=user, is_activated=False)
+            user_profile.save()
         return user
 
 

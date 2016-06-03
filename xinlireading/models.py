@@ -39,11 +39,12 @@ class Activity(models.Model):
 # 会员
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	name = models.CharField(max_length=50)
-	avatar = models.ImageField()
+	is_activated = models.BooleanField()
+	# name = models.CharField(max_length=50)
+	avatar = models.ImageField(blank=True)
 
 	def __str__(self):
-		return self.name
+		return self.user.username
 
 # 读书群
 class ReadingGroup(models.Model):
