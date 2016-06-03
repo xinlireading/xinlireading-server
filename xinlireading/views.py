@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
-from xinlireading.forms import XLRRegistrationForm, XLRAuthenticationForm, CustomUserCreationForm
+from xinlireading.forms import XLRAuthenticationForm, CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 

@@ -3,47 +3,34 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelForm
 
+
 class CustomUserCreationForm(UserCreationForm):
+    # error_messages = {
+    #     'duplicate_username': '此邮箱已经注册，你可以直接登陆',
+    #     'required_username': '邮箱不能为空',
+    #     'invalid_username': '请输入有效的邮箱地址',
+    # }
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        self.fields.pop('password2')
-        self.fields['username'].error_messages = {
-            'required': '邮箱不能为空',
-            'invalid': '请输入有效的邮箱地址'
-        }
-
-class XLRRegistrationForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(XLRRegistrationForm, self).__init__(*args, **kwargs)
-
-    error_messages = {
-        'duplicate_username': '此邮箱已经注册，你可以直接登陆'
-    }
-
-    def clean_username(self):
-        username = self.cleaned_data['username']
-        if User.objects.filter(username = username).exists():
-            raise forms.ValidationError(
-                self.error_messages['duplicate_username'], code='duplicate_username'
-            )
-        else:
-            return username
-
-    class Meta:
-        model = User
-        fields = ('username','password')
-
+        # self.fields.pop('password2')
+        # del self.fields['password1']
+        # del self.fields['password2']
+        # self.fields['password1'].required = False
+        # self.fields['password2'].required = False
+        # self.fields['username'].error_messages = {
+        #     'required': self.error_messages['required_username'],
+        #     'invalid': self.error_messages['invalid_username'],
+        #     'unique': self.error_messages['duplicate_username']
+        # }
+        
     def save(self, commit=True):
-        # user = super(SignupForm, self).save(commit=False)
-        # user.username = self.cleaned_data['username']
-        # user.email = self.cleaned_data['username']
-        # user.set_password(self.cleaned_data['password'])
-        user = User.objects.create_user(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+        user = super(UserCreationForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
         user.email = self.cleaned_data['username']
         if commit:
             user.save()
         return user
+
 
 class XLRAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(label='username', max_length=100)
