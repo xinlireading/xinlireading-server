@@ -232,6 +232,12 @@ ul.ul-content li {
   margin-top: 10px;
 }
 
+.btn-primary-custom-submit.disabled:hover {
+  background-color: #ECA739;
+  border-color: #ECA739
+
+}
+
 .has-error .checkbox-custom {
   color: #838383;
   margin-left: 11px;
@@ -242,4 +248,11 @@ ul.ul-content li {
 
 .checkbox-custom .checkbox {
   margin-top: 2px;
+}
+
+.data-validate-error {
+  font-size: 12px;
+  /*text-align: center;*/
+  color: #BC342D; /* red */
+  padding-left: 15px
 }

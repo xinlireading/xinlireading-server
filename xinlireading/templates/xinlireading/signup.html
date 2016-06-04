@@ -18,13 +18,22 @@
     <div class="div-content-signup-panel">
       <p class="title">注册</p>
       <p class="subtitle">用电子邮箱注册</p>
-
+      {% if form.errors %}
+        {% for field in form %}
+          {% for error in field.errors %}
+          <!-- <p class="data-validate-error"> {{error}}</p> -->
+           {% if error == 'A user with that username already exists.' %}
+            <p class="data-validate-error">您输入的电子邮件地址已被注册。请重新输入。</p>
+           {% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
       <div class="form-group form-group-custom">
         <div class="input-group">
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-envelope"></span>
           </div>
-          <input type="email" data-error="请输入有效的邮箱地址" class="form-control" name="username" placeholder="Email"  required />
+          <input type="email" data-error="请输入一个有效的电子邮件地址" class="form-control" name="username" placeholder="Email"  required />
         </div>
         <div class="help-block custom-help-block with-errors"></div>
       </div>
@@ -34,7 +43,8 @@
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-lock"></span>
           </div>
-          <input type="password" class="form-control" id="password1" name="password1" placeholder="Password" data-minlength="8" data-error="密码长度最少8位" required />
+          <input type="password" class="form-control" id="password1" name="password1" placeholder="Password"
+                 data-minlength="8" maxlength=20 data-error="密码必须介于 8 至 20 个字符之间；请注意大小写！" required />
         </div>
         <div class="help-block with-errors"></div>
 
@@ -46,7 +56,7 @@
             <span class="glyphicon glyphicon-lock"></span>
           </div>
           <input type="password" class="form-control" name="password2" placeholder="Confirm Password"
-                 data-match="#password1" data-match-error="两次输入的密码不一致" data-error="密码长度最少8位" 
+                 data-match="#password1" data-match-error="两次输入的密码不一致" data-error="密码必须介于 8 至 20 个字符之间；请注意大小写！"
            required />
       </div>
       <div class="help-block with-errors"></div>

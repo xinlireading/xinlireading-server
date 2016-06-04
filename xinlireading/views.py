@@ -5,6 +5,7 @@ from django.views.generic import View
 from xinlireading.forms import XLRAuthenticationForm, CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+# from django.utils import simplejson
 
 # import pdb; pdb.set_trace()
 
@@ -63,9 +64,9 @@ def success(request):
 # 	return render(request, 'xinlireading/signup.html', context)
 class SignupView(View):
 	template_name = 'xinlireading/signup.html'
-	context = {'is_signup': True }
 	def get(self, request, *args, **kwargs):
-		return render(request, self.template_name, self.context)
+		context = {'is_signup': True }
+		return render(request, self.template_name, context)
 
 	def post(self, request, *args, **kwargs):
 		print('post')
@@ -79,7 +80,14 @@ class SignupView(View):
 		if form.is_valid():
 			form.save()
 			return redirect('/success/')
-		return redirect('/invalid/')
+
+		context = {
+					'is_signup': True,
+		 			'form': form
+				}
+		return render(request, self.template_name, context)
+		# return HttpResponse(simplejson.dumps(form.errors), mimetype='application/javascript')
+
 
 
 		# # Check if an username exists
