@@ -4,10 +4,11 @@
   margin-right: auto;
   margin-left: auto;
 }
-.navbar-fixed-top-custom {
+.navbar-static-top-custom {
   background-color: #ECA739;
   border-color: #ECA739;
   font-size: 10px;
+  margin-bottom: 0px;
 }
 .navbar-header-custom .navbar-brand {
   font-size: 28px;
@@ -187,10 +188,9 @@ ul.ul-content li {
 
 .div-content-signup-panel {
   width: 366px;
-  height: 372px;
+  height: 392px;
   background-color: white;
   margin: 0 auto;
-  margin-top: 50px;
 }
 
 .div-content-signup-panel .title {
@@ -228,8 +228,8 @@ ul.ul-content li {
 .btn-primary-custom-submit {
   width: 336px;
   height: 40px;
-  margin: 5px 15px;
-  margin-top: 30px;
+  margin: 0px 15px;
+  margin-top: 10px;
 }
 
 .has-error .checkbox-custom {
