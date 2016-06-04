@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
 from xinlireading.forms import XLRAuthenticationForm, CustomUserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-# from django.utils import simplejson
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # import pdb; pdb.set_trace()
 
@@ -79,6 +79,9 @@ class SignupView(View):
 		print(form.errors)
 		if form.is_valid():
 			form.save()
+			new_user = authenticate(username=form.cleaned_data['username'],
+									password=form.cleaned_data['password1'])
+			login(request, new_user)
 			return redirect('/dashboard/')
 
 		context = {
@@ -117,18 +120,29 @@ class SigninView(View):
 		# return redirect('/invalid/')
 
 		# Method 2:
+		if not request.POST.get('remember_me', None):
+			request.session.set_expiry(0)
+
 		username = request.POST.get('username')
 		password = request.POST.get('password')
-		print(username + ':' +password)
 		user = authenticate(username=username, password=password)
 		print(user)
 		if user is not None:
 			login(request, user)
-			return redirect('/dashboard/')
+			return redirect('/account/dashboard/')
 		else:
-			return redirect('/invalid/')
+			return redirect('/account/invalid/')
 
-class DashboardView(View):
+class DashboardView(LoginRequiredMixin, View):
+	login_url = '/account/signin/'
+    # redirect_field_name = 'redirect_to'
 	template_name = 'xinlireading/dashboard.html'
+
 	def get(self, request, *args, **kwargs):
+		print(request.user)
 		return render(request, self.template_name, None)
+
+	# Logout
+	def post(self, request, *args, **kwargs):
+		logout(request)
+		return redirect('/home/')

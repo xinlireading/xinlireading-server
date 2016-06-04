@@ -7,9 +7,20 @@
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" /> -->
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/dashboard.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
-<script src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
 
 <div class="dashboard-container">
+  <p>{{ user.get_username }}</p>
+  <p>{{ user.email }}</p>
+  <p>{{ user.password }}</p>
+  <p>{{ user.userprofile.is_activated }}</p>
+
+  <form action="/account/logout/" method="post" id="logout_form">
+    {% csrf_token %}
+    <input type="submit" value="Logout now" />
+  </form>
+
+
 </div>
 {% endblock %}
