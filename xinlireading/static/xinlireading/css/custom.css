@@ -82,12 +82,13 @@
   background-image: url(../images/books-reading-chinese-students.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
+  min-width: 500px;
 }
 
 .blackboard {
   height: 350px;
   width: 40%;
-  min-width: 310px;
+  min-width: 350px;
   max-width: 455px;
   background-color: rgba(0, 0, 0, 0.6);
   margin-left: 80px;

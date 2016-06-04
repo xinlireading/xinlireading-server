@@ -1,14 +1,46 @@
 {% extends 'xinlireading/base-reg.html' %}
 {% block content %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
+
 <div class="data">
-	<div class="blackboard">
+	<div id="blackboard" class="blackboard">
 		<p class="title">
 			你有多久没有<br/>静下心来看一本书了
 		</p>
 		<p class="content">
 			在小组的督促下坚持每周共读一本书，<br/>享受共同成长的乐趣。
 		</p>
-		<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/signup'">立刻开始</button>
+		<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/account/signup/'">立刻开始</button>
 	</div>
 </div>
+
+<script>
+HTMLElement.prototype.alpha = function(a) {
+        current_color = getComputedStyle(this).getPropertyValue("background-color");
+        match = /rgba?\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*\d+[\.\d+]*)*\)/g.exec(current_color)
+        a = a > 1 ? (a / 100) : a;
+        this.style.backgroundColor = "rgba(" + [match[1],match[2],match[3],a].join(',') +")";
+      }
+
+window.addEventListener('resize', resize, false);
+function resize() {
+	var blackboard = document.getElementById('blackboard');
+	// blackboard.offsetWidth
+	if (window.innerWidth < 650) {
+		blackboard.alpha(0)
+		$('#blackboard').css('margin-top', 10)
+	} else if (window.innerWidth < 800) {
+		// blackboard.alpha(window.innerWidth/2000)
+		blackboard.alpha(0.6)
+		$('#blackboard').css('margin-top', 80)
+	} else {
+		blackboard.alpha(0.6)
+		$('#blackboard').css('margin-top', 160)
+
+	}
+}
+</script>
+
+
 {% endblock %}
