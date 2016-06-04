@@ -10,9 +10,33 @@
   font-size: 10px;
   margin-bottom: 0px;
 }
+
+.navbar-header-custom {
+}
+
+.navbar-header-custom .collapsed {
+  border-color: white
+}
+
 .navbar-header-custom .navbar-brand {
   font-size: 28px;
+  color: white
 }
+
+/* Header with white background-color */
+.div-header-container .navbar-static-top-custom {
+  background-color: white;
+  border-color: lightgray;
+  font-size: 10px;
+  margin-bottom: 0px;
+}
+
+.div-header-container .navbar-header-custom .navbar-brand {
+  font-size: 28px;
+  color: #ECA739
+}
+
+
 .navbar-right-custom {
   margin-top: 12px;
 }
@@ -45,16 +69,11 @@
   border-color: white;
   outline: none
 }
-.navbar-header-custom {
-}
 
-.navbar-header-custom .collapsed {
-  border-color: white
-}
 
-.navbar-header-custom .navbar-brand {
+/*.navbar-header-custom .navbar-brand {
   color: white
-}
+}*/
 
 .data {
   overflow: auto;

@@ -79,7 +79,7 @@ class SignupView(View):
 		print(form.errors)
 		if form.is_valid():
 			form.save()
-			return redirect('/success/')
+			return redirect('/dashboard/')
 
 		context = {
 					'is_signup': True,
@@ -101,9 +101,6 @@ class SignupView(View):
 		# 	else:
 		# 		return redirect('/invalid/')
 
-# def signin(request):
-# 	context = {'is_signin': True }
-# 	return render(request, 'xinlireading/signin.html', context)
 class SigninView(View):
 	template_name = 'xinlireading/signin.html'
 	context = {'is_signin': True }
@@ -127,6 +124,11 @@ class SigninView(View):
 		print(user)
 		if user is not None:
 			login(request, user)
-			return redirect('/success/')
+			return redirect('/dashboard/')
 		else:
 			return redirect('/invalid/')
+
+class DashboardView(View):
+	template_name = 'xinlireading/dashboard.html'
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, None)
