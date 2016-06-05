@@ -128,14 +128,9 @@
 .footer {
   height: 60px;
   width: 100%;
+  min-width: 1000px;
   background-color: #444444;
-  bottom: 0px;
-}
-
-.footer .content {
-  margin-left: 85px;
-  margin-right: 100px;
-  padding-top: 15px;
+  /*bottom: 0px;*/
 }
 
 .social-icon {
@@ -157,7 +152,10 @@ ul.ul-content li {
 
 .footer-container {
   padding-top: 12px;
-  padding-left: 100px;
+  /*padding-left: 100px;*/
+  padding-left: 5%;
+
+  margin: 0px;
 }
 .footer-container .div-social {
   float: left;
@@ -168,8 +166,8 @@ ul.ul-content li {
 .footer-container .div-copyright {
   float: left;
   height: 35px;
-  width: 20%;
-  min-width: 130px;
+  width: 30%;
+  /*min-width: 200px;*/
   padding-top: 7px;
 }
 

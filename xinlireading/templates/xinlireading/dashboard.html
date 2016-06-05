@@ -5,22 +5,37 @@
 {% load staticfiles %}
 
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" /> -->
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/dashboard.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/dashboard.css' %}" />
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
-
+<!-- <p>{{ user.get_username }}</p>
+<p>{{ user.email }}</p>
+<p>{{ user.password }}</p>
+<p>{{ user.userprofile.is_activated }}</p>
+<form action="/account/logout/" method="post" id="logout_form">
+  {% csrf_token %}
+  <input type="submit" value="Logout now" />
+</form> -->
 <div class="dashboard-container">
-  <p>{{ user.get_username }}</p>
-  <p>{{ user.email }}</p>
-  <p>{{ user.password }}</p>
-  <p>{{ user.userprofile.is_activated }}</p>
 
-  <form action="/account/logout/" method="post" id="logout_form">
-    {% csrf_token %}
-    <input type="submit" value="Logout now" />
-  </form>
 
+  <div class="div-user-info-container">
+    <div class="div-base-userinfo-panel">
+      base-userinfo
+    </div>
+
+    <div class="div-my-posts-total-panel">
+      my-posts-total
+    </div>
+
+    <div class="div-my-books-total-panel">
+      my-books-total
+    </div>
+  </div>
+
+  <div class="div-group-info-container">
+  </div>
 
 </div>
 {% endblock %}
