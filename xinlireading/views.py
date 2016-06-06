@@ -149,3 +149,14 @@ class DashboardView(LoginRequiredMixin, View):
 	def post(self, request, *args, **kwargs):
 		logout(request)
 		return redirect('/home/')
+
+
+class EditProfileView(LoginRequiredMixin, View):
+	login_url = "/account/signin/"
+	template_name = "xinlireading/edit-profile.html"
+
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, None)
+
+	def post(self, request, *args, **kwargs):
+		return render(request, self.template_name, None)

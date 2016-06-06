@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 from django.contrib.auth.views import login
-from xinlireading.views import SignupView, SigninView, DashboardView
+from xinlireading.views import SignupView, SigninView, DashboardView, EditProfileView
 
 urlpatterns = [
 	# url(r'^/', views.home, name='home'),
@@ -12,5 +12,6 @@ urlpatterns = [
 	url(r'^invalid/', views.invalid, name='invalid'),
 	# url(r'^account/', DashboardView.as_view(), name='dashboard'),
 	url(r'^account/dashboard/', DashboardView.as_view(), name='dashboard'),
-	url(r'^test/', views.test, name='test')
+	url(r'^test/', views.test, name='test'),
+	url(r'^settings/profile/', EditProfileView.as_view(), name='edit-profile')
 ]

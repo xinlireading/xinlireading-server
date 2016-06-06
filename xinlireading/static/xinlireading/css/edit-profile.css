@@ -1,0 +1,232 @@
+.div-root-container {
+  width: 100%;
+  height: 100%;
+  background-color: #F2F2F2;
+}
+
+.div-title-panel {
+  height: 75px;
+  /*background-color: #e7e9d1;*/
+  margin-left: 45px;
+  padding-top: 18px;
+}
+
+.div-title-panel label {
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.div-baseinfo-label-panel {
+  height: 60px;
+  background-color: white;
+  margin: 0px 45px;
+  padding-left: 15px;
+  padding-top: 18px;
+}
+
+.div-baseinfo-label-panel label {
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.div-userinfo-panel {
+  /*height: 320px;*/
+  width: auto;
+  background-color: white;
+  margin: 2px 45px;
+}
+.div-userinfo-base-panel {
+  display: table;
+  width: 100%;
+}
+.div-photo-panel {
+  display: table-cell;
+  width: 40%;
+  background-color: #c9d787;
+}
+.div-photo-panel ul li {
+  list-style-type: none;
+}
+.btn-link-custom {
+  font-size: 13px;
+  margin-left: 60px;
+  margin-top: 4px;
+}
+
+.btn-link-custom span {
+  margin-right: 5px
+}
+
+.img-user-profile-photo {
+  width: 160px;
+  height: 160px;
+  margin-left: 34px;
+  margin-top: 15px;
+}
+
+.div-profile-panel {
+  display: table-cell;
+  width: 60%;
+  background-color: green;
+  vertical-align: top
+}
+
+.div-profile-base-panel {
+  width: 100%;
+  margin: 0px;
+  margin-top: 30px;
+  background-color: #cfc291;
+  display: table;
+}
+
+.div-labels-panel {
+  display: table-cell;
+  width: 70px;
+}
+
+.div-labels-panel div {
+  width: 60px;
+  height: 50px;
+  /*float: left;*/
+  /*background-color: #1FAB21;*/
+}
+
+.div-labels-panel label {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  /*margin-right: 10px;*/
+  font-size: 13px;
+  font-weight: normal;
+  color: #3a3a3a;
+  /*background-color: #AFEEAF;*/
+}
+
+.div-inputs-panel {
+  display: table-cell;
+}
+
+.div-inputs-wrapper-panel {
+  width: 100%;
+  height: 100%;
+  background-color: #a1e8d9;
+  display: table;
+}
+.div-input1-sub-panel {
+  display: table-cell;
+  background-color: green;
+}
+.div-input-sub-wrapper-panel {
+  width: 100%;
+  height: 100%;
+  background-color: yellow
+}
+
+.div-inputs-wrapper-panel div {
+  /*width: 100%;*/
+  height: 50px;
+  background-color: #1FAB21;
+  /*margin-left: 10px;*/
+  margin-right: 36px;
+}
+
+.div-address-wrapper {
+  width: 100%;
+  height: 100%;
+  display: table;
+  background-color: black;
+}
+.div-address-wrapper input {
+  display: table-cell;
+  width: 49%;
+}
+
+.div-address-wrapper input:last-child {
+  /*display: table-cell;
+  width: 50%;*/
+  margin-left: 2%;
+}
+
+.div-birthday-wrapper {
+  width: 100%;
+  /*height: 100%;*/
+  display: table;
+}
+
+/*.div-birthday-wrapper div {
+  display: table-cell;
+  width: 1%;
+}*/
+.div-birthday-year-wrapper {
+  display: table-cell;
+  width: 48%;
+}
+.div-birthday-date-wrapper {
+  display: table-cell;
+  width: 48%;
+}
+
+.div-date-wrapper {
+  width: 100%;
+  /*height: 100%;*/
+  display: table;
+  background-color: lightgray;
+}
+
+.div-date-wrapper input {
+  display: table-cell;
+  width: 47%;
+  margin-left: 2%;
+}
+
+.div-date-wrapper input:last-child {
+  /*margin-left: 2%;*/
+}
+
+/*.input-address2 {
+  display: table-cell;
+  width: 50%;
+}*/
+
+.form-control-userprofile-input {
+  border-radius: 0px;
+  border-color: #A7A6A6;
+  border-width: 1px;
+  /*margin: 0px;*/
+  padding: 0px;
+  height: 33px;
+  /*margin-left: 13px;*/
+  /*margin-right: 36px;*/
+}
+
+.div-input-name {
+  background-color: red;
+}
+.div-input-address {
+  background-color: green;
+}
+.div-input-birthday {
+  background-color: yellow;
+  height: 40px;
+}
+.div-input-gender {
+  background-color: lightgray;
+  height: 40px;
+
+}
+.div-input-introduction {
+  background-color: gray
+}
+
+.div-savebtn-panel {
+  height: 60px;
+  background-color: white;
+  margin: 0px 45px;
+}
+
+.div-savebtn-panel .btn-primary-custom {
+  float: right;
+  margin-top: 15px;
+  margin-right: 15px;
+}

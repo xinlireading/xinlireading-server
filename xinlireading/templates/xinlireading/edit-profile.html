@@ -1,0 +1,110 @@
+{% extends 'xinlireading/base.html' %}
+{% block title %}个人中心 - 心理读书会{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/edit-profile.css' %}" />
+<div class="div-root-container">
+
+  <!-- 修改资料 标题 -->
+  <div class="div-title-panel"><label>修改资料</label></div>
+  <!-- 基本信息 标题 -->
+  <div class="div-baseinfo-label-panel"><label>基本信息</label></div>
+
+  <!-- 用户信息 -->
+  <div class="div-userinfo-panel">
+    <div class="div-userinfo-base-panel">
+      <!-- Profile Photo -->
+      <div class="div-photo-panel">
+        <ul>
+          <li>
+            <img class="img-circle img-user-profile-photo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUyMmQxNDc3ZiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTIyZDE0NzdmIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" />
+          </li>
+          <li>
+            <button type="button" class="btn btn-link btn-link-custom"><span class="glyphicon glyphicon-pencil"></span>编辑头像</button>
+          </li>
+        </ul>
+      </div>
+      <!-- Profile Info -->
+      <div class="div-profile-panel">
+        <div class="div-profile-base-panel">
+          <div class="div-labels-panel">
+            <div><label>姓名</label></div>
+            <div><label>住在</label></div>
+            <div><label>出生日期</label></div>
+            <div><label>性别</label></div>
+            <div><label>简介</label></div>
+          </div>
+          <div class="div-inputs-panel">
+            <div class="div-inputs-wrapper-panel">
+              <!-- <div class="div-input1-sub-panel">
+                <div class="div-input-sub-wrapper-panel">
+                  <ul>
+                    <li>
+                      <input type="text" class="form-control form-control-userprofile-input" placeholder="Text input">
+                    </li>
+                  </ul>
+                </div>
+              </div> -->
+              <!-- <div class="div-input2-sub-panel">
+                <div class="div-input-sub-wrapper-panel">
+                  <ul>
+                    <li>
+                      <input type="text" class="form-control form-control-userprofile-input" placeholder="Text input">
+                    </li>
+                  </ul>
+                </div>
+              </div> -->
+              <!-- <div>1</div>
+              <div class="div-input-birthday">2</div>
+              <div>3</div>
+              <div class="div-input-gender">4</div>
+              <div>5</div> -->
+              <!-- <div><label>姓名</label></div> -->
+              <div>
+                <input type="text" class="form-control form-control-userprofile-input" placeholder=" ">
+              </div>
+              <div>
+                <div class="div-address-wrapper">
+                  <input type="text" class="form-control form-control-userprofile-input" placeholder=" ">
+                  <input type="text" class="form-control form-control-userprofile-input" placeholder=" ">
+                </div>
+              </div>
+              <div>
+                <div class="div-birthday-wrapper">
+                  <div class="div-birthday-year-wrapper">
+                    <input type="text" class="form-control form-control-userprofile-input" placeholder=" ">
+                  </div>
+                  <div>
+                    <div class="div-birthday-date-wrapper">
+                      <input type="text" class="form-control form-control-userprofile-input" placeholder=" ">
+                      <input type="text" class="form-control form-control-userprofile-input" placeholder=" ">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <input type="text" class="form-control form-control-userprofile-input" placeholder=" ">
+              </div>
+              <div>
+                <input type="text" class="form-control form-control-userprofile-input" placeholder=" ">
+              </div>
+              <!-- <div><label>住在</label></div>
+              <div><label>出生日期</label></div>
+              <div><label>性别</label></div>
+              <div><label>简介</label></div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 保存按钮 -->
+  <div class="div-savebtn-panel">
+    <button type="button" class="btn btn-primary btn-primary-custom">保存</button>
+  </div>
+</div>
+{% endblock %}
