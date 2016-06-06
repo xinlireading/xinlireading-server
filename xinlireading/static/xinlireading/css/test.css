@@ -1,0 +1,17 @@
+.wrapper {
+  background-color: green;
+  width: 100%;
+  display: table;
+}
+
+.block1 {
+  background-color: red;
+  display: table-cell;
+  width: 200px;
+}
+
+.block2 {
+  background-color: yellow;
+  display: table-cell;
+  width: auto;
+}

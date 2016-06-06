@@ -12,4 +12,5 @@ urlpatterns = [
 	url(r'^invalid/', views.invalid, name='invalid'),
 	# url(r'^account/', DashboardView.as_view(), name='dashboard'),
 	url(r'^account/dashboard/', DashboardView.as_view(), name='dashboard'),
+	url(r'^test/', views.test, name='test')
 ]

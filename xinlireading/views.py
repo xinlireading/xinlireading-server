@@ -39,6 +39,9 @@ def mobileBrowser(request):
 
     return mobile_browser
 
+def test(request):
+	return render(request, 'xinlireading/test.html', None);
+
 # Create your views here.
 def home(request):
 	context = {
