@@ -2,10 +2,17 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
-from xinlireading.forms import XLRAuthenticationForm, CustomUserCreationForm
+from xinlireading.forms import TestStudentForm, XLRAuthenticationForm, CustomUserCreationForm, EditProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+class TestCreateStudentView(View):
+	template_name = 'xinlireading/test.html'
+
+	def get(self, request, *args, **kwargs):
+		form = TestStudentForm()
+		return render(request, self.template_name, { 'form': form })
 
 # import pdb; pdb.set_trace()
 
@@ -156,7 +163,8 @@ class EditProfileView(LoginRequiredMixin, View):
 	template_name = "xinlireading/edit-profile.html"
 
 	def get(self, request, *args, **kwargs):
-		return render(request, self.template_name, None)
+		form = EditProfileForm()
+		return render(request, self.template_name, { 'form': form })
 
 	def post(self, request, *args, **kwargs):
 		return render(request, self.template_name, None)

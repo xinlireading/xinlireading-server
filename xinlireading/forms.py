@@ -2,7 +2,15 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelForm
-from .models import UserProfile
+from .models import UserProfile, TestStudent
+
+# class TestStudentForm(forms.Form):
+#     name = forms.CharField(label='your name', max_length=100)
+class TestStudentForm(ModelForm):
+    class Meta:
+        model = TestStudent
+        fields = ['name', 'gender']
+
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -39,3 +47,16 @@ class CustomUserCreationForm(UserCreationForm):
 class XLRAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(label='username', max_length=100)
     password = forms.CharField(label='password', max_length=100)
+
+
+class EditProfileForm(ModelForm):
+    name = forms.CharField(max_length=100)
+    gender = forms.CharField(max_length=1)
+
+    class Meta:
+        model = UserProfile
+        fields = ['name', 'gender']
+    #
+    # def save(self):
+    #
+    # def is_valid(self):
