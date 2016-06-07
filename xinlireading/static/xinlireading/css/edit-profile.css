@@ -90,6 +90,9 @@
   /*float: left;*/
   /*background-color: #1FAB21;*/
 }
+.div-labels-panel div:last-child {
+  height: 100px;
+}
 
 .div-labels-panel label {
   width: 100%;
@@ -105,118 +108,118 @@
 
 .div-inputs-panel {
   display: table-cell;
-}
-
-.div-inputs-wrapper-panel {
+  background-color: lightgray;
   width: 100%;
   height: 100%;
-  background-color: #a1e8d9;
-  display: table;
-}
-.div-input1-sub-panel {
-  display: table-cell;
-  background-color: green;
-}
-.div-input-sub-wrapper-panel {
-  width: 100%;
-  height: 100%;
-  background-color: yellow
 }
 
-.div-inputs-wrapper-panel div {
-  /*width: 100%;*/
+.div-inputs-panel-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+}
+.div-inputs-panel-wrapper > div {
   height: 50px;
-  background-color: #1FAB21;
-  /*margin-left: 10px;*/
-  margin-right: 36px;
-}
-
-.div-address-wrapper {
   width: 100%;
-  height: 100%;
-  display: table;
-  background-color: black;
 }
-.div-address-wrapper input {
-  display: table-cell;
-  width: 49%;
+.div-inputs-panel-wrapper > div:last-child {
+  background-color: lightgray;
+  height: 100px;
 }
-
-.div-address-wrapper input:last-child {
-  /*display: table-cell;
-  width: 50%;*/
-  margin-left: 2%;
-}
-
-.div-birthday-wrapper {
-  width: 100%;
-  /*height: 100%;*/
-  display: table;
-}
-
-/*.div-birthday-wrapper div {
-  display: table-cell;
-  width: 1%;
-}*/
-.div-birthday-year-wrapper {
-  display: table-cell;
-  width: 48%;
-}
-.div-birthday-date-wrapper {
-  display: table-cell;
-  width: 48%;
-}
-
-.div-date-wrapper {
-  width: 100%;
-  /*height: 100%;*/
-  display: table;
+/*Name panel*/
+.div-input-name-panel {
   background-color: lightgray;
 }
-
-.div-date-wrapper input {
-  display: table-cell;
-  width: 47%;
-  margin-left: 2%;
+.div-input-name-panel-wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: #42C341;
 }
 
-.div-date-wrapper input:last-child {
-  /*margin-left: 2%;*/
-}
-
-/*.input-address2 {
-  display: table-cell;
-  width: 50%;
-}*/
-
-.form-control-userprofile-input {
-  border-radius: 0px;
-  border-color: #A7A6A6;
-  border-width: 1px;
-  /*margin: 0px;*/
-  padding: 0px;
-  height: 33px;
-  /*margin-left: 13px;*/
-  /*margin-right: 36px;*/
-}
-
-.div-input-name {
+/*Address Panel*/
+.div-input-address-panel {
   background-color: red;
 }
-.div-input-address {
+.div-input-address-panel-wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: green;
+  display: table;
+}
+.div-input-address-panel-wrapper > div {
+  display: table-cell;
+  height: 100%;
+  width: 50%;
+  background-color: red;
+}
+.div-input-address-panel-wrapper > div:first-child {
   background-color: green;
 }
-.div-input-birthday {
-  background-color: yellow;
-  height: 40px;
-}
-.div-input-gender {
-  background-color: lightgray;
-  height: 40px;
 
+/*Birthday Panel*/
+.div-input-birthday-panel {
+  background-color: red;
 }
-.div-input-introduction {
-  background-color: gray
+.div-input-birthday-panel-wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: yellow;
+  display: table;
+}
+.div-input-birthday-panel-wrapper > div {
+  display: table-cell;
+  width: 25%;
+  height: 100%;
+  background-color: green;
+}
+.div-input-birthday-panel-wrapper > div:first-child {
+  background-color: red;
+  width: 50%;
+}
+.div-input-birthday-panel-wrapper > div:last-child {
+  background-color: red;
+}
+
+/*Gender panel*/
+.div-input-gender-panel {
+  background-color: red;
+}
+.div-input-gender-panel-wrapper {
+  height: 100%;
+  width: 100%;
+  background-color: yellow;
+  display: table;
+}
+.div-input-gender-panel-wrapper > div {
+  display: table-cell;
+  width: 25%;
+  height: 100%;
+  background-color: blue;
+}
+.div-input-gender-panel-wrapper > div:first-child {
+  background-color: black;
+}
+
+/*Intro panel*/
+.div-input-intro-panel-wrapper {
+  height: 100%;
+  width: 100%;
+}
+.div-input-intro-panel-wrapper > div {
+  height: 100%;
+  width: 100%;
+  background-color: green;
+}
+
+
+
+
+
+
+
+
+.div-input-birthday-panel {
+  background-color: lightgray;
 }
 
 .div-savebtn-panel {
