@@ -27,8 +27,42 @@
 
 .navbar-right-custom {
   margin-top: 22px;
+  /*padding-top: 22px;*/
 }
-
+.img-user-profile-photo-header {
+  height: 30px;
+  width: 30px;
+}
+.glyphicon-menu-down-custom {
+  font-size: 10px;
+  color: #737373;
+}
+.btn-default-header {
+  border-width: 0px;
+  border-radius: 0px;
+  height: 66px;
+  width: 70px;
+  padding-top: 15px;
+  padding-left: 15px;
+  margin-right: 50px;
+}
+.btn-default-header:hover {
+  background-color: white;
+}
+.btn-default-header:active:focus {
+  outline: none;
+  background-color: #e7e7e7;
+  box-shadow: none;
+}
+.btn-default-header:active {
+  background-color: #e7e7e7;
+  box-shadow: none;
+}
+.btn-default-header:focus {
+  outline: none;
+  background-color: #e7e7e7;
+  box-shadow: none;
+}
 /* Header with white background-color */
 .div-header-container .navbar-static-top-custom {
   background-color: white;
