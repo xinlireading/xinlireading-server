@@ -1,15 +1,19 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea
 from .models import UserProfile, TestStudent
 
 # class TestStudentForm(forms.Form):
 #     name = forms.CharField(label='your name', max_length=100)
 class TestStudentForm(ModelForm):
+    # gender = forms.CharField()
     class Meta:
         model = TestStudent
         fields = ['name', 'gender']
+        widgets = {
+            'name': Textarea()
+        }
 
 
 
