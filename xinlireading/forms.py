@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.forms import ModelForm, Textarea
+from django.forms import ModelForm, Textarea, Form
 from .models import UserProfile, TestStudent
 
 # class TestStudentForm(forms.Form):
@@ -11,9 +11,9 @@ class TestStudentForm(ModelForm):
     class Meta:
         model = TestStudent
         fields = ['name', 'gender']
-        widgets = {
-            'name': Textarea()
-        }
+        # widgets = {
+        #     'name': Textarea()
+        # }
 
 
 
@@ -53,13 +53,21 @@ class XLRAuthenticationForm(AuthenticationForm):
     password = forms.CharField(label='password', max_length=100)
 
 
-class EditProfileForm(ModelForm):
+class EditProfileForm(Form):
     name = forms.CharField(max_length=100)
-    gender = forms.CharField(max_length=1)
+    address_country = forms.CharField(max_length=100)
+    address_city = forms.CharField(max_length=100)
 
-    class Meta:
-        model = UserProfile
-        fields = ['name', 'gender']
+    birth_year = forms.IntegerField()
+    birth_month = forms.IntegerField()
+    birth_day = forms.IntegerField()
+
+    gender = forms.CharField(max_length=1)
+    intro = forms.CharField(max_length=500)
+
+    # class Meta:
+    #     model = UserProfile
+    #     fields = ['name', 'gender']
     #
     # def save(self):
     #
