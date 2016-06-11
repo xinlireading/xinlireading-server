@@ -80,7 +80,7 @@ class EditProfileForm(Form):
     birth_day = forms.ChoiceField(choices=DAY_CHOICES)
 
     gender = forms.ChoiceField(choices=GENDER_CHOICES)
-    intro = forms.CharField(max_length=500, widget=forms.Textarea(attrs={'rows':4, 'cols':15}))
+    intro = forms.CharField(required=True, max_length=500, widget=forms.Textarea(attrs={'rows':4, 'cols':15}))
 
     # class Meta:
     #     model = UserProfile

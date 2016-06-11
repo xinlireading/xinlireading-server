@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/edit-profile.css' %}" />
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
-
+<script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
 <div class="div-root-container">
 
   <!-- 修改资料 标题 -->
@@ -15,84 +15,117 @@
   <!-- 基本信息 标题 -->
   <div class="div-baseinfo-label-panel"><label>基本信息</label></div>
 
-  <!-- 用户信息 -->
-  <div class="div-userinfo-panel">
-    <div class="container-fluid div-userinfo-base-panel">
-        <div class="row">
-          <div class="col-sm-4 col-md-4 div-col-userphoto">
-            <div class="row">
-              <img class="img-circle img-user-profile-photo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUyMmQxNDc3ZiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTIyZDE0NzdmIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" />
-            </div>
-            <div class="row">
-              <button type="button" class="btn btn-link btn-link-custom"><span class="glyphicon glyphicon-pencil"></span>编辑头像</button>
+  <form method="post" action="" data-toggle="validator" role="form" id="myForm">{% csrf_token %}
+    <!-- 用户信息 -->
+    <div class="div-userinfo-panel">
+      <div class="container-fluid div-userinfo-base-panel">
+          <div class="row">
+            <div class="col-sm-4 col-md-4 div-col-userphoto">
+              <div class="row">
+                <img class="img-circle img-user-profile-photo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUyMmQxNDc3ZiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTIyZDE0NzdmIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" />
+              </div>
+              <div class="row">
+                <button type="file" class="btn btn-link btn-link-custom"><span class="glyphicon glyphicon-pencil"></span>编辑头像</button>
+              </div>
+
             </div>
 
+            <div class="col-sm-8 col-md-8 div-col-userinfo">
+              <div class="row">
+                <div class="col-md-3">
+                  <label id="namelabel">名字</label>
+                </div>
+                <div class="col-md-9">
+                  <div class="form-group">
+                      {% render_field form.name|attr:"required"|attr:"maxlength:20"|attr:"data-customlengthvalidator:true" class+="form-control" placeholder=" " %}
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label id="addresslabel">住在<label>
+                </div>
+                <div class="col-md-5">
+                  <!-- {% render_field form.name class+="form-control" placeholder=" " %} -->
+                  <div class="form-group">
+                      {% render_field form.address_country|attr:"required"|attr:"data-error:请输入你的住址" class+="form-control" placeholder=" " %}
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <!-- {% render_field form.name class+="form-control" placeholder=" " %} -->
+                  <div class="form-group">
+                      {% render_field form.address_city|attr:"required"|attr:"data-error:请输入你的住址" class+="form-control" %}
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label id="birthlabel">出生日期</label>
+                </div>
+                <div class="col-md-5">
+                  <!-- {% render_field form.birth_year class+="form-control" placeholder=" " %} -->
+                  <div class="form-group">
+                      {% render_field form.birth_year|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <!-- {% render_field form.birth_month class+="form-control" placeholder=" " %} -->
+                  <div class="form-group">
+                      {% render_field form.birth_month|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <!-- {% render_field form.birth_day class+="form-control" placeholder=" " %} -->
+                  <div class="form-group">
+                      {% render_field form.birth_day|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label id="genderlabel">性别</label>
+                </div>
+                <div class="col-md-5">
+                  <!-- {% render_field form.gender class+="form-control" placeholder=" " %} -->
+                  <div class="form-group">
+                      {% render_field form.gender|attr:"required"|attr:"data-error:请选择您的性别" class+="form-control" placeholder=" " %}
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <!-- <select id="gender_select" class="form-control">
+                    <option>请选择你的性别</option>
+                    <option>女</option>
+                    <option>男</option>
+                  </select> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <label id="introlabel">个人简介</label>
+                </div>
+                <div class="col-md-9">
+                  <!-- {% render_field form.intro class+="form-control" placeholder=" " %} -->
+                  <div class="form-group">
+                      {% render_field form.intro class+="form-control" placeholder="介绍一下你自己吧" %}
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div class="col-sm-8 col-md-8 div-col-userinfo">
-            <div class="row">
-              <div class="col-md-3">
-                <label id="namelabel">名字</label>
-              </div>
-              <div class="col-md-9">
-                {% render_field form.name class+="form-control" placeholder=" " %}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <label id="addresslabel">住在<label>
-              </div>
-              <div class="col-md-5">
-                {% render_field form.name class+="form-control" placeholder=" " %}
-              </div>
-              <div class="col-md-4">
-                {% render_field form.name class+="form-control" placeholder=" " %}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <label id="birthlabel">出生日期</label>
-              </div>
-              <div class="col-md-5">
-                {% render_field form.birth_year class+="form-control" placeholder=" " %}
-              </div>
-              <div class="col-md-2">
-                {% render_field form.birth_month class+="form-control" placeholder=" " %}
-              </div>
-              <div class="col-md-2">
-                {% render_field form.birth_day class+="form-control" placeholder=" " %}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <label id="genderlabel">性别</label>
-              </div>
-              <div class="col-md-5">
-                {% render_field form.gender class+="form-control" placeholder=" " %}
-                <!-- <select id="gender_select" class="form-control">
-                  <option>请选择你的性别</option>
-                  <option>女</option>
-                  <option>男</option>
-                </select> -->
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <label id="introlabel">个人简介</label>
-              </div>
-              <div class="col-md-9">
-                {% render_field form.intro class+="form-control" placeholder=" " %}
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- 保存按钮 -->
-  <div class="div-savebtn-panel">
-    <button type="button" class="btn btn-primary btn-primary-custom">保存</button>
-  </div>
+    <!-- 保存按钮 -->
+    <div class="div-savebtn-panel">
+      <button type="submit" class="btn btn-primary btn-primary-custom">保存</button>
+    </div>
+  </form>
 </div>
 <script>
 window.addEventListener('resize', resize, false);
@@ -113,5 +146,39 @@ function initGenderOptions() {
   var gender_select = document.getElementById("gender_select");
   gender_select.options.add(new Option("未知","-1"));
 }
+
+$('#myForm').validator({
+  custom: {
+    customlengthvalidator: function($el) {
+      var content = $el.val();
+      if (content == null || content.length == 0) {
+        return true;
+      }
+      if (content.length >= 3 && content.length <=20) {
+        return true;
+      }
+      return false;
+    }
+  },
+  errors: {
+    customlengthvalidator: "3 - 20"
+  }
+})
+
+document.addEventListener("DOMContentLoaded", function() {
+    var elements = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].oninvalid = function(e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                e.target.setCustomValidity("请输入你的名称");
+            }
+        };
+        elements[i].oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    }
+})
+
 </script>
 {% endblock %}
