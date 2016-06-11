@@ -18,8 +18,8 @@
 
 .div-baseinfo-label-panel {
   height: 60px;
-  background-color: white;
-  margin: 0px 45px;
+  background-color: #FAFAFA;
+  margin: 0px 70px;
   padding-left: 15px;
   padding-top: 18px;
 }
@@ -31,13 +31,38 @@
 
 .div-userinfo-panel {
   /*height: 320px;*/
-  width: auto;
+  /*width: auto;*/
   background-color: white;
-  margin: 2px 45px;
+  margin: 2px 70px;
 }
+
+
+
 .div-userinfo-base-panel {
   display: table;
-  width: 96%;
+  width: 100%;
+}
+.div-userinfo-base-panel label {
+  font-weight: bold;
+  float: right;
+  margin-top: 15px;
+}
+.div-userinfo-base-panel input {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 0px;
+}
+
+.div-userinfo-base-panel select {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 0px;
+}
+
+.div-userinfo-base-panel textarea {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 0px;
 }
 .div-photo-panel {
   display: table-cell;
@@ -47,21 +72,9 @@
 .div-photo-panel ul li {
   list-style-type: none;
 }
-.btn-link-custom {
-  font-size: 13px;
-  margin-left: 60px;
-  margin-top: 4px;
-}
 
 .btn-link-custom span {
   margin-right: 5px
-}
-
-.img-user-profile-photo {
-  width: 160px;
-  height: 160px;
-  margin-left: 34px;
-  margin-top: 15px;
 }
 
 .div-profile-panel {
@@ -143,7 +156,7 @@
 
 /*Address Panel*/
 .div-input-address-panel {
-  background-color: red;
+  /*background-color: red;*/
 }
 .div-input-address-panel-wrapper {
   height: 100%;
@@ -155,7 +168,7 @@
   display: table-cell;
   height: 100%;
   width: 50%;
-  background-color: red;
+  /*background-color: red;*/
 }
 .div-input-address-panel-wrapper > div:first-child {
   background-color: green;
@@ -163,7 +176,7 @@
 
 /*Birthday Panel*/
 .div-input-birthday-panel {
-  background-color: red;
+  /*background-color: red;*/
 }
 .div-input-birthday-panel-wrapper {
   height: 100%;
@@ -178,11 +191,11 @@
   background-color: green;
 }
 .div-input-birthday-panel-wrapper > div:first-child {
-  background-color: red;
+  /*background-color: red;*/
   width: 50%;
 }
 .div-input-birthday-panel-wrapper > div:last-child {
-  background-color: red;
+  /*background-color: red;*/
 }
 
 /*Gender panel*/
@@ -216,12 +229,44 @@
   background-color: green;
 }
 
+.div-col-userphoto {
+  min-height: 100px;
+  /*background-color: red;*/
+  /*margin-left: 20px;*/
+  text-align: center;
+}
+.div-col-userinfo {
+  min-height: 100px;
+  /*background-color: green;*/
+  margin: 15px 0px;
+
+}
 
 
+.img-user-profile-photo {
+  width: 160px;
+  height: 160px;
+  /*margin-left: 50px;*/
+  /*margin-top: 15px;*/
+  /*text-align: center;*/
+  /*align-items: center;*/
+  /*float: inherit;*/
+  /*margin: 0px;*/
+  /*margin: 0px auto;*/
+  /*padding: 0px;*/
+  display: inline-block;
+  margin-top: 20px;
+
+}
 
 
+.btn-link-custom {
+  font-size: 13px;
+  /*margin-left: 60px;*/
+  margin-top: 4px;
+  display: inline-block;
 
-
+}
 
 .div-input-birthday-panel {
   background-color: lightgray;
@@ -230,7 +275,7 @@
 .div-savebtn-panel {
   height: 60px;
   background-color: white;
-  margin: 0px 45px;
+  margin: 0px 70px;
 }
 
 .div-savebtn-panel .btn-primary-custom {

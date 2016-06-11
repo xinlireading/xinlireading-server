@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelForm, Textarea, Form
 from .models import UserProfile, TestStudent
 
+
 # class TestStudentForm(forms.Form):
 #     name = forms.CharField(label='your name', max_length=100)
 class TestStudentForm(ModelForm):
@@ -14,8 +15,6 @@ class TestStudentForm(ModelForm):
         # widgets = {
         #     'name': Textarea()
         # }
-
-
 
 class CustomUserCreationForm(UserCreationForm):
     # error_messages = {
@@ -52,18 +51,36 @@ class XLRAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(label='username', max_length=100)
     password = forms.CharField(label='password', max_length=100)
 
-
+UNKNOWN = 'U'
+MALE = 'M'
+FEMALE = 'F'
+GENDER_CHOICES = (
+    (UNKNOWN, '请选择你的性别'),
+    (MALE, '男'),
+    (FEMALE, '女'),
+)
+YEAR_CHOICES = (
+    [(-1, '年')] + [(i, str(i)) for i in range(2016, 1900, -1)]
+)
+MONTH_CHOICES = (
+    [(-1, '月')] + [(i, str(i)) for i in range(1, 13)]
+)
+DAY_CHOICES = (
+    [(-1, '日')] + [(i, str(i)) for i in range(1, 32)]
+)
 class EditProfileForm(Form):
+
+
     name = forms.CharField(max_length=100)
     address_country = forms.CharField(max_length=100)
     address_city = forms.CharField(max_length=100)
 
-    birth_year = forms.IntegerField()
-    birth_month = forms.IntegerField()
-    birth_day = forms.IntegerField()
+    birth_year = forms.ChoiceField(choices=YEAR_CHOICES)
+    birth_month = forms.ChoiceField(choices=MONTH_CHOICES)
+    birth_day = forms.ChoiceField(choices=DAY_CHOICES)
 
-    gender = forms.CharField(max_length=1)
-    intro = forms.CharField(max_length=500)
+    gender = forms.ChoiceField(choices=GENDER_CHOICES)
+    intro = forms.CharField(max_length=500, widget=forms.Textarea(attrs={'rows':4, 'cols':15}))
 
     # class Meta:
     #     model = UserProfile
