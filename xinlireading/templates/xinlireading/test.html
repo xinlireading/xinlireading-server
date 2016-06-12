@@ -1,43 +1,34 @@
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/test.css' %}" />
+ <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
+<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
+<body>
+  <div class="container">
+    <h2>Modal Example</h2>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
 
-{% csrf_token %}
-{% load widget_tweaks %}
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the modal.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
 
-<!-- {{ form }}
-<div class="wrapper">
-  <div class="block1">{% render_field form.name %}</div>
-  <div class="block1">{% render_field form.name|add_class:"form-control" %}</div>
-  <div class="block2">{{ form.name }}</div>
-</div> -->
-<!-- <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3">
-      <input type="text" class="form-control" placeholder="please input your name">
-    </div>
-    <div class="col-md-3">
-      <input type="text" class="form-control" placeholder="please input your name">
-    </div>
-  </div>
-</div> -->
-
-<!-- <input type="email" data-error="请输入一个有效的电子邮件地址" class="form-control" name="username" placeholder="Email"  required /> -->
-
-<form method="post" action="" data-toggle="validator" role="form" name="myForm">
-  <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-addon">
-        <span class="glyphicon glyphicon-envelope"></span>
       </div>
-      <input type="email" data-error="请输入一个有效的电子邮件地址" class="form-control" name="username" placeholder="Email"  required />
     </div>
-    <div class="help-block with-errors"></div>
+
   </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">注册</button>
-  </div>
-</form>
+
+</body>
