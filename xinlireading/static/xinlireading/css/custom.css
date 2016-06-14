@@ -87,11 +87,52 @@
   font-weight: lighter;
 }
 
+.btn-primary-custom-cancel {
+  color: #7D7D7D;
+  background-color: #E7E7E7;
+}
+
 .btn-primary-custom:hover {
   opacity: 0.7;
   background-color: #ECA739;
   border-color: white
+}
 
+.btn-primary-custom-cancel:hover {
+  background-color: #C2C2C2;
+  color: black;
+}
+
+.guide-message {
+  color: #3E3E3E;
+  font-size: 12px;
+  margin-left: 0px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+.modal-content-custom {
+  padding-left: 10px;
+}
+.uploadimage-container {
+  width: 270px;
+  height: 270px;
+}
+
+.previewimage-container {
+  margin-left: 20px;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+.img-edit-user-photo-preview {
+  height: 270px;
+  width: 270px;
+  /*max-width: 100%;*/
+  /*max-height: 100%;*/
+  background-color: #E7E7E7;
+  border-radius: 0px;
+  border-width: 0px;
+  border: none
 }
 .navbar-right-custom .btn-primary-custom:active {
   background: #ECA739;
