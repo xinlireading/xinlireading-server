@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class TestCreateStudentView(View):
-	template_name = 'xinlireading/test.html'
+	template_name = 'xinlireading/test-crop-image.html'
 
 	def get(self, request, *args, **kwargs):
 		form = TestStudentForm()

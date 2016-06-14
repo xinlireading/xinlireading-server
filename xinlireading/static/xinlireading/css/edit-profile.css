@@ -73,6 +73,10 @@
   list-style-type: none;
 }
 
+/*.previewimage-container {
+  width: 100px;
+  height: 100px;
+}*/
 .btn-link-custom span {
   margin-right: 5px
 }

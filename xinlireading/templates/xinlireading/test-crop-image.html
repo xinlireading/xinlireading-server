@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.js"></script>
+      <script type="text/javascript" src="https://cdn.rawgit.com/alexk111/ngImgCrop/master/compile/minified/ng-img-crop.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/alexk111/ngImgCrop/master/compile/minified/ng-img-crop.css">
+  <style type="text/css">
+    .cropArea {
+      background: #E4E4E4;
+      overflow: hidden;
+      width:500px;
+      height:350px;
+  }
+  </style>
+  <title>Image Crop demo</title>
+
+  <script type='text/javascript'>//<![CDATA[
+    angular.module('app', ['ngImgCrop'])
+    .config(function($interpolateProvider) {
+        $interpolateProvider.startSymbol('{$');
+        $interpolateProvider.endSymbol('$}');
+    })
+      .controller('Ctrl', function($scope) {
+        $scope.myImage='';
+        $scope.myCroppedImage='';
+
+        var handleFileSelect=function(evt) {
+          var file=evt.currentTarget.files[0];
+          var reader = new FileReader();
+          reader.onload = function (evt) {
+            $scope.$apply(function($scope){
+              $scope.myImage=evt.target.result;
+            });
+          };
+          reader.readAsDataURL(file);
+        };
+        angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+      });
+  </script>
+</head>
+
+<body>
+  <body ng-app="app" ng-controller="Ctrl">
+  <div>Select an image file: <input type="file" id="fileInput" /></div>
+  <div class="cropArea">
+    <img-crop area-type="circle" image="myImage" result-image="myCroppedImage"></img-crop>
+  </div>
+  <div>Cropped Image:</div>
+  <div><img ng-src="{$myCroppedImage$}" /></div>
+</body>
+
+</body>
+
+</html>

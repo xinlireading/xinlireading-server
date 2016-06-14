@@ -114,12 +114,17 @@
   padding-left: 10px;
 }
 .uploadimage-container {
-  width: 270px;
-  height: 270px;
+  /*width: 270px;
+  height: 270px;*/
+  background: #E4E4E4;
+  overflow: hidden;
+  width:350px;
+  height:350px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .previewimage-container {
-  margin-left: 20px;
   width: 200px;
   height: 200px;
   overflow: hidden;
