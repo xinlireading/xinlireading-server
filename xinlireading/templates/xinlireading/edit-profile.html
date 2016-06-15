@@ -281,20 +281,25 @@ angular.module('app', ['ngImgCrop'])
       reader.readAsDataURL(file);
     };
     angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+
+    var handleSavePhotoBtnClick=function(evt) {
+      console.log('handleSavePhotoBtnClick');
+    };
+    angular.element(document.querySelector('#save-photo-btn')).on('click', handleSavePhotoBtnClick);
   });
 
 // Set the croped image to the photo image.
-$(document).ready(function() {
-  var $savePhotoBtn = $("#save-photo-btn");
-  $savePhotoBtn.click(function() {
-    var $croppedImage = $("#croppedImage");
-    var $photoImage = $("#photoImage");
-    console.log($croppedImage.prop('src'));
-    // $photoImage.attr('src', $croppedImage.src);
-    $photoImage.attr('src', $croppedImage.prop('src'));
-  });
-});
-
+// $(document).ready(function() {
+//   var $savePhotoBtn = $("#save-photo-btn");
+//   $savePhotoBtn.click(function() {
+//     var $croppedImage = $("#croppedImage");
+//     var $photoImage = $("#photoImage");
+//
+//     // $photoImage.attr('src', $croppedImage.prop('src'));
+//     var $base64_string = $croppedImage.prop('src');
+//
+//   });
+// });
 
 </script>
 {% endblock %}
