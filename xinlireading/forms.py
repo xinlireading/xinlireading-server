@@ -82,6 +82,8 @@ class EditProfileForm(Form):
     gender = forms.ChoiceField(choices=GENDER_CHOICES)
     intro = forms.CharField(required=True, max_length=500, widget=forms.Textarea(attrs={'rows':4, 'cols':15}))
 
+    photo = forms.FileField()
+
     # class Meta:
     #     model = UserProfile
     #     fields = ['name', 'gender']

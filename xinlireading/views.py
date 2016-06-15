@@ -163,8 +163,15 @@ class EditProfileView(LoginRequiredMixin, View):
 	template_name = "xinlireading/edit-profile.html"
 
 	def get(self, request, *args, **kwargs):
+		print('get EditProfileView');
 		form = EditProfileForm()
 		return render(request, self.template_name, { 'form': form })
 
 	def post(self, request, *args, **kwargs):
-		return render(request, self.template_name, None)
+		print('post EditProfileView');
+		# return render(request, self.template_name, None)
+		form = EditProfileForm(request.POST)
+		print(form)
+		if form.is_valid():
+			return redirect('/success/')
+		return redirect('/invalid/')
