@@ -51,43 +51,15 @@ class XLRAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(label='username', max_length=100)
     password = forms.CharField(label='password', max_length=100)
 
-UNKNOWN = 'U'
-MALE = 'M'
-FEMALE = 'F'
-GENDER_CHOICES = (
-    (UNKNOWN, '请选择你的性别'),
-    (MALE, '男'),
-    (FEMALE, '女'),
-)
-YEAR_CHOICES = (
-    [(-1, '年')] + [(i, str(i)) for i in range(2016, 1900, -1)]
-)
-MONTH_CHOICES = (
-    [(-1, '月')] + [(i, str(i)) for i in range(1, 13)]
-)
-DAY_CHOICES = (
-    [(-1, '日')] + [(i, str(i)) for i in range(1, 32)]
-)
-class EditProfileForm(Form):
+class EditProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['name', 'gender', 'intro', 'address_country', 'address_city', 'birth_year', 'birth_month', 'birth_day']
 
-
-    name = forms.CharField(max_length=100)
-    address_country = forms.CharField(max_length=100)
-    address_city = forms.CharField(max_length=100)
-
-    birth_year = forms.ChoiceField(choices=YEAR_CHOICES)
-    birth_month = forms.ChoiceField(choices=MONTH_CHOICES)
-    birth_day = forms.ChoiceField(choices=DAY_CHOICES)
-
-    gender = forms.ChoiceField(choices=GENDER_CHOICES)
-    intro = forms.CharField(required=True, max_length=500, widget=forms.Textarea(attrs={'rows':4, 'cols':15}))
-
-    photo = forms.FileField()
-
-    # class Meta:
-    #     model = UserProfile
-    #     fields = ['name', 'gender']
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['intro'].initial = 'hi guy!';
     #
     # def save(self):
-    #
+
     # def is_valid(self):

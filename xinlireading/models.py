@@ -51,11 +51,30 @@ class UserProfile(models.Model):
 	is_activated = models.BooleanField()
 	name = models.CharField(max_length=100)
 	avatar = models.ImageField(blank=True)
+	intro = models.CharField(max_length=200)
+	UNKNOWN = 'U'
+	MALE = 'M'
+	FEMALE = 'F'
 	GENDER_CHOICES = (
-	    ('M', 'Male'),
-	    ('F', 'Female'),
+	    (UNKNOWN, '请选择你的性别'),
+	    (MALE, '男'),
+	    (FEMALE, '女'),
+	)
+	YEAR_CHOICES = (
+	    [(-1, '年')] + [(i, str(i)) for i in range(2016, 1900, -1)]
+	)
+	MONTH_CHOICES = (
+	    [(-1, '月')] + [(i, str(i)) for i in range(1, 13)]
+	)
+	DAY_CHOICES = (
+	    [(-1, '日')] + [(i, str(i)) for i in range(1, 32)]
 	)
 	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M', null=True)
+	address_country = models.CharField(max_length=200)
+	address_city = models.CharField(max_length=200)
+	birth_year = models.CharField(max_length=200, choices=YEAR_CHOICES)
+	birth_month = models.CharField(max_length=200, choices=MONTH_CHOICES)
+	birth_day = models.CharField(max_length=200, choices=DAY_CHOICES)
 
 	def __str__(self):
 		return self.user.username + ' ' + self.name

@@ -164,14 +164,24 @@ class EditProfileView(LoginRequiredMixin, View):
 
 	def get(self, request, *args, **kwargs):
 		print('get EditProfileView');
-		form = EditProfileForm()
+		form = EditProfileForm(instance=request.user.userprofile)
+		# form.intro = request.user.userprofile.intro;
+		print(request.user.userprofile.intro);
+		# print(form.intro);
+		userprofile = request.user.userprofile;
 		return render(request, self.template_name, { 'form': form })
 
 	def post(self, request, *args, **kwargs):
-		print('post EditProfileView');
-		# return render(request, self.template_name, None)
-		form = EditProfileForm(request.POST)
-		print(form)
-		if form.is_valid():
-			return redirect('/success/')
+		#form = EditProfileForm(request.POST)
+
+		print(request.user.userprofile.intro);
+
+		name = request.POST.get('name');
+		gender = request.POST.get('gender');
+		intro = request.POST.get('intro');
+		print('name: ' + name +', gender: ' + gender + ', intro: ' + intro);
+
+
+		# if form.is_valid():
+		# 	return redirect('/success/')
 		return redirect('/invalid/')
