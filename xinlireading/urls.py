@@ -13,5 +13,6 @@ urlpatterns = [
 	# url(r'^account/', DashboardView.as_view(), name='dashboard'),
 	url(r'^account/dashboard/', DashboardView.as_view(), name='dashboard'),
 	url(r'^test/', TestCreateStudentView.as_view(), name='test'),
-	url(r'^settings/profile/', EditProfileView.as_view(), name='edit-profile')
+	url(r'^settings/profile/', EditProfileView.as_view(), name='edit-profile'),
+    url(r'^upload/', views.upload, name='upload'),
 ]

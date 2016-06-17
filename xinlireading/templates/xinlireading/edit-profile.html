@@ -9,11 +9,11 @@
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
 <script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
-<!-- <link rel="stylesheet" href="{% static 'xinlireading/js/cropper/cropper.min.css' %}">
-<script type="text/javascript" src="{% static 'xinlireading/js/cropper/cropper.min.js' %}"></script> -->
-<script src="{% static 'xinlireading/js/ngImgCrop/angular-1.0.1.min.js' %}"></script>
-<script src="{% static 'xinlireading/js/ngImgCrop/ng-img-crop.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/js/ngImgCrop/ng-img-crop.css' %}">
+<script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
+<script src="{% static 'xinlireading/ng-file-upload/ng-file-upload-shim.min.js' %}"></script>
+<script src="{% static 'xinlireading/ng-file-upload/ng-file-upload.min.js' %}"></script>
+<script src="{% static 'xinlireading/ngImgCrop/ng-img-crop.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/ngImgCrop/ng-img-crop.css' %}">
 
 <form id="myForm" method="post" action="" data-toggle="validator" role="form" ng-app="app" ng-controller="Ctrl">
   {% csrf_token %}
@@ -35,15 +35,11 @@
               <div class="row">
                 <div class="col-sm-4 col-md-4 div-col-userphoto">
                   <div class="row">
-                    <!-- <img id="photoImage" class="img-circle img-user-profile-photo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUyMmQxNDc3ZiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTIyZDE0NzdmIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" /> -->
-                    <!-- {% render_field form.photo class+="img-circle img-user-profile-photo" %} -->
-                    <!-- {% render_field form.photo %} -->
                     <img id="photoImage" class="img-circle img-user-profile-photo" src={{ form.photo.url }} >
                   </div>
                   <div class="row">
                     <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-link btn-link-custom"><span class="glyphicon glyphicon-pencil"></span>编辑头像</button>
                   </div>
-
                 </div>
 
                 <div class="col-sm-8 col-md-8 div-col-userinfo">
@@ -159,17 +155,15 @@
         </div>
         <div class="modal-body">
           <!-- <p>Some text in the modal.</p> -->
-          <input type="file" id="fileInput" />
+          <input type="file" id="fileInput" accept="image/*" />
           <p class="guide-message">若要裁剪图像，拖动或移动要截取的选择区域然后点击“保存”按钮。</p>
           <div>
             <div class="row">
               <div>
                 <div class="col-md-8 uploadimage-container">
-                  <!-- <img id="uploadimage" class="img-edit-user-photo-preview" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTUyMmQxNDc3ZiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NTIyZDE0NzdmIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4="> -->
                   <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
                 </div>
                 <div class="col-md-4">
-                  <!-- <img id="previewImage" /> -->
                   <img id="croppedImage" ng-src="{$myCroppedImage$}" />
                 </div>
               </div>
@@ -242,63 +236,74 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-angular.module('app', ['ngImgCrop'])
-  .config(function($interpolateProvider) {
-      $interpolateProvider.startSymbol('{$');
-      $interpolateProvider.endSymbol('$}');
-  })
-  .controller('Ctrl', function($scope) {
-    $scope.myImage='';
-    $scope.myCroppedImage='';
+var app = angular.module('app', ['ngImgCrop', 'ngFileUpload']);
+app.config(function($httpProvider, $interpolateProvider) {
+  // csrftoken for django.
+  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+  // django and argular use the same '{{' tag, so need to change one to '{%'.
+  $interpolateProvider.startSymbol('{$');
+  $interpolateProvider.endSymbol('$}');
+});
+app.controller('Ctrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
 
-    // Select a new image file as photo.
-    var handleFileSelect=function(evt) {
-      var file=evt.currentTarget.files[0];
-      var reader = new FileReader();
-      reader.onload = function (evt) {
-        $scope.$apply(function($scope){
-          $scope.myImage=evt.target.result;
-        });
-      };
-      reader.readAsDataURL(file);
+  $scope.uploadPic = function(file) {
+    console.log('uploadPic');
+    var file = Upload.dataUrltoBlob($scope.myCroppedImage, 'a.png');
+    file.upload = Upload.upload({
+      url: 'http://127.0.0.1:8000/upload/',
+      data: {username: 'username', file: file },
+    });
+
+    file.upload.then(function (response) {
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+        if (response.status > 0)
+          $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+        // Math.min is to fix IE which reports 200% sometimes
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+
+  };
+
+  $scope.myImage='';
+  $scope.myCroppedImage='';
+
+  // Select a new image file as photo.
+  var handleFileSelect=function(evt) {
+    var file=evt.currentTarget.files[0];
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function($scope){
+        $scope.myImage=evt.target.result;
+      });
     };
-    angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+    reader.readAsDataURL(file);
+  };
+  angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 
-    // Set the croped image to the photo image.
-    var handleSavePhotoBtnClick=function(evt) {
-      console.log('handleSavePhotoBtnClick'); // ok
-      var $croppedImage = $("#croppedImage");
-      var $photoImage = $("#photoImage");
-      // $photoImage.attr('src', $croppedImage.prop('src')); // method #1 is ok
-      $photoImage.attr('src', $scope.myCroppedImage); // method #2 is ok
+  // Set the croped image to the photo image.
+  var handleSavePhotoBtnClick=function(evt) {
+    console.log('handleSavePhotoBtnClick'); // ok
+    var $croppedImage = $("#croppedImage");
+    var $photoImage = $("#photoImage");
+    // $photoImage.attr('src', $croppedImage.prop('src')); // method #1 is ok
+    $photoImage.attr('src', $scope.myCroppedImage); // method #2 is ok
 
+    // upload image
+    $scope.uploadPic($scope.myCroppedImage);
+  };
 
-    };
-    angular.element(document.querySelector('#save-photo-btn')).on('click', handleSavePhotoBtnClick);
+  angular.element(document.querySelector('#save-photo-btn')).on('click', handleSavePhotoBtnClick);
 
-    // var handleSaveButtonClick=function(evt) {
-    //
-    // };
-    // angular.element(document.querySelector('#saveButton')).on('click', handleSaveButtonClick);
-    $scope.save = function() {
-      console.log('save');
-      var $myForm = $("#myForm");
-      $myForm.submit();
-    };
-  });
-
-// Set the croped image to the photo image.
-// $(document).ready(function() {
-//   var $savePhotoBtn = $("#save-photo-btn");
-//   $savePhotoBtn.click(function() {
-//     var $croppedImage = $("#croppedImage");
-//     var $photoImage = $("#photoImage");
-//
-//     // $photoImage.attr('src', $croppedImage.prop('src'));
-//     var $base64_string = $croppedImage.prop('src');
-//
-//   });
-// });
-
+  $scope.save = function() {
+    console.log('save');
+    var $myForm = $("#myForm");
+    $myForm.submit();
+  };
+}]);
 </script>
 {% endblock %}

@@ -6,6 +6,10 @@ from xinlireading.forms import TestStudentForm, XLRAuthenticationForm, CustomUse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+# from django.conf import settings
+# import os
 
 class TestCreateStudentView(View):
 	template_name = 'xinlireading/test-crop-image.html'
@@ -185,3 +189,30 @@ class EditProfileView(LoginRequiredMixin, View):
 		# if form.is_valid():
 		# 	return redirect('/success/')
 		return redirect('/invalid/')
+
+def upload(request):
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        file = request.FILES['file']
+        # print(request.FILES)
+        # print(request.POST.get('file'))
+        # return;
+        # file = request.FILES.get('file')
+        print(file.name)
+        print(file.charset)
+        print(file.content_type)
+        print(file.size)
+        print(file.content_type_extra)
+        # print(file.temporary_file_path())
+        # return HttpResponse('POST')
+        filename = file.name
+
+        path = default_storage.save('{}/{}'.format('avatar',filename), ContentFile(file.read()))
+        # tmp_file = os.path.join(settings.MEDIA_ROOT, path)
+        print('POST1');
+        return HttpResponse('POST1')
+
+    else:
+        print('get')
+        return HttpResponse('GET')

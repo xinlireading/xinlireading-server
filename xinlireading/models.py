@@ -72,9 +72,9 @@ class UserProfile(models.Model):
 	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M', null=True)
 	address_country = models.CharField(max_length=200)
 	address_city = models.CharField(max_length=200)
-	birth_year = models.CharField(max_length=200, choices=YEAR_CHOICES)
-	birth_month = models.CharField(max_length=200, choices=MONTH_CHOICES)
-	birth_day = models.CharField(max_length=200, choices=DAY_CHOICES)
+	birth_year = models.IntegerField(default=-1, choices=YEAR_CHOICES)
+	birth_month = models.IntegerField(default=-1, choices=MONTH_CHOICES)
+	birth_day = models.IntegerField(default=-1, choices=DAY_CHOICES)
 
 	def __str__(self):
 		return self.user.username + ' ' + self.name
