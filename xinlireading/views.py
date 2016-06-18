@@ -18,8 +18,6 @@ class TestCreateStudentView(View):
 		form = TestStudentForm()
 		return render(request, self.template_name, { 'form': form })
 
-# import pdb; pdb.set_trace()
-
 # list of mobile User Agents
 mobile_uas = [
 	'w3c ','acs-','alav','alca','amoi','audi','avan','benq','bird','blac',
@@ -62,16 +60,10 @@ def home(request):
 	return render(request, 'xinlireading/home.html', context)
 
 def invalid(request):
-	context = {
-		'a': 1
-	}
-	return render(request, 'xinlireading/invalid.html', context)
+	return render(request, 'xinlireading/invalid.html', None)
 
 def success(request):
-	context = {
-		'a': 2
-	}
-	return render(request, 'xinlireading/success.html', context)
+	return render(request, 'xinlireading/success.html', None)
 
 # def signup(request):
 # 	context = {'is_signup': True }
@@ -93,30 +85,14 @@ class SignupView(View):
 		print(form.errors)
 		if form.is_valid():
 			form.save()
-			new_user = authenticate(username=form.cleaned_data['username'],
-									password=form.cleaned_data['password1'])
+			new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
 			login(request, new_user)
 			return redirect('/dashboard/')
-
 		context = {
 					'is_signup': True,
 		 			'form': form
 				}
 		return render(request, self.template_name, context)
-		# return HttpResponse(simplejson.dumps(form.errors), mimetype='application/javascript')
-
-
-
-		# # Check if an username exists
-		# if User.objects.filter(username = cleaned_info['username']).exists():
-		#
-		# else:
-		# 	u = User.objects.create_user(username=username, password=password)
-		# 	if u is not None:
-		# 		# login(request, u)
-		# 		return redirect('/success/')
-		# 	else:
-		# 		return redirect('/invalid/')
 
 class SigninView(View):
 	template_name = 'xinlireading/signin.html'
@@ -169,50 +145,25 @@ class EditProfileView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
 		print('get EditProfileView');
 		form = EditProfileForm(instance=request.user.userprofile)
-		# form.intro = request.user.userprofile.intro;
 		print(request.user.userprofile.intro);
-		# print(form.intro);
 		userprofile = request.user.userprofile;
 		return render(request, self.template_name, { 'form': form })
 
 	def post(self, request, *args, **kwargs):
-		#form = EditProfileForm(request.POST)
-
-		print(request.user.userprofile.intro);
-
 		name = request.POST.get('name');
 		gender = request.POST.get('gender');
 		intro = request.POST.get('intro');
 		print('name: ' + name +', gender: ' + gender + ', intro: ' + intro);
-
-
-		# if form.is_valid():
-		# 	return redirect('/success/')
 		return redirect('/invalid/')
 
+# Upload image file.
 def upload(request):
-
     if request.method == 'POST':
         username = request.POST['username']
         file = request.FILES['file']
-        # print(request.FILES)
-        # print(request.POST.get('file'))
-        # return;
-        # file = request.FILES.get('file')
-        print(file.name)
-        print(file.charset)
-        print(file.content_type)
-        print(file.size)
-        print(file.content_type_extra)
-        # print(file.temporary_file_path())
-        # return HttpResponse('POST')
         filename = file.name
-
         path = default_storage.save('{}/{}'.format('avatar',filename), ContentFile(file.read()))
         # tmp_file = os.path.join(settings.MEDIA_ROOT, path)
-        print('POST1');
         return HttpResponse('POST1')
-
     else:
-        print('get')
         return HttpResponse('GET')
