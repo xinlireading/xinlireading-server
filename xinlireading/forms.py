@@ -54,12 +54,4 @@ class XLRAuthenticationForm(AuthenticationForm):
 class EditProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['name', 'gender', 'intro', 'address_country', 'address_city', 'birth_year', 'birth_month', 'birth_day']
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['intro'].initial = 'hi guy!';
-    #
-    # def save(self):
-
-    # def is_valid(self):
+        fields = ['name', 'gender', 'intro', 'address_country', 'address_city', 'birth_year', 'birth_month', 'birth_day', 'avatar_url']

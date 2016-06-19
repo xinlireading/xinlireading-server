@@ -47,11 +47,6 @@ class Activity(models.Model):
 
 # 会员
 class UserProfile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	is_activated = models.BooleanField()
-	name = models.CharField(max_length=100)
-	avatar = models.ImageField(blank=True)
-	intro = models.CharField(max_length=200)
 	UNKNOWN = 'U'
 	MALE = 'M'
 	FEMALE = 'F'
@@ -69,7 +64,13 @@ class UserProfile(models.Model):
 	DAY_CHOICES = (
 	    [(-1, '日')] + [(i, str(i)) for i in range(1, 32)]
 	)
-	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M', null=True)
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	is_activated = models.BooleanField(default=False)
+	name = models.CharField(max_length=100)
+	avatar = models.ImageField(blank=True, null=True)
+	avatar_url = models.CharField(max_length=200, null=True, blank=True) #, default="avatar/avatar.png"
+	intro = models.CharField(max_length=200, null=True, blank=True)
+	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='U')
 	address_country = models.CharField(max_length=200)
 	address_city = models.CharField(max_length=200)
 	birth_year = models.IntegerField(default=-1, choices=YEAR_CHOICES)

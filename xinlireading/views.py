@@ -150,11 +150,11 @@ class EditProfileView(LoginRequiredMixin, View):
 		return render(request, self.template_name, { 'form': form })
 
 	def post(self, request, *args, **kwargs):
-		name = request.POST.get('name');
-		gender = request.POST.get('gender');
-		intro = request.POST.get('intro');
-		print('name: ' + name +', gender: ' + gender + ', intro: ' + intro);
-		return redirect('/invalid/')
+		form = EditProfileForm(request.POST, instance=request.user.userprofile);
+		if form.is_valid():
+			form.save();
+			return HttpResponse('Success')
+		return HttpResponse('Faild');
 
 # Upload image file.
 def upload(request):

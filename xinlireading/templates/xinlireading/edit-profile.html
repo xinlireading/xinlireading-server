@@ -35,7 +35,9 @@
               <div class="row">
                 <div class="col-sm-4 col-md-4 div-col-userphoto">
                   <div class="row">
-                    <img id="photoImage" class="img-circle img-user-profile-photo" src={{ form.photo.url }} >
+                    <!-- <img id="photoImage" class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{request.user.userprofile.avatar_url}}' > -->
+                    <img id="photoImage" class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{ form.avatar_url.value|default:"avatar/avatar.png" }}' >
+                    <input type="hidden" name="avatar_url" id="avatar_url">
                   </div>
                   <div class="row">
                     <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-link btn-link-custom"><span class="glyphicon glyphicon-pencil"></span>编辑头像</button>
@@ -136,7 +138,8 @@
         <!-- 保存按钮 -->
         <div class="div-savebtn-panel">
           <!-- <button type="submit" class="btn btn-primary btn-primary-custom">保存</button> -->
-          <button id="saveButton" ng-click="save()" class="btn btn-primary btn-primary-custom">保存</button>
+          <!-- <button id="saveButton" ng-click="save()" class="btn btn-primary btn-primary-custom">保存</button> -->
+          <button id="saveButton" type="button" ng-click="save()" class="btn btn-primary btn-primary-custom">保存</button>
         </div>
       </div>
 
@@ -255,21 +258,26 @@ app.controller('Ctrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload
       data: {username: 'username', file: file },
     });
 
-    file.upload.then(function (response) {
-      $timeout(function () {
-        file.result = response.data;
-      });
-    }, function (response) {
-        if (response.status > 0)
-          $scope.errorMsg = response.status + ': ' + response.data;
+    file.upload.then(
+      function (response) {
+        // success
+        var $myForm = $("#myForm");
+        // $myForm.avatar_url = '/avatar/a.png';
+        // $myForm.avatar_url.value = '/avatar/a.png';
+        $("#avatar_url").val('/avatar/a.png');
+        $myForm.submit();
+      }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
       }, function (evt) {
         // Math.min is to fix IE which reports 200% sometimes
         file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-    });
+      });
   };
 
   $scope.myImage='';
   $scope.myCroppedImage='';
+  $scope.photoImageChanged = false;
 
   // Select a new image file as photo.
   var handleFileSelect=function(evt) {
@@ -291,9 +299,7 @@ app.controller('Ctrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload
     var $photoImage = $("#photoImage");
     // $photoImage.attr('src', $croppedImage.prop('src')); // method #1 is ok
     $photoImage.attr('src', $scope.myCroppedImage); // method #2 is ok
-
-    // upload image
-    $scope.uploadPic($scope.myCroppedImage);
+    $scope.photoImageChanged = true;
   };
 
   angular.element(document.querySelector('#save-photo-btn')).on('click', handleSavePhotoBtnClick);
@@ -301,8 +307,13 @@ app.controller('Ctrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload
   // Save button click event.
   $scope.save = function() {
     console.log('save');
-    var $myForm = $("#myForm");
-    $myForm.submit();
+    // upload image
+    if ($scope.photoImageChanged) {
+      $scope.uploadPic($scope.myCroppedImage);
+    } else {
+      var $myForm = $("#myForm");
+      $myForm.submit();
+    }
   };
 }]);
 </script>
