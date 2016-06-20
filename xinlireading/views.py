@@ -169,3 +169,9 @@ def upload(request):
 		return HttpResponse(newFilePath)
 	else:
 		return HttpResponse('GET')
+
+class BaseHeaderView(View):
+	template_name = "xinlireading/base-header.html"
+	def get(self, request, *args, **kwargs):
+		form = BaseHeaderForm(instance=request.user.userprofile)
+		return render(request, self.template_name, {'form': form })

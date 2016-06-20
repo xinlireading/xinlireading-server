@@ -67,7 +67,6 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	is_activated = models.BooleanField(default=False)
 	name = models.CharField(max_length=100)
-	avatar = models.ImageField(blank=True, null=True)
 	avatar_url = models.CharField(max_length=200, null=True, blank=True) #, default="avatar/avatar.png"
 	intro = models.CharField(max_length=200, null=True, blank=True)
 	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='U')

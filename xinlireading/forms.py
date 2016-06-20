@@ -59,4 +59,9 @@ class EditProfileForm(ModelForm):
 class DashboardForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['name']
+        fields = ['name', 'avatar_url']
+
+class BaseHeaderForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['avatar_url']
