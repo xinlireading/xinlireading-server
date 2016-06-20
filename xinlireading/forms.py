@@ -55,3 +55,8 @@ class EditProfileForm(ModelForm):
     class Meta:
         model = UserProfile
         fields = ['name', 'gender', 'intro', 'address_country', 'address_city', 'birth_year', 'birth_month', 'birth_day', 'avatar_url']
+
+class DashboardForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['name']

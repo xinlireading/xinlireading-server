@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
-from xinlireading.forms import TestStudentForm, XLRAuthenticationForm, CustomUserCreationForm, EditProfileForm
+from xinlireading.forms import TestStudentForm, XLRAuthenticationForm, CustomUserCreationForm, EditProfileForm, DashboardForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -131,8 +131,8 @@ class DashboardView(LoginRequiredMixin, View):
 	template_name = 'xinlireading/dashboard.html'
 
 	def get(self, request, *args, **kwargs):
-		print(request.user)
-		return render(request, self.template_name, None)
+		form = DashboardForm(instance=request.user.userprofile)
+		return render(request, self.template_name, {'form': form})
 
 	# Logout
 	def post(self, request, *args, **kwargs):
