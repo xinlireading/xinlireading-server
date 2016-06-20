@@ -5,15 +5,24 @@
 }
 
 .div-user-info-container {
-  background-color: yellow;
+  /*background-color: yellow;*/
   display: table-cell;
   width: 350px;
 }
 
 .div-group-info-container {
-  background-color: green;
+  /*background-color: green;*/
   display: table-cell;
   width: auto;
+}
+
+.div-group-info-container > div {
+    /*background-color: green;*/
+    background-color: white;
+    width: 90%;
+    height: 100px;
+    margin-left: 10px;
+    margin-top: 1110px;
 }
 
 .div-base-user-info-panel {

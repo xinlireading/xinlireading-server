@@ -19,9 +19,8 @@
 </form> -->
 <div class="dashboard-container">
 
-  <div class="div-user-info-container">
+  <!-- <div class="div-user-info-container">
 
-    <!-- userinfo -->
     <div class="div-base-user-info-panel">
       <div>
         <div class="div-user-info-photo">
@@ -38,7 +37,6 @@
     </div>
 
     <div>
-      <!-- edit userinfo button -->
       <a type="submit" class="btn btn-default btn-defult-edit-userinfo" href="/settings/profile/">
         <span class="glyphicon glyphicon-cog"></span> 修改资料
       </a>
@@ -64,7 +62,58 @@
   </div>
 
   <div class="div-group-info-container">
-    test1
+    <div>
+    </div>
+  </div> -->
+
+  <div class="row">
+      <div style="height:auto" class="col-md-4">
+          <div class="div-user-info-container">
+
+            <div class="div-base-user-info-panel">
+              <div>
+                <div class="div-user-info-photo">
+                  <img class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{ form.avatar_url.value|default:"avatar/avatar.png" }}' />
+                </div>
+                <div class="div-user-info-name">
+                  <label class="label-user-profile-name">{{ form.name.value }}</label><br />
+                  <div style="margin-top:10px">
+                    <span class="label-user-profile-level">一年级</span></br />
+                    <span class="label-user-profile-reading-total">共看过 12 本书</span>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <a type="submit" class="btn btn-default btn-defult-edit-userinfo" href="/settings/profile/">
+                <span class="glyphicon glyphicon-cog"></span> 修改资料
+              </a>
+            </div>
+
+            <div class="div-my-posts-total-panel">
+              <ul>
+                <li class="list-group-item list-group-item-custom"><label class="title">本月</label></li>
+                <li class="list-group-item list-group-item-custom">
+                  <label>已发打卡笔记</label><span class="badge">32</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="div-my-books-total-panel">
+              <ul>
+                <li class="list-group-item list-group-item-custom"><label class="title">我的书籍</label></li>
+                <li class="list-group-item list-group-item-custom"><label>已看</label><span class="badge">2</span></li>
+                <li class="list-group-item list-group-item-custom"><label>收藏</label><span class="badge">23</span></li>
+              </ul>
+            </div>
+
+          </div>
+      </div>
+
+      <div class="col-md-8">
+          
+      </div>
   </div>
 
 </div>
