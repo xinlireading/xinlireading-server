@@ -164,7 +164,7 @@ def upload(request):
 		username = request.POST['username']
 		file = request.FILES['file']
 		newFilename = "{}.{}".format(uuid.uuid4(), 'png')
-		newFilePath = "{}/{}".format('avatar', newFilename)
+		newFilePath = "{}/{}/{}".format('avatar',request.user.id, newFilename)
 		path = default_storage.save(newFilePath, ContentFile(file.read()))
 		return HttpResponse(newFilePath)
 	else:
