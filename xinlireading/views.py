@@ -9,7 +9,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 # from django.conf import settings
-# import os
+import os
+import uuid
+
 
 class TestCreateStudentView(View):
 	template_name = 'xinlireading/test-crop-image.html'
@@ -34,19 +36,19 @@ mobile_uas = [
 mobile_ua_hints = [ 'SymbianOS', 'Opera Mini', 'iPhone' ]
 
 def mobileBrowser(request):
-    ''' Super simple device detection, returns True for mobile devices '''
+	''' Super simple device detection, returns True for mobile devices '''
 
-    mobile_browser = False
-    ua = request.META['HTTP_USER_AGENT'].lower()[0:4]
+	mobile_browser = False
+	ua = request.META['HTTP_USER_AGENT'].lower()[0:4]
 
-    if (ua in mobile_uas):
-        mobile_browser = True
-    else:
-        for hint in mobile_ua_hints:
-            if request.META['HTTP_USER_AGENT'].find(hint) > 0:
-                mobile_browser = True
+	if (ua in mobile_uas):
+		mobile_browser = True
+	else:
+		for hint in mobile_ua_hints:
+			if request.META['HTTP_USER_AGENT'].find(hint) > 0:
+				mobile_browser = True
 
-    return mobile_browser
+	return mobile_browser
 
 def test(request):
 	return render(request, 'xinlireading/test.html', None);
@@ -66,8 +68,8 @@ def success(request):
 	return render(request, 'xinlireading/success.html', None)
 
 # def signup(request):
-# 	context = {'is_signup': True }
-# 	return render(request, 'xinlireading/signup.html', context)
+#	 context = {'is_signup': True }
+#	 return render(request, 'xinlireading/signup.html', context)
 class SignupView(View):
 	template_name = 'xinlireading/signup.html'
 	def get(self, request, *args, **kwargs):
@@ -90,7 +92,7 @@ class SignupView(View):
 			return redirect('/dashboard/')
 		context = {
 					'is_signup': True,
-		 			'form': form
+					 'form': form
 				}
 		return render(request, self.template_name, context)
 
@@ -106,7 +108,7 @@ class SigninView(View):
 		# form = SigninForm(request.POST)
 		# print(form)
 		# if form.is_valid():
-		# 	return redirect('/success/')
+		#	 return redirect('/success/')
 		# return redirect('/invalid/')
 
 		# Method 2:
@@ -125,7 +127,7 @@ class SigninView(View):
 
 class DashboardView(LoginRequiredMixin, View):
 	login_url = '/account/signin/'
-    # redirect_field_name = 'redirect_to'
+	# redirect_field_name = 'redirect_to'
 	template_name = 'xinlireading/dashboard.html'
 
 	def get(self, request, *args, **kwargs):
@@ -158,12 +160,12 @@ class EditProfileView(LoginRequiredMixin, View):
 
 # Upload image file.
 def upload(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        file = request.FILES['file']
-        filename = file.name
-        path = default_storage.save('{}/{}'.format('avatar',filename), ContentFile(file.read()))
-        # tmp_file = os.path.join(settings.MEDIA_ROOT, path)
-        return HttpResponse('POST1')
-    else:
-        return HttpResponse('GET')
+	if request.method == 'POST':
+		username = request.POST['username']
+		file = request.FILES['file']
+		newFilename = "{}.{}".format(uuid.uuid4(), 'png')
+		newFilePath = "{}/{}".format('avatar', newFilename)
+		path = default_storage.save(newFilePath, ContentFile(file.read()))
+		return HttpResponse(newFilePath)
+	else:
+		return HttpResponse('GET')

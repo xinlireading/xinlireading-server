@@ -264,7 +264,7 @@ app.controller('Ctrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload
         var $myForm = $("#myForm");
         // $myForm.avatar_url = '/avatar/a.png';
         // $myForm.avatar_url.value = '/avatar/a.png';
-        $("#avatar_url").val('/avatar/a.png');
+        $("#avatar_url").val(response.data);
         $myForm.submit();
       }, function (response) {
       if (response.status > 0)
