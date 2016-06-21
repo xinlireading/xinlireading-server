@@ -17,7 +17,7 @@
           <li>
             <div>
               <button type="button" class="btn btn-default btn-default-header">
-                <img class="img-circle img-user-profile-photo-header" src='http://127.0.0.1:8000/media/{{ form.avatar_url.value|default:"avatar/avatar.png" }}' />
+                <img class="img-circle img-user-profile-photo-header" src='http://127.0.0.1:8000/media/{{ request.user.userprofile.avatar_url|default:"avatar/avatar.png" }}' />
                 <span class="glyphicon glyphicon-menu-down glyphicon-menu-down-custom"></span>
             </button>
             </div>
