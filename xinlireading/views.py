@@ -182,5 +182,7 @@ class BookDetailView(View):
 	def get(self, request, *args, **kwargs):
 		book_id = self.kwargs['book_id']
 		book = get_object_or_404(Book, pk=book_id)
-		form = BookDetailForm(instance=book)
-		return render(request, self.template_name, {'form': form})
+		# form = BookDetailForm(instance=book)
+		# print(form)
+		# return render(request, self.template_name, {'form': form})
+		return render(request, self.template_name, {'book': book})

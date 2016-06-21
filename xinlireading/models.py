@@ -20,11 +20,11 @@ class BookType(models.Model):
 		return self.name
 
 class Author(models.Model):
-	title = models.CharField(max_length=200)
+	name = models.CharField(max_length=200)
 	intro = RichTextField(blank=True)
 
 	def __str__(self):
-		return self.title
+		return self.name
 
 # 书籍
 class Book(models.Model):
