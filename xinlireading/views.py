@@ -177,6 +177,11 @@ class BaseHeaderView(View):
 		form = BaseHeaderForm(instance=request.user.userprofile)
 		return render(request, self.template_name, {'form': form})
 
+class BooksView(View):
+	template_name = "xinlireading/books.html"
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, {'books': Book.objects.all()})
+
 class BookDetailView(View):
 	template_name = "xinlireading/book-detail.html"
 	def get(self, request, *args, **kwargs):
