@@ -6,6 +6,15 @@
     background-color: white;
     padding: 15px 27px;
 }
+
+.left-container p {
+    font-size: 13px;
+    color: #3A3A3A;
+}
+
+.div-book-into-panel p {
+    color: #505050
+}
 .right-container {
     bottom:0;
     top:0;
@@ -23,6 +32,10 @@
     width: auto;
 }
 
+.right-container p {
+    font-size: 13px;
+    color: #505050
+}
 .book-reading-info-panel {
     padding-top: 34px;
 }

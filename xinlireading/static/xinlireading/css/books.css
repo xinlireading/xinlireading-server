@@ -1,1 +1,34 @@
-/*li { cursor: pointer; cursor: hand; }*/
+li {
+    list-style-type: none;
+    margin-left: -40px;
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px*/
+}
+
+.div-book-info-panel {
+    width: calc(100% - 116px);
+    min-width: 200px;
+    height: 100%;
+    float: left;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+.div-book-info-panel>div {
+    font-size: 12.5px;
+    color: #505050;
+    padding-top: 8px;
+    font-weight: normal;
+}
+.div-book-info-panel > div:first-child {
+    font-size: 13.5px;
+    color: #337AB7;
+}
+
+.div-reading-info-panel {
+
+}
+.div-reading-info-panel > div {
+    font-size: 13px;
+    color: #505050
+}
