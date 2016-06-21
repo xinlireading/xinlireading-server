@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms import ModelForm, Textarea, Form
-from .models import UserProfile, TestStudent
+from .models import UserProfile, TestStudent, Book
 
 
 # class TestStudentForm(forms.Form):
@@ -65,3 +65,8 @@ class BaseHeaderForm(ModelForm):
     class Meta:
         model = UserProfile
         fields = ['avatar_url']
+
+class BookDetailForm(ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title']

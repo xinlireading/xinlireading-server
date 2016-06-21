@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
-from xinlireading.forms import TestStudentForm, XLRAuthenticationForm, CustomUserCreationForm, EditProfileForm, DashboardForm
+from xinlireading.forms import TestStudentForm, XLRAuthenticationForm, CustomUserCreationForm, EditProfileForm, DashboardForm, BookDetailForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from .models import Book
 # from django.conf import settings
 import os
 import uuid
@@ -174,4 +175,12 @@ class BaseHeaderView(View):
 	template_name = "xinlireading/base-header.html"
 	def get(self, request, *args, **kwargs):
 		form = BaseHeaderForm(instance=request.user.userprofile)
-		return render(request, self.template_name, {'form': form })
+		return render(request, self.template_name, {'form': form})
+
+class BookDetailView(View):
+	template_name = "xinlireading/book-detail.html"
+	def get(self, request, *args, **kwargs):
+		book_id = self.kwargs['book_id']
+		book = get_object_or_404(Book, pk=book_id)
+		form = BookDetailForm(instance=book)
+		return render(request, self.template_name, {'form': form})
