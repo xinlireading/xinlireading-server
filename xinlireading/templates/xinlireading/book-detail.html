@@ -3,4 +3,46 @@
 
 {% block content %}
 {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-detail.css' %}" />
+
+<div class="row" style="background-color:#f2f2f2">
+    <div class="col-md-9">
+        <div class="left-container">
+
+            <div style="height:33px;">
+                <p style="font-size:25px;">{{form.title.value}}</p>
+            </div>
+
+            <div style="height:179px;margin-top:12px;">
+                <div style="float:left;">
+                    <img src="/media/{{form.cover.value}}" style="height:177px; width:120px; display:block; background-color:green" />
+                </div>
+                <div style="height:100%; width:auto; float:left; padding-left:15px;">
+                    <p>作者: {{form.author.value}}</p>
+                    <p>出版社: {{form.publisher.value}}</p>
+                    <p>出版日期: {{form.pusblish_date.value}}</p>
+                    <p>价格: {{form.price.value}}</p>
+                </div>
+            </div>
+
+
+            <div style="margin-top:38px">
+                <p style="font-size:15px">内容简介</p>
+                {{form.intro.value|safe}}
+            </div>
+
+            <div style="margin-top:25px">
+                <p style="font-size:15px">作者简介</p>
+                {{form.intro.value|safe}}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" style="background-color:yellow">
+        <div class="right-container">
+        </div>
+    </div>
+</div>
+
+
+
 {% endblock %}

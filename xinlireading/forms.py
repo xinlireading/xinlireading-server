@@ -69,4 +69,4 @@ class BaseHeaderForm(ModelForm):
 class BookDetailForm(ModelForm):
     class Meta:
         model = Book
-        fields = ['title']
+        fields = ['title', 'cover', 'publisher', 'publish_date', 'price', 'author', 'intro']
