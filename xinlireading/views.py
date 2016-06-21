@@ -191,3 +191,10 @@ class BookDetailView(View):
 		# print(form)
 		# return render(request, self.template_name, {'form': form})
 		return render(request, self.template_name, {'book': book})
+
+class BookSignView(View):
+	template_name = "xinlireading/book-sign.html"
+	def get(self, request, *args, **kwargs):
+		book_id = self.kwargs['book_id']
+		book = get_object_or_404(Book, pk=book_id)
+		return render(request, self.template_name, {'book': book})
