@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
 	url(r'^', include('xinlireading.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
+from datetime import date
 
 class TestStudent(models.Model):
 	name =  models.CharField(max_length=100)
@@ -9,10 +11,24 @@ class TestStudent(models.Model):
 	)
 	gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M', null=True)
 
+# 书籍类型
+class BookType(models.Model):
+	name = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.name
+
 # 书籍
 class Book(models.Model):
-	type = models.IntegerField()
+	# type = models.IntegerField()
+	type = models.ForeignKey(BookType, on_delete=models.CASCADE)
 	title = models.CharField(max_length=200)
+	author = models.CharField(max_length=200, blank=True)
+	publisher = models.CharField(max_length=200, blank=True)
+	publish_date = models.DateField(auto_now=False, auto_now_add=False)
+	price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)
+	intro = RichTextUploadingField(blank=True)
+	cover = models.ImageField(blank=True)
 
 	def __str__(self):
 		return self.title
