@@ -18,7 +18,7 @@
                     <img src="/media/{{form.cover.value}}" style="height:177px; width:120px; display:block; background-color:green" />
                 </div>
                 <div style="height:100%; width:auto; float:left; padding-left:15px;">
-                    <p>作者: {{form.author.value}}</p>
+                    <p>作者: {{form.author}}</p>
                     <p>出版社: {{form.publisher.value}}</p>
                     <p>出版日期: {{form.pusblish_date.value}}</p>
                     <p>价格: {{form.price.value}}</p>
@@ -33,7 +33,7 @@
 
             <div style="margin-top:25px">
                 <p style="font-size:15px">作者简介</p>
-                {{form.intro.value|safe}}
+                {{form.author.intro}}
             </div>
         </div>
     </div>
