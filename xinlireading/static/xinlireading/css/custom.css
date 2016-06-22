@@ -100,7 +100,11 @@
 
 .btn-primary-custom-cancel:hover {
   background-color: #C2C2C2;
-  color: black;
+  color: white;
+}
+
+.btn-primary-custom-cancel:active {
+    background-color: red;
 }
 
 .guide-message {
@@ -354,4 +358,11 @@ ul.ul-content li {
   /*text-align: center;*/
   color: #BC342D; /* red */
   padding-left: 15px
+}
+
+a {
+    color: #337ab7
+}
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none
 }

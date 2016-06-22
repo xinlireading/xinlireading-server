@@ -4,6 +4,8 @@
 {% block content %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-detail.css' %}" />
+<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
 
 <div class="container-fluid">
     <div class="row" style="background-color:#f2f2f2">
@@ -27,28 +29,89 @@
                     </div>
                 </div>
 
-
-                <div style="margin-top:38px">
-                    <p style="font-size:15px">内容简介</p>
+                <!-- <hr> -->
+                <div style="margin-top:20px; margin-bottom:20px">
+                    <p style="font-size:14px; font-weight:bold">内容简介</p>
                     {{book.intro|safe}}
                 </div>
 
-                <div style="margin-top:25px">
-                    <p style="font-size:15px">作者简介</p>
+                <hr>
+                <div style="margin-top:20px; margin-bottom:20px">
+                    <p style="font-size:14px; font-weight:bold">作者简介</p>
                     {{book.author.intro|safe}}
                 </div>
+
+                <hr>
+                <div style="margin-top:20px; margin-bottom:20px">
+                    <div style="font-size:14px; font-weight:bold">相关读书活动</div>
+                    <ul style="margin-top:15px;font-size:13px;">
+                        {% for activity in book.activitys.all %}
+                        <li style="height:60px; margin:1px">
+                            <div style="float:left;width:calc(100% - 130px);">
+                                <div style="font-weight:bold; color:#3a3a3a"><a href="">{{activity.title}}</a></div>
+                                <div style="font-size:12px; color:#505050">{{activity.intro}}</div>
+                            </div>
+                            <div style="float:left; width:130px" >
+                                <div style="font-size:12px; color:#3A3A3A">活动时间: {{activity.start_date|date:'Y-m-d'}}</div>
+                                <button data-toggle="modal" data-target="#myModal" style="margin-left:30px" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel">参加</button>
+
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
             </div>
         </div>
         <div class="col-md-3 book-reading-info-panel">
             <div class="right-container">
-                <p>本书已有120位组员读过</p>
-                <p>正在阅读的小组  10</p>
-                <p>正在招募的小组 3</p>
-                <button type="button" src="/sign/" class="btn btn-primary btn-primary-custom btn-primary-custom-submit" onclick="location.href='/book/{{book.id}}/sign/'">报名这本书的读书会</button>
+                <p>120位组员读过</br>310位组员在读</p>
+
+                <p>进行中的小组 10</br>招募中的小组 3</p>
+                <p>相关读书活动 1</p>
+                <!-- onclick="location.href='/book/{{book.id}}/sign/'" -->
+                <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">报名读书小组</h4>
+          </div>
+          <div  class="modal-body" style="text-align:center; padding:25px; background-color:#f2f2f2;">
+            <div class="step1"
+              <div style="font-size:18px; margin-top:0px; margin-bottom:12px;">请选择要参加的活动</div>
+              <div style="height:25px; background-color:white"></div> 
+              {% for activity in book.activitys.all %}
+                <a class="activity-container" href="">
+                    <div style="background-color:white; padding:0px 25px 25px 25px;">
+                        <div class="activity-panel" style="border:1px solid #f0f0f0;padding:10px 0px">
+                          <div style="font-weight:bold; color: #3a3a3a; font-size:14px;">活动名称: {{activity.title}}</div>
+                          <div style="font-size:13px; color:#777; margin: 10px 0px">{{activity.intro}}</div>
+                          <div style="font-size:13px; color:#777; margin: 10px 0px">开始时间: {{activity.start_date|date:'Y-m-d'}}  持续{{activity.duration}}天</div>
+                        </div>
+                    </div>
+                </a>
+              {% endfor %}
+            </div>
+            <!-- <div class="step2">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
+                  <button id="save-photo-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
+                </div>
+            </div> -->
+          </div>
+
+        </div>
+
+      </div>
+    </div>
 </div>
 
 {% endblock %}

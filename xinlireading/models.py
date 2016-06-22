@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
-from datetime import date
+from django.utils import timezone
 
 class TestStudent(models.Model):
 	name =  models.CharField(max_length=100)
@@ -60,14 +60,20 @@ class Grade(models.Model):
 	def __str__(self):
 		return self.book.title
 
+
 # 读书活动
 class Activity(models.Model):
-	book = models.ForeignKey(Book, on_delete=models.CASCADE)
-	start_date = models.DateTimeField()
+	title = models.CharField(max_length=200, blank=True)
+	intro = models.CharField(max_length=200, blank=True)
+	book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="activitys")
+	start_date = models.DateTimeField(default=timezone.now)
 	duration = models.IntegerField()
+	rule = RichTextField(blank=True)
 
 	def __str__(self):
-		return self.book.title + str(self.start_date)
+		# return self.book.title + str(self.start_date) + " " + self.title
+		# return self.book.title + self.start_date.strftime("%Y-%m-%d %H:%M") + " " + self.title
+		return self.book.title + " - " + self.title + " " + self.start_date.strftime("%Y-%m-%d")
 
 
 # 会员
@@ -113,6 +119,7 @@ class ReadingGroup(models.Model):
 		through = 'ReadingGroupMembership',
 		through_fields=('reading_group', 'user'),
 	)
+	wechatGroupImage = models.ImageField(blank=True)
 
 	def __str__(self):
 		return self.name

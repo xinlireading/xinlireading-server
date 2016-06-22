@@ -52,3 +52,30 @@
 .btn-primary-custom-submit:focus {
     background-color: #78BE2C;
 }
+
+.btn-primary-custom-cancel {
+    font-size: 12px;
+    width: 70px;
+    color:#3A3A3A;
+    /*font-weight: normal;*/
+}
+.btn-primary-custom-cancel:hover {
+  background-color: #C2C2C2;
+  /*color: white;*/
+}
+.btn-primary-custom-cancel:focus {
+    background-color: #C2C2C2;
+}
+
+.left-container ul {
+    padding-left: 0px
+}
+.left-container li {
+    list-style-type: none;
+}
+.activity-panel {
+    background-color: white;
+}
+.activity-panel:hover {
+     background-color: #FBFBFB;
+ }
