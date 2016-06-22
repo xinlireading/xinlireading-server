@@ -67,7 +67,7 @@
                 <p>120位组员读过</br>310位组员在读</p>
                 <p>进行中的小组 10</br>招募中的小组 3</p>
                 <p>相关读书活动 1</p>
-                <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
+                <button id="start-sign-activity-btn" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
             </div>
         </div>
     </div>
@@ -120,7 +120,7 @@
           </div>
           <div id="modal-footer" class="modal-footer" style="background-color:white; display:none">
             <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
-            <button id="save-photo-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
+            <button id="sign-activity-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
           </div>
         </div>
 
@@ -137,13 +137,35 @@ app.config(function($interpolateProvider) {
 });
 app.controller('Ctrl', ['$scope', '$element', function ($scope, $element) {
 
-    $scope.nextStep = function(activity_id) {
-        console.log(activity_id);
+$scope.activity_id = -1;
+
+    var toggleStep = function(showStep1, showStep2) {
+        // Hide the step2 view
+        var step2Elements = $element.find('.step2-class');
+        angular.forEach(step2Elements, function(value, key) {
+            value.style.display = showStep2 ? 'block' : 'none';
+        });
         // Hide the step1 view
         var step1Elements = $element.find('.step1-class');
         angular.forEach(step1Elements, function(value, key) {
-            value.style.display = 'none';
+            value.style.display = showStep1 ? 'block' : 'none';
         });
+    };
+
+
+    var startSignActivityButtonClick = function() {
+        // Show the step1 view, Hiden the step2 view
+        toggleStep(true, false);
+    };
+    angular.element(document.querySelector('#start-sign-activity-btn')).on('click', startSignActivityButtonClick);
+
+
+    $scope.nextStep = function(activity_id) {
+        $scope.activity_id = activity_id;
+
+        console.log(activity_id);
+        // // Hide the step1 view
+        toggleStep(false, false);
         // Show the selected activity view
         var selected_activity_id = "#activity-step2-id"+activity_id+"-container";
         $(selected_activity_id).css('display', 'block');
@@ -153,20 +175,17 @@ app.controller('Ctrl', ['$scope', '$element', function ($scope, $element) {
 
 
     var backButtonClick = function() {
-        // Hide the step2 view
-        var step2Elements = $element.find('.step2-class');
-        angular.forEach(step2Elements, function(value, key) {
-            value.style.display = 'none';
-        });
-        // Show the step1 view
-        var step1Elements = $element.find('.step1-class');
-        angular.forEach(step1Elements, function(value, key) {
-            value.style.display = 'block';
-        });
-        // Hide the modal footer view
+        // Show the step1 view, Hide the step2 view
+        toggleStep(true, false);
         $("#modal-footer").css('display', 'none');
     };
     angular.element(document.querySelector('#back-btn')).on('click', backButtonClick);
+
+
+    var signActivityButtonClick = function() {
+    };
+    angular.element(document.querySelector('#sign-activity-btn')).on('click', signActivityButtonClick);
+
 }]);
 </script>
 
