@@ -366,3 +366,7 @@ a {
 a:hover, a:visited, a:link, a:active {
     text-decoration: none
 }
+
+.btn:focus, .btn:active:focus {
+    outline: 0;
+}

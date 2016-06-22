@@ -6,8 +6,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-detail.css' %}" />
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 
-<div class="container-fluid">
+<div class="container-fluid" ng-app="app" ng-controller="Ctrl">
     <div class="row" style="background-color:#f2f2f2">
         <div class="col-md-9">
             <div class="left-container">
@@ -24,7 +25,6 @@
                         <p>作者: {{book.author.name}}</p>
                         <p>出版社: {{book.publisher}}</p>
                         <p>出版日期: {{book.publish_date|date:'Y-m-d'}}</p>
-                        <!-- <p>类型: {{book.type.name}}</p> -->
                         <p>价格: {{book.price}}</p>
                     </div>
                 </div>
@@ -60,16 +60,13 @@
                         {% endfor %}
                     </ul>
                 </div>
-
             </div>
         </div>
         <div class="col-md-3 book-reading-info-panel">
             <div class="right-container">
                 <p>120位组员读过</br>310位组员在读</p>
-
                 <p>进行中的小组 10</br>招募中的小组 3</p>
                 <p>相关读书活动 1</p>
-                <!-- onclick="location.href='/book/{{book.id}}/sign/'" -->
                 <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
             </div>
         </div>
@@ -85,11 +82,14 @@
             <h4 class="modal-title">报名读书小组</h4>
           </div>
           <div  class="modal-body" style="text-align:center; padding:25px; background-color:#f2f2f2;">
-            <div class="step1"
-              <div style="font-size:18px; margin-top:0px; margin-bottom:12px;">请选择要参加的活动</div>
-              <div style="height:25px; background-color:white"></div> 
+            <div>
+              <div style="font-size:18px; margin-top:0px; margin-bottom:12px;">
+                  <button class="btn btn-link" style="float:left" id="back-btn"><span class="glyphicon glyphicon-menu-left" ></span></button>
+                  选择活动
+              </div>
+              <div style="height:25px; background-color:white"></div>
               {% for activity in book.activitys.all %}
-                <a class="activity-container" href="">
+                <a class="step1-class" ng-click="nextStep('{{activity.id}}')" style="display:block">
                     <div style="background-color:white; padding:0px 25px 25px 25px;">
                         <div class="activity-panel" style="border:1px solid #f0f0f0;padding:10px 0px">
                           <div style="font-weight:bold; color: #3a3a3a; font-size:14px;">活动名称: {{activity.title}}</div>
@@ -98,6 +98,16 @@
                         </div>
                     </div>
                 </a>
+
+                <div style="display:none" class="step2-class" id="activity-step2-id{{activity.id}}-container">
+                    <div style="height:200px; text-align:left; background-color:white; padding-left:20px;display:block">
+                        <div style="color: #3a3a3a; font-size:14px;">{{activity.title}}</div>
+                        <div style="font-size:13px; color:#777; margin: 10px 0px">{{activity.intro}}</div>
+                        <div style="font-size:13px; color:#777; margin: 10px 0px">开始时间: {{activity.start_date|date:'Y-m-d'}}  持续{{activity.duration}}天</div>
+                        <div style="font-size:13px; color:#777; margin: 10px 0px;">规则:{{activity.rule|safe}}</div>
+
+                    </div>
+                </div>
               {% endfor %}
             </div>
             <!-- <div class="step2">
@@ -106,12 +116,58 @@
                   <button id="save-photo-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
                 </div>
             </div> -->
-          </div>
 
+          </div>
+          <div id="modal-footer" class="modal-footer" style="background-color:white; display:none">
+            <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
+            <button id="save-photo-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
+          </div>
         </div>
 
       </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+var app = angular.module('app', []);
+app.config(function($interpolateProvider) {
+  $interpolateProvider.startSymbol('{$');
+  $interpolateProvider.endSymbol('$}');
+});
+app.controller('Ctrl', ['$scope', '$element', function ($scope, $element) {
+
+    $scope.nextStep = function(activity_id) {
+        console.log(activity_id);
+        // Hide the step1 view
+        var step1Elements = $element.find('.step1-class');
+        angular.forEach(step1Elements, function(value, key) {
+            value.style.display = 'none';
+        });
+        // Show the selected activity view
+        var selected_activity_id = "#activity-step2-id"+activity_id+"-container";
+        $(selected_activity_id).css('display', 'block');
+        // Show the modal footer
+        $("#modal-footer").css('display', 'block');
+    };
+
+
+    var backButtonClick = function() {
+        // Hide the step2 view
+        var step2Elements = $element.find('.step2-class');
+        angular.forEach(step2Elements, function(value, key) {
+            value.style.display = 'none';
+        });
+        // Show the step1 view
+        var step1Elements = $element.find('.step1-class');
+        angular.forEach(step1Elements, function(value, key) {
+            value.style.display = 'block';
+        });
+        // Hide the modal footer view
+        $("#modal-footer").css('display', 'none');
+    };
+    angular.element(document.querySelector('#back-btn')).on('click', backButtonClick);
+}]);
+</script>
 
 {% endblock %}
