@@ -8,126 +8,126 @@
 <script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 
-<div class="container-fluid" ng-app="app" ng-controller="Ctrl">
-    <div class="row" style="background-color:#f2f2f2">
-        <div class="col-md-9">
-            <div class="left-container">
+<form  ng-app="app" ng-controller="Ctrl" method="post">
+    <div class="container-fluid">
+        <div class="row" style="background-color:#f2f2f2">
+            <div class="col-md-9">
+                <div class="left-container">
 
-                <div style="height:33px;">
-                    <p style="font-size:24px;">{{book.title}}</p>
-                </div>
-
-                <div style="height:179px;margin-top:12px;">
-                    <div style="float:left;">
-                        <img src="/media/{{book.cover}}" style="height:177px; width:120px; display:block; background-color:green" />
+                    <div style="height:33px;">
+                        <p style="font-size:24px;">{{book.title}}</p>
                     </div>
-                    <div class="div-book-into-panel" style="height:100%; width:auto; float:left; padding-left:15px;">
-                        <p>作者: {{book.author.name}}</p>
-                        <p>出版社: {{book.publisher}}</p>
-                        <p>出版日期: {{book.publish_date|date:'Y-m-d'}}</p>
-                        <p>价格: {{book.price}}</p>
-                    </div>
-                </div>
 
-                <!-- <hr> -->
-                <div style="margin-top:20px; margin-bottom:20px">
-                    <p style="font-size:14px; font-weight:bold">内容简介</p>
-                    {{book.intro|safe}}
-                </div>
-
-                <hr>
-                <div style="margin-top:20px; margin-bottom:20px">
-                    <p style="font-size:14px; font-weight:bold">作者简介</p>
-                    {{book.author.intro|safe}}
-                </div>
-
-                <hr>
-                <div style="margin-top:20px; margin-bottom:20px">
-                    <div style="font-size:14px; font-weight:bold">相关读书活动</div>
-                    <ul style="margin-top:15px;font-size:13px;">
-                        {% for activity in book.activitys.all %}
-                        <li style="height:60px; margin:1px">
-                            <div style="float:left;width:calc(100% - 130px);">
-                                <div style="font-weight:bold; color:#3a3a3a"><a href="">{{activity.title}}</a></div>
-                                <div style="font-size:12px; color:#505050">{{activity.intro}}</div>
-                            </div>
-                            <div style="float:left; width:130px" >
-                                <div style="font-size:12px; color:#3A3A3A">活动时间: {{activity.start_date|date:'Y-m-d'}}</div>
-                                <button data-toggle="modal" data-target="#myModal" style="margin-left:30px" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel">参加</button>
-
-                            </div>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 book-reading-info-panel">
-            <div class="right-container">
-                <p>120位组员读过</br>310位组员在读</p>
-                <p>进行中的小组 10</br>招募中的小组 3</p>
-                <p>相关读书活动 1</p>
-                <button id="start-sign-activity-btn" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
-            </div>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">报名读书小组</h4>
-          </div>
-          <div  class="modal-body" style="text-align:center; padding:25px; background-color:#f2f2f2;">
-            <div>
-              <div style="font-size:18px; margin-top:0px; margin-bottom:12px;">
-                  <button class="btn btn-link" style="float:left" id="back-btn"><span class="glyphicon glyphicon-menu-left" ></span></button>
-                  选择活动
-              </div>
-              <div style="height:25px; background-color:white"></div>
-              {% for activity in book.activitys.all %}
-                <a class="step1-class" ng-click="nextStep('{{activity.id}}')" style="display:block">
-                    <div style="background-color:white; padding:0px 25px 25px 25px;">
-                        <div class="activity-panel" style="border:1px solid #f0f0f0;padding:10px 0px">
-                          <div style="font-weight:bold; color: #3a3a3a; font-size:14px;">活动名称: {{activity.title}}</div>
-                          <div style="font-size:13px; color:#777; margin: 10px 0px">{{activity.intro}}</div>
-                          <div style="font-size:13px; color:#777; margin: 10px 0px">开始时间: {{activity.start_date|date:'Y-m-d'}}  持续{{activity.duration}}天</div>
+                    <div style="height:179px;margin-top:12px;">
+                        <div style="float:left;">
+                            <img src="/media/{{book.cover}}" style="height:177px; width:120px; display:block; background-color:green" />
+                        </div>
+                        <div class="div-book-into-panel" style="height:100%; width:auto; float:left; padding-left:15px;">
+                            <p>作者: {{book.author.name}}</p>
+                            <p>出版社: {{book.publisher}}</p>
+                            <p>出版日期: {{book.publish_date|date:'Y-m-d'}}</p>
+                            <p>价格: {{book.price}}</p>
                         </div>
                     </div>
-                </a>
 
-                <div style="display:none" class="step2-class" id="activity-step2-id{{activity.id}}-container">
-                    <div style="height:200px; text-align:left; background-color:white; padding-left:20px;display:block">
-                        <div style="color: #3a3a3a; font-size:14px;">{{activity.title}}</div>
-                        <div style="font-size:13px; color:#777; margin: 10px 0px">{{activity.intro}}</div>
-                        <div style="font-size:13px; color:#777; margin: 10px 0px">开始时间: {{activity.start_date|date:'Y-m-d'}}  持续{{activity.duration}}天</div>
-                        <div style="font-size:13px; color:#777; margin: 10px 0px;">规则:{{activity.rule|safe}}</div>
+                    <!-- <hr> -->
+                    <div style="margin-top:20px; margin-bottom:20px">
+                        <p style="font-size:14px; font-weight:bold">内容简介</p>
+                        {{book.intro|safe}}
+                    </div>
 
+                    <hr>
+                    <div style="margin-top:20px; margin-bottom:20px">
+                        <p style="font-size:14px; font-weight:bold">作者简介</p>
+                        {{book.author.intro|safe}}
+                    </div>
+
+                    <hr>
+                    <div style="margin-top:20px; margin-bottom:20px">
+                        <div style="font-size:14px; font-weight:bold">相关读书活动</div>
+                        <ul style="margin-top:15px;font-size:13px;">
+                            {% for activity in book.activitys.all %}
+                            <li style="height:60px; margin:1px">
+                                <div style="float:left;width:calc(100% - 130px);">
+                                    <div style="font-weight:bold; color:#3a3a3a"><a href="">{{activity.title}}</a></div>
+                                    <div style="font-size:12px; color:#505050">{{activity.intro}}</div>
+                                </div>
+                                <div style="float:left; width:130px" >
+                                    <div style="font-size:12px; color:#3A3A3A">活动时间: {{activity.start_date|date:'Y-m-d'}}</div>
+                                    <button data-toggle="modal" data-target="#myModal" style="margin-left:30px" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel">参加</button>
+
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
-              {% endfor %}
             </div>
-            <!-- <div class="step2">
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
-                  <button id="save-photo-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
+            <div class="col-md-3 book-reading-info-panel">
+                <div class="right-container">
+                    <p>120位组员读过</br>310位组员在读</p>
+                    <p>进行中的小组 10</br>招募中的小组 3</p>
+                    <p>相关读书活动 1</p>
+                    <button id="start-sign-activity-btn" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
                 </div>
-            </div> -->
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
 
-          </div>
-          <div id="modal-footer" class="modal-footer" style="background-color:white; display:none">
-            <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
-            <button id="sign-activity-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">报名读书小组</h4>
+              </div>
+              <div  class="modal-body" style="text-align:center; padding:25px; background-color:#f2f2f2;">
+                <div>
+                  <div style="font-size:18px; margin-top:0px; margin-bottom:12px;">
+                      <button class="btn btn-link" style="float:left" id="back-btn"><span class="glyphicon glyphicon-menu-left" ></span></button>
+                      选择活动
+                  </div>
+                  <div style="height:25px; background-color:white"></div>
+                  {% for activity in book.activitys.all %}
+                    <a class="step1-class" ng-click="nextStep('{{activity.id}}')" style="display:block">
+                        <div style="background-color:white; padding:0px 25px 25px 25px;">
+                            <div class="activity-panel" style="border:1px solid #f0f0f0;padding:10px 0px">
+                              <div style="font-weight:bold; color: #3a3a3a; font-size:14px;">活动名称: {{activity.title}}</div>
+                              <div style="font-size:13px; color:#777; margin: 10px 0px">{{activity.intro}}</div>
+                              <div style="font-size:13px; color:#777; margin: 10px 0px">开始时间: {{activity.start_date|date:'Y-m-d'}}  持续{{activity.duration}}天</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div style="display:none" class="step2-class" id="activity-step2-id{{activity.id}}-container">
+                        <div style="height:200px; text-align:left; background-color:white; padding-left:20px;display:block">
+                            <div style="color: #3a3a3a; font-size:14px;">{{activity.title}}</div>
+                            <div style="font-size:13px; color:#777; margin: 10px 0px">{{activity.intro}}</div>
+                            <div style="font-size:13px; color:#777; margin: 10px 0px">开始时间: {{activity.start_date|date:'Y-m-d'}}  持续{{activity.duration}}天</div>
+                            <div style="font-size:13px; color:#777; margin: 10px 0px;">规则:{{activity.rule|safe}}</div>
+
+                        </div>
+                    </div>
+                  {% endfor %}
+                </div>
+                <!-- <div class="step2">
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
+                      <button id="save-photo-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
+                    </div>
+                </div> -->
+
+              </div>
+              <div id="modal-footer" class="modal-footer" style="background-color:white; display:none">
+                <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
+                <button id="sign-activity-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">报名</button>
+              </div>
+            </div>
           </div>
         </div>
-
-      </div>
     </div>
-</div>
-
+</form>
 
 <script type="text/javascript">
 var app = angular.module('app', []);
@@ -140,15 +140,13 @@ app.controller('Ctrl', ['$scope', '$element', function ($scope, $element) {
 $scope.activity_id = -1;
 
     var toggleStep = function(showStep1, showStep2) {
-        // Hide the step2 view
-        var step2Elements = $element.find('.step2-class');
-        angular.forEach(step2Elements, function(value, key) {
-            value.style.display = showStep2 ? 'block' : 'none';
-        });
-        // Hide the step1 view
         var step1Elements = $element.find('.step1-class');
         angular.forEach(step1Elements, function(value, key) {
             value.style.display = showStep1 ? 'block' : 'none';
+        });
+        var step2Elements = $element.find('.step2-class');
+        angular.forEach(step2Elements, function(value, key) {
+            value.style.display = showStep2 ? 'block' : 'none';
         });
     };
 
@@ -162,8 +160,6 @@ $scope.activity_id = -1;
 
     $scope.nextStep = function(activity_id) {
         $scope.activity_id = activity_id;
-
-        console.log(activity_id);
         // // Hide the step1 view
         toggleStep(false, false);
         // Show the selected activity view

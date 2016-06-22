@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 from django.contrib.auth.views import login
-from xinlireading.views import TestCreateStudentView, SignupView, SigninView, DashboardView, EditProfileView, BookDetailView, BooksView, BookSignView
+from xinlireading.views import TestCreateStudentView, SignupView, SigninView, DashboardView, EditProfileView, BookDetailView, BooksView, ActivitySignView
 
 urlpatterns = [
 	# url(r'^/', views.home, name='home'),
@@ -17,5 +17,5 @@ urlpatterns = [
     url(r'^upload/$', views.upload, name='upload'),
 	url(r'^books/$', BooksView.as_view(), name='books'),
 	url(r'^book/(?P<book_id>[0-9]+)/$', BookDetailView.as_view(), name='book-detail'),
-	url(r'^book/(?P<book_id>[0-9]+)/sign/$', BookSignView.as_view(), name='book-sign'),
+	url(r'^book/(?P<book_id>[0-9]+)/sign/$', ActivitySignView.as_view(), name='activity-sign'),
 ]
