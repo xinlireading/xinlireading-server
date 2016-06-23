@@ -79,3 +79,11 @@
 .activity-panel:hover {
      background-color: #FBFBFB;
  }
+
+#success-message, #faild-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000
+}

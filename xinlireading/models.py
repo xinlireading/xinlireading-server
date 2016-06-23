@@ -120,6 +120,7 @@ class ReadingGroup(models.Model):
 		through_fields=('reading_group', 'user'),
 	)
 	wechatGroupImage = models.ImageField(blank=True)
+	opening = models.BooleanField(default=True)
 
 	def __str__(self):
 		return self.name

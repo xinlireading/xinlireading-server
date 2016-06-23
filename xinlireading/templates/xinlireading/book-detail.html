@@ -8,7 +8,11 @@
 <script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 
-<form  ng-app="app" ng-controller="Ctrl" method="post">
+<!-- <form id="myForm" ng-app="app" ng-controller="Ctrl" method="post" action="{$ '/book/' + book_id + '/activity/' + activity_id + '/sign/' $}"> -->
+<div id="success-message" style="display:none" class="alert alert-success" role="alert">恭喜你，报名成功！</div>
+<div id="faild-message" style="display:none" class="alert alert-danger" role="alert">报名失败！</div>
+<form id="myForm" ng-app="app" ng-controller="Ctrl">
+    {% csrf_token %}
     <div class="container-fluid">
         <div class="row" style="background-color:#f2f2f2">
             <div class="col-md-9">
@@ -131,13 +135,19 @@
 
 <script type="text/javascript">
 var app = angular.module('app', []);
-app.config(function($interpolateProvider) {
+app.config(function($httpProvider, $interpolateProvider, $locationProvider) {
+  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
   $interpolateProvider.startSymbol('{$');
   $interpolateProvider.endSymbol('$}');
+  // $locationProvider.html5Mode(true);
 });
-app.controller('Ctrl', ['$scope', '$element', function ($scope, $element) {
 
-$scope.activity_id = -1;
+app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', function ($scope, $element, $http, $timeout, $window) {
+
+    // $("#message").hide();
+    $scope.book_id = {{ book.id }};
+    $scope.activity_id = -1;
 
     var toggleStep = function(showStep1, showStep2) {
         var step1Elements = $element.find('.step1-class');
@@ -179,6 +189,23 @@ $scope.activity_id = -1;
 
 
     var signActivityButtonClick = function() {
+        // var $myForm = $("#myForm");
+        // $myForm.submit();
+        var url = '/book/' + $scope.book_id + '/activity/' + $scope.activity_id + '/sign/'
+        $http({
+            url: url,
+            method: "POST",
+        }).then(function success(response) {
+            // Show the message
+            $("#success-message").css('display', 'block');
+            // Redirect to new page
+            $timeout(function () {
+                $window.location.href = url;
+            }, 1500);
+        }, function error(response) {
+            console.log('error');
+            $("#faild-message").css('display', 'block');
+        });
     };
     angular.element(document.querySelector('#sign-activity-btn')).on('click', signActivityButtonClick);
 

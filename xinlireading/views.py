@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.views.generic import View
@@ -8,11 +8,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
-from .models import Book
+from .models import Book, Activity, ReadingGroup, ReadingGroupMembership
 # from django.conf import settings
 import os
 import uuid
-
+# from django.contrib import messages
 
 class TestCreateStudentView(View):
 	template_name = 'xinlireading/test-crop-image.html'
@@ -197,4 +197,19 @@ class ActivitySignView(View):
 	def get(self, request, *args, **kwargs):
 		book_id = self.kwargs['book_id']
 		book = get_object_or_404(Book, pk=book_id)
-		return render(request, self.template_name, {'book': book})
+		activity_id = self.kwargs['activity_id']
+		activity = get_object_or_404(Activity, pk=activity_id)
+		return render(request, self.template_name, {'activity': activity})
+
+	def post(self, request, *args, **kwargs):
+		activity_id = self.kwargs['activity_id']
+		print(activity_id)
+		group = ReadingGroup.objects.filter(activity__id=activity_id, opening=True).first()
+		print(group);
+		print(request.user);
+		readingGroupMembership = ReadingGroupMembership(reading_group=group, user=request.user)
+		readingGroupMembership.save()
+		# print(group);
+		return HttpResponse('sign the activity success!')
+		# messages.success(request, 'Sign the activity success~');
+		# return render_to_response(self.template_name, None)
