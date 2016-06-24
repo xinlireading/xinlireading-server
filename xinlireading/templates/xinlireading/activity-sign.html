@@ -1,8 +1,52 @@
 {% extends 'xinlireading/base.html' %}
-{% block title %}{{activity.title}}{% endblock %}
+{% block title %}{{membership.reading_group.activity.title}}{% endblock %}
 
 {% block content %}
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-sign.css' %}" />
-<h1>activity</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-detail.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/activity-sign.css' %}" />
+<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
+
+<!-- <form id="myForm" ng-app="app" ng-controller="Ctrl" method="post" action="{$ '/book/' + book_id + '/activity/' + activity_id + '/sign/' $}"> -->
+
+<form id="myForm" ng-app="app" ng-controller="Ctrl">
+
+    <div id="message" style="display:none" ng-class="messageClass" role="alert" ng-bind="error"></div>
+
+    {% csrf_token %}
+    <div class="container-fluid">
+        <div style="font-size:24px; margin-left:20px; margin-top:20px">小组报名详情</div>
+        <div class="row" style="background-color:#f2f2f2">
+            <div class="col-md-9">
+                <div class="left-container">
+
+                    <div style="height:160px;margin-top:12px;">
+                        <div>所在小组: {{membership.reading_group.name}}</div>
+                    </div>
+
+                    <!-- <hr>
+                    <div style="height:120px; margin-top:20px; margin-bottom:20px">
+                    </div>
+
+                    <hr>
+                    <div style="height:270px; margin-top:20px; margin-bottom:20px">
+                    </div>
+
+                    <hr>
+                    <div style="height:270px; margin-top:20px; margin-bottom:20px">
+                    </div> -->
+
+                </div>
+            </div>
+            <div class="col-md-3 book-reading-info-panel">
+                <div class="right-container">
+                    <p style="font-size:14px;font-weight:bold">需要帮助？</p>
+                    <p>请添加客服微信: 心理读书会-小书童</p>
+                    <!-- <button id="start-sign-activity-btn" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

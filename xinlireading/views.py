@@ -195,11 +195,14 @@ class BookDetailView(View):
 class ActivitySignView(View):
 	template_name = "xinlireading/activity-sign.html"
 	def get(self, request, *args, **kwargs):
-		book_id = self.kwargs['book_id']
-		book = get_object_or_404(Book, pk=book_id)
+		# book_id = self.kwargs['book_id']
+		# book = get_object_or_404(Book, pk=book_id)
 		activity_id = self.kwargs['activity_id']
-		activity = get_object_or_404(Activity, pk=activity_id)
-		return render(request, self.template_name, {'activity': activity})
+		# activity = get_object_or_404(Activity, pk=activity_id)
+		# groups = ReadingGroup.objects.filter(activity__id=activity_id)
+		membership = ReadingGroupMembership.objects.filter(user=request.user, reading_group__activity__id=activity_id).first()
+		print(membership)
+		return render(request, self.template_name, {'membership': membership})
 
 	def post(self, request, *args, **kwargs):
 		activity_id = self.kwargs['activity_id']
@@ -213,6 +216,6 @@ class ActivitySignView(View):
 
 		readingGroupMembership = ReadingGroupMembership(reading_group=group, user=request.user)
 		readingGroupMembership.save()
-		return HttpResponse('报名成功!', None)
+		return HttpResponse('报名成功!', status=201)
 
 		# return render_to_response(self.template_name, None)
