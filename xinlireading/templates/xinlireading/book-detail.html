@@ -9,9 +9,11 @@
 <script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 
 <!-- <form id="myForm" ng-app="app" ng-controller="Ctrl" method="post" action="{$ '/book/' + book_id + '/activity/' + activity_id + '/sign/' $}"> -->
-<div id="success-message" style="display:none" class="alert alert-success" role="alert">恭喜你，报名成功！</div>
-<div id="faild-message" style="display:none" class="alert alert-danger" role="alert">报名失败！</div>
+
 <form id="myForm" ng-app="app" ng-controller="Ctrl">
+
+    <div id="message" style="display:none" ng-class="messageClass" role="alert" ng-bind="error"></div>
+
     {% csrf_token %}
     <div class="container-fluid">
         <div class="row" style="background-color:#f2f2f2">
@@ -148,6 +150,7 @@ app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', fu
     // $("#message").hide();
     $scope.book_id = {{ book.id }};
     $scope.activity_id = -1;
+    // $scope.error = "";
 
     var toggleStep = function(showStep1, showStep2) {
         var step1Elements = $element.find('.step1-class');
@@ -189,22 +192,26 @@ app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', fu
 
 
     var signActivityButtonClick = function() {
-        // var $myForm = $("#myForm");
-        // $myForm.submit();
         var url = '/book/' + $scope.book_id + '/activity/' + $scope.activity_id + '/sign/'
         $http({
             url: url,
             method: "POST",
         }).then(function success(response) {
-            // Show the message
-            $("#success-message").css('display', 'block');
+            $("#message").css('display', 'block');
+            $scope.messageClass = "alert alert-success";
+            $scope.error = response.data;
             // Redirect to new page
             $timeout(function () {
+                $("#message").css('display', 'none');
                 $window.location.href = url;
             }, 1500);
         }, function error(response) {
-            console.log('error');
-            $("#faild-message").css('display', 'block');
+            $("#message").css('display', 'block');
+            $scope.error = response.data;
+            $scope.messageClass = "alert alert-danger";
+            $timeout(function () {
+                $("#message").css('display', 'none');
+            }, 1500);
         });
     };
     angular.element(document.querySelector('#sign-activity-btn')).on('click', signActivityButtonClick);

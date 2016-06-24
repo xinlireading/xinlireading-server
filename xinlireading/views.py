@@ -12,7 +12,7 @@ from .models import Book, Activity, ReadingGroup, ReadingGroupMembership
 # from django.conf import settings
 import os
 import uuid
-# from django.contrib import messages
+from django.contrib import messages
 
 class TestCreateStudentView(View):
 	template_name = 'xinlireading/test-crop-image.html'
@@ -205,11 +205,14 @@ class ActivitySignView(View):
 		activity_id = self.kwargs['activity_id']
 		print(activity_id)
 		group = ReadingGroup.objects.filter(activity__id=activity_id, opening=True).first()
-		print(group);
-		print(request.user);
+		if group == None:
+			return HttpResponse('没有可加入的群组!', status=500)
+
+		if ReadingGroupMembership.objects.filter(user=request.user, reading_group=group).count() > 0:
+			return HttpResponse('不可重复报名!', status=500)
+
 		readingGroupMembership = ReadingGroupMembership(reading_group=group, user=request.user)
 		readingGroupMembership.save()
-		# print(group);
-		return HttpResponse('sign the activity success!')
-		# messages.success(request, 'Sign the activity success~');
+		return HttpResponse('报名成功!', None)
+
 		# return render_to_response(self.template_name, None)
