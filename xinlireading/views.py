@@ -198,8 +198,6 @@ class ActivitySignView(View):
 		# book_id = self.kwargs['book_id']
 		# book = get_object_or_404(Book, pk=book_id)
 		activity_id = self.kwargs['activity_id']
-		# activity = get_object_or_404(Activity, pk=activity_id)
-		# groups = ReadingGroup.objects.filter(activity__id=activity_id)
 		membership = ReadingGroupMembership.objects.filter(user=request.user, reading_group__activity__id=activity_id).first()
 		print(membership)
 		return render(request, self.template_name, {'membership': membership})

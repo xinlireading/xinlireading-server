@@ -52,29 +52,39 @@
                     <div style="margin-top:20px; margin-bottom:20px">
                         <div style="font-size:14px; font-weight:bold">相关读书活动</div>
                         <ul style="margin-top:15px;font-size:13px;">
-                            {% for activity in book.activitys.all %}
-                            <li style="height:60px; margin:1px">
-                                <div style="float:left;width:calc(100% - 130px);">
-                                    <div style="font-weight:bold; color:#3a3a3a"><a href="">{{activity.title}}</a></div>
-                                    <div style="font-size:12px; color:#505050">{{activity.intro}}</div>
-                                </div>
-                                <div style="float:left; width:130px" >
-                                    <div style="font-size:12px; color:#3A3A3A">活动时间: {{activity.start_date|date:'Y-m-d'}}</div>
-                                    <button data-toggle="modal" data-target="#myModal" style="margin-left:30px" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel">参加</button>
+                            {% ifequal book.activitys.all.count 0 %}
+                                <div>无相关活动</div>
+                            {% else %}
+                                {% for activity in book.activitys.all %}
+                                    <li style="height:60px; margin:1px">
+                                        <div style="float:left;width:calc(100% - 130px);">
+                                            <div style="font-weight:bold; color:#3a3a3a"><a href="">{{activity.title}}</a></div>
+                                            <div style="font-size:12px; color:#505050">{{activity.intro}}</div>
+                                        </div>
+                                        <div style="float:left; width:130px" >
+                                            <div style="font-size:12px; color:#3A3A3A">活动时间: {{activity.start_date|date:'Y-m-d'}}</div>
+                                            <button data-toggle="modal" data-target="#myModal" style="margin-left:30px" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel">参加</button>
 
-                                </div>
-                            </li>
-                            {% endfor %}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            {% endifequal %}
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 book-reading-info-panel">
                 <div class="right-container">
-                    <p>120位组员读过</br>310位组员在读</p>
-                    <p>进行中的小组 10</br>招募中的小组 3</p>
-                    <p>相关读书活动 1</p>
-                    <button id="start-sign-activity-btn" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
+                    <div>120 位组员读过</div>
+                    <div style="margin-top:10px; margin-bottom:30px">310 位组员在读</div>
+
+                    {% ifequal book.activitys.all.count 0 %}
+                        <div style="margin-bottom:10px;">无相关读书活动</div>
+                        <button disabled="disabled" id="start-sign-activity-btn" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
+                    {% else %}
+                        <div style="margin-bottom:10px;">相关读书活动 {{book.activitys.all.count}}</div>
+                        <button id="start-sign-activity-btn" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button>
+                    {% endifequal %}
                 </div>
             </div>
         </div>
