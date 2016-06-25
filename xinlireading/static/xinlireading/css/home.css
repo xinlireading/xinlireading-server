@@ -1,0 +1,61 @@
+.container-fluid-custom {
+  padding-right: 15px;
+  padding-left: 0px;
+}
+
+.blackboard {
+  height: 350px;
+  width: 40%;
+  min-width: 350px;
+  max-width: 455px;
+  /*background-color: rgba(0, 0, 0, 0.6);*/
+  /*top:160px;*/
+  left:50px;
+  text-align: center;
+  position: absolute;
+}
+
+.blackboard .title {
+  color: white;
+  padding-top: 50px;
+  font-size: 30px;
+}
+
+.blackboard .content {
+  color: rgba(255, 255, 255, 0.7);;
+  font-size: 17px;
+  padding: 25px;
+  font-weight: lighter;
+
+}
+.blackboard .btn-primary-custom {
+  border-color: #ECA739;
+  align-items: center;
+  font-size: 16px;
+  padding: 5px 26px;
+}
+
+.blackboard .btn-primary-custom:active {
+  background: #ECA739;
+  border-color: #ECA739;
+  align-items: center;
+  outline: none
+
+}
+
+#list{
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  padding:20px 0 0 0;
+  border-top: 4px solid black;
+  width:30%;
+  list-style-type:none;
+}
+
+.container{
+  width:40px;
+  height:40px;
+  background-color:red;
+  margin: 1px;
+}

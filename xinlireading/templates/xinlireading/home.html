@@ -2,19 +2,58 @@
 {% block content %}
 {% load staticfiles %}
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/home.css' %}" />
 
-<div class="data">
-	<div id="blackboard" class="blackboard">
-		<p class="title">
-			你有多久没有<br/>静下心来看一本书了
-		</p>
-		<p class="content">
-			在小组的督促下坚持每周共读一本书，<br/>享受共同成长的乐趣。
-		</p>
-		<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/account/signup/'">立刻开始</button>
+<!-- <div class="row">
+	<div class="section1">
+		<div class="blackboard-background">
+			<div id="blackboard" class="blackboard">
+				<p class="title">
+					你有多久没有<br/>静下心来看一本书了
+				</p>
+				<p class="content">
+					在小组的督促下坚持每周共读一本书，<br/>享受共同成长的乐趣。
+				</p>
+				<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/account/signup/'">立刻开始</button>
+			</div>
+		</div>
+	</div>
+	<div style="background-color:green">
+		<ul class="list">
+
+			<li class="container"></li>
+			<li class="container"></li>
+			<li class="container"></li>
+			<li class="container"></li>
+			<li class="container"></li>
+			<li class="container"></li>
+			<li class="container"></li>
+			<li class="container"></li>
+		</ul>
+	</div>
+</div> -->
+<div class="container-fluid container-fluid-custom">
+
+	<div class="row">
+		<div style="overflow:hidden;width:100%">
+			<img src="{% static '/media/books-reading-chinese-students.jpg' %}" style="display:block;width:100%">
+
+			<div id="blackboard" class="blackboard">
+				<p class="title">
+					你有多久没有<br/>静下心来看一本书了
+				</p>
+				<p class="content">
+					在小组的督促下坚持每周共读一本书，<br/>享受共同成长的乐趣。
+				</p>
+				<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/account/signup/'">立刻开始</button>
+			</div>
+			</img>
+
+		</div>
+		<div style="height:100px;width:100%;background-color:yellow"></div>
+		<div style="height:100px;width:100%;background-color:green"></div>
 	</div>
 </div>
-
 <script>
 HTMLElement.prototype.alpha = function(a) {
         current_color = getComputedStyle(this).getPropertyValue("background-color");
@@ -25,21 +64,27 @@ HTMLElement.prototype.alpha = function(a) {
 
 window.addEventListener('resize', resize, false);
 function resize() {
+	console.log('resize');
 	var blackboard = document.getElementById('blackboard');
 	// blackboard.offsetWidth
-	if (window.innerWidth < 650) {
-		blackboard.alpha(0)
-		$('#blackboard').css('margin-top', 10)
+	if (window.innerWidth < 450) {
+		$('#blackboard').css('top', 58)
+		blackboard.alpha(0.0)
+
+	} else if (window.innerWidth < 600) {
+		$('#blackboard').css('top', 80)
+		blackboard.alpha(0.0)
+
 	} else if (window.innerWidth < 800) {
-		// blackboard.alpha(window.innerWidth/2000)
+		$('#blackboard').css('top', 120)
 		blackboard.alpha(0.6)
-		$('#blackboard').css('margin-top', 80)
+
 	} else {
 		blackboard.alpha(0.6)
-		$('#blackboard').css('margin-top', 160)
-
+		$('#blackboard').css('top', 160)
 	}
 }
+resize();
 </script>
 
 

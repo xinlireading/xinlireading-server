@@ -160,56 +160,6 @@
   color: white
 }*/
 
-.data {
-  overflow: auto;
-  background-color: white;
-  height: 800px;
-  background-image: url(../images/books-reading-chinese-students.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  min-width: 500px;
-}
-
-.blackboard {
-  height: 350px;
-  width: 40%;
-  min-width: 350px;
-  max-width: 455px;
-  background-color: rgba(0, 0, 0, 0.6);
-  margin-left: 80px;
-  margin-top: 160px;
-  text-align: center;
-
-}
-
-.blackboard .title {
-  color: white;
-  padding-top: 50px;
-  font-size: 30px;
-}
-
-.blackboard .content {
-  color: rgba(255, 255, 255, 0.7);;
-  font-size: 17px;
-  padding: 25px;
-  font-weight: lighter;
-
-}
-.blackboard .btn-primary-custom {
-  border-color: #ECA739;
-  align-items: center;
-  font-size: 16px;
-  padding: 5px 26px;
-}
-
-.blackboard .btn-primary-custom:active {
-  background: #ECA739;
-  border-color: #ECA739;
-  align-items: center;
-  outline: none
-
-}
-
 .footer {
   height: 60px;
   width: 100%;
