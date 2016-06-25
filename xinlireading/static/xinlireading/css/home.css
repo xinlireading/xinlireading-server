@@ -54,10 +54,10 @@
   list-style-type:none;
 }
 
-.container{
+.book-container{
   width:149px;
   height:246px;
-  background-color:red;
+  /*background-color:red;*/
   margin: 10px;
 }
 

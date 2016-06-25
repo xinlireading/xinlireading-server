@@ -58,7 +58,8 @@ def test(request):
 def home(request):
 	context = {
 		'is_signup': True,
-		'is_signin': True
+		'is_signin': True,
+		'books': Book.objects.all()
 	}
 	return render(request, 'xinlireading/home.html', context)
 
