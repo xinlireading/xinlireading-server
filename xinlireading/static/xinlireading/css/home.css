@@ -43,19 +43,24 @@
 
 }
 
-#list{
+.list{
   display: flex;
   flex-flow: wrap;
   justify-content: space-between;
-  padding:20px 0 0 0;
-  border-top: 4px solid black;
-  width:30%;
+  /*margin: 20px;*/
+  /*width: calc(100% - 40px);*/
+  padding: 20px 10px;
+  padding-left: 25px;
   list-style-type:none;
 }
 
 .container{
-  width:40px;
-  height:40px;
+  width:149px;
+  height:246px;
   background-color:red;
-  margin: 1px;
+  margin: 10px;
+}
+
+div {
+    font-weight: lighter;
 }
