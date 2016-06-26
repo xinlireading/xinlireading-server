@@ -1,8 +1,8 @@
 {% load staticfiles %}
 <!-- <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script> -->
-<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script> -->
 
-<div class="div-header-container" ng-app="app" ng-controller="Ctrl">
+<div class="div-header-container">
   <nav class="navbar navbar-inverse navbar-static-top navbar-static-top-custom">
     <div class="container-fluid">
       <div class="navbar-header navbar-header-custom">
@@ -46,33 +46,33 @@
 </div>
 
 <script>
-var app = angular.module('app', []);
-app.config(function($httpProvider, $interpolateProvider) {
-  // csrftoken for django.
-  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-  // django and argular use the same '{{' tag, so need to change one to '{%'.
-  $interpolateProvider.startSymbol('{$');
-  $interpolateProvider.endSymbol('$}');
-});
-
-app.controller('Ctrl', ['$scope', '$http', '$timeout', '$window', function ($scope, $http, $timeout, $window) {
-    var handleLogoutBtnClick = function() {
-        // console.log('handleLogoutBtnClick');
-        $http({
-            method: 'POST',
-            url: '/account/logout/'
-        }).then(function successCallback(response) {
-            console.log('successCallback');
-            // $window.location.href = "/account/dashboard/"//"/account/signin/"
-            $window.location.reload();
-        }, function errorCallback(response) {
-            console.log('errorCallback');
-        });
-
-    };
-    angular.element(document.querySelector('#logout-btn')).on('click', handleLogoutBtnClick);
-
-}]);
+// var app = angular.module('app', []);
+// app.config(function($httpProvider, $interpolateProvider) {
+//   // csrftoken for django.
+//   $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+//   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+//   // django and argular use the same '{{' tag, so need to change one to '{%'.
+//   $interpolateProvider.startSymbol('{$');
+//   $interpolateProvider.endSymbol('$}');
+// });
+//
+// app.controller('Ctrl', ['$scope', '$http', '$timeout', '$window', function ($scope, $http, $timeout, $window) {
+//     var handleLogoutBtnClick = function() {
+//         // console.log('handleLogoutBtnClick');
+//         $http({
+//             method: 'POST',
+//             url: '/account/logout/'
+//         }).then(function successCallback(response) {
+//             console.log('successCallback');
+//             $window.location.href = "/account/dashboard/"//"/account/signin/"
+//             // $window.location.reload();
+//         }, function errorCallback(response) {
+//             console.log('errorCallback');
+//         });
+//
+//     };
+//     angular.element(document.querySelector('#logout-btn')).on('click', handleLogoutBtnClick);
+//
+// }]);
 
 </script>
