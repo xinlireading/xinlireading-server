@@ -8,11 +8,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
-from .models import Book, Activity, ReadingGroup, ReadingGroupMembership
+from .models import Book, Activity, ReadingGroup, ReadingGroupMembership, UserFavoriteBook
 # from django.conf import settings
 import os
 import uuid
 from django.contrib import messages
+import json
 
 class TestCreateStudentView(View):
 	template_name = 'xinlireading/test-crop-image.html'
@@ -191,7 +192,23 @@ class BookDetailView(View):
 		# form = BookDetailForm(instance=book)
 		# print(form)
 		# return render(request, self.template_name, {'form': form})
-		return render(request, self.template_name, {'book': book})
+		book_user_relation = UserFavoriteBook.objects.filter(book=book, user=request.user).first()
+		if book_user_relation == None:
+			isFavorite = 0
+		else:
+			isFavorite = 1
+		print(book_user_relation);
+		return render(request, self.template_name, {'book': book, 'isFavorite': isFavorite})
+
+	def post(self, request, *args, **kwargs):
+		body_unicode = request.body.decode('utf-8')
+		body_dic = json.loads(body_unicode)
+		print(body_dic['favorite'])
+		favorite = bool(body_dic['favorite'])
+		print(favorite)
+		# TODO: Save the favorite
+		
+		return HttpResponse(favorite)
 
 class ActivitySignView(View):
 	template_name = "xinlireading/activity-sign.html"

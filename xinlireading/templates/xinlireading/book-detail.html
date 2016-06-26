@@ -22,12 +22,12 @@
                         <p style="font-size:24px; float:left; background-color:none">{{book.title}}</p>
                         <div style="float:right; text-align:right; background-color:none;">
                             <div style="float:left;">
-                                <a id="favorite-btn" class="btn btn-link btn-link-custom">
+                                <a id="favorite-btn" class="btn btn-link btn-link-custom" style="display:none">
                                     <span class="tag">
                                         <span class="icon is-small"><i class="fa fa-heart"></i></span>收藏
                                     </span>
                                 </a>
-                                <a id="unfavorite-btn" class="btn btn-link btn-link-custom">
+                                <a id="unfavorite-btn" class="btn btn-link btn-link-custom" style="display:none">
                                     <span class="tag is-warning">
                                         <span class="icon is-small"><i class="fa fa-heart"></i></span>已收藏
                                     </span>
@@ -176,6 +176,7 @@ app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', fu
     // $("#message").hide();
     $scope.book_id = {{ book.id }};
     $scope.activity_id = -1;
+    $scope.isFavorite = ({{ isFavorite }} == 1) ? true : false;
     // $scope.error = "";
     // $scope.isFavorite = false;
     // $scope.myStyle = { 'visibility': 'hidden' };
@@ -250,6 +251,24 @@ app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', fu
         // $scope.disableUnFavoriteButton = {'visibility': 'visible'};
         $("#favorite-btn").css('display', isFavorite ? 'none' : 'block');
         $("#unfavorite-btn").css('display', !isFavorite ? 'none' : 'block');
+
+        if (isFavorite) {
+            console.log('add favorite');
+        } else {
+            console.log('remove favorite');
+        }
+
+        var url = '/book/' + $scope.book_id +'/';
+        $http({
+            method: 'POST',
+            url: url,
+            data: { 'favorite': $scope.isFavorite ? 1 : 0}
+        }).then(function successCallback(response) {
+            console.log(response.data);
+        }, function errorCallback(response) {
+            console.log(response.data);
+        });
+        $scope.isFavorite = !$scope.isFavorite;
     };
     var HandleFavoriteBtnClick = function() {
         HandleToggleFavoriteClick(true);
@@ -259,7 +278,8 @@ app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', fu
     };
     angular.element(document.querySelector('#favorite-btn')).on('click', HandleFavoriteBtnClick);
     angular.element(document.querySelector('#unfavorite-btn')).on('click', HandleUnFavoriteBtnClick);
-
+    HandleToggleFavoriteClick($scope.isFavorite);
+    // console.log();
 }]);
 </script>
 
