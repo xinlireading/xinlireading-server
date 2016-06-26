@@ -105,8 +105,10 @@ body {
   border-radius: 0px;
   margin-left: 0px;
   margin-right: 10px;
-  font-weight: lighter;
 }
+/*.btn-primary-custom.disabled:hover, .btn-primary-custom.disabled:active {
+    background-color: red;
+}*/
 
 .btn-primary-custom-cancel {
   color: #7D7D7D;
@@ -306,9 +308,15 @@ ul.ul-content li {
   margin-top: 10px;
 }
 
-.btn-primary-custom-submit.disabled:hover {
-  background-color: #ECA739;
-  border-color: #ECA739
+.btn-primary-custom-submit[disabled] {
+    background-color: #D7D7D7;
+    border-color: #D7D7D7;
+    color: #9B9B9B;
+}
+.btn-primary-custom-submit[disabled]:hover {
+  background-color: #D7D7D7;
+  border-color: #D7D7D7;
+  color: #9B9B9B;
 
 }
 
