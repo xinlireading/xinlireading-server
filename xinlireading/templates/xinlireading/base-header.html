@@ -1,25 +1,42 @@
+{% load staticfiles %}
+<!-- <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 
-<div class="div-header-container">
+<div class="div-header-container" ng-app="app" ng-controller="Ctrl">
   <nav class="navbar navbar-inverse navbar-static-top navbar-static-top-custom">
     <div class="container-fluid">
       <div class="navbar-header navbar-header-custom">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-        </button>
+        </button> -->
         <a class="navbar-brand" href="/account/dashboard/">心理读书会</a>
       </div>
 
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li>
+              <a href="/books/">找书</a>
+          </li>
+          <li>
             <div>
-              <button type="button" class="btn btn-default btn-default-header">
+              <button type="button" class="btn btn-default btn-default-header" data-toggle="dropdown">
                 <img class="img-circle img-user-profile-photo-header" src='/media/{{ request.user.userprofile.avatar_url|default:"avatar/avatar.png" }}' />
                 <span class="glyphicon glyphicon-menu-down glyphicon-menu-down-custom"></span>
             </button>
+
+            <ul class="dropdown-menu">
+                <li><a href="/account/dashboard">个人中心</a></li>
+                <li><a href="/settings/profile/">修改资料</a></li>
+                <!-- <li><a href="#">Something else here</a></li> -->
+                <!-- <li role="separator" class="divider"></li> -->
+                <!-- <li><a href="#">Separated link</a></li> -->
+                <li role="separator" class="divider"></li>
+                <li><a id="logout-btn" href="">退出</a></li>
+            </ul>
+
             </div>
           </li>
         </ul>
@@ -27,3 +44,35 @@
     </div>
   </nav>
 </div>
+
+<script>
+var app = angular.module('app', []);
+app.config(function($httpProvider, $interpolateProvider) {
+  // csrftoken for django.
+  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+  // django and argular use the same '{{' tag, so need to change one to '{%'.
+  $interpolateProvider.startSymbol('{$');
+  $interpolateProvider.endSymbol('$}');
+});
+
+app.controller('Ctrl', ['$scope', '$http', '$timeout', '$window', function ($scope, $http, $timeout, $window) {
+    var handleLogoutBtnClick = function() {
+        // console.log('handleLogoutBtnClick');
+        $http({
+            method: 'POST',
+            url: '/account/logout/'
+        }).then(function successCallback(response) {
+            console.log('successCallback');
+            // $window.location.href = "/account/dashboard/"//"/account/signin/"
+            $window.location.reload();
+        }, function errorCallback(response) {
+            console.log('errorCallback');
+        });
+
+    };
+    angular.element(document.querySelector('#logout-btn')).on('click', handleLogoutBtnClick);
+
+}]);
+
+</script>
