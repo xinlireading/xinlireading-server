@@ -19,16 +19,20 @@
                 <div class="left-container">
 
                     <div style="height:33px;">
-                        <p style="font-size:24px; float:left; background-color:yellow">{{book.title}}</p>
-                        <div style="float:right; background-color:none;">
-                            <a href="" class="btn btn-link btn-link-custom">
-                                <span class="tag">
-                                    <span class="icon is-small"><i class="fa fa-heart"></i></span>收藏
-                                </span>
-                                <span class="tag is-warning">
-                                    <span class="icon is-small"><i class="fa fa-heart"></i></span>已收藏
-                                </span>
-                            </a>
+                        <p style="font-size:24px; float:left; background-color:none">{{book.title}}</p>
+                        <div style="float:right; text-align:right; background-color:none;">
+                            <div style="float:left;">
+                                <a id="favorite-btn" class="btn btn-link btn-link-custom">
+                                    <span class="tag">
+                                        <span class="icon is-small"><i class="fa fa-heart"></i></span>收藏
+                                    </span>
+                                </a>
+                                <a id="unfavorite-btn" class="btn btn-link btn-link-custom">
+                                    <span class="tag is-warning">
+                                        <span class="icon is-small"><i class="fa fa-heart"></i></span>已收藏
+                                    </span>
+                                </a>
+                            </div>
                             <span class="tag is-success">即将开始</span>
                             <span class="tag is-danger">已开始</span>
 
@@ -173,7 +177,8 @@ app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', fu
     $scope.book_id = {{ book.id }};
     $scope.activity_id = -1;
     // $scope.error = "";
-
+    // $scope.isFavorite = false;
+    // $scope.myStyle = { 'visibility': 'hidden' };
     var toggleStep = function(showStep1, showStep2) {
         var step1Elements = $element.find('.step1-class');
         angular.forEach(step1Elements, function(value, key) {
@@ -238,6 +243,22 @@ app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', fu
     };
     angular.element(document.querySelector('#sign-activity-btn')).on('click', signActivityButtonClick);
 
+
+    var HandleToggleFavoriteClick = function(isFavorite) {
+        console.log('HandleToggleFavoriteClick');
+        // $scope.disableFavoriteButton = {'visibility': 'hidden'};
+        // $scope.disableUnFavoriteButton = {'visibility': 'visible'};
+        $("#favorite-btn").css('display', isFavorite ? 'none' : 'block');
+        $("#unfavorite-btn").css('display', !isFavorite ? 'none' : 'block');
+    };
+    var HandleFavoriteBtnClick = function() {
+        HandleToggleFavoriteClick(true);
+    };
+    var HandleUnFavoriteBtnClick = function() {
+        HandleToggleFavoriteClick(false);
+    };
+    angular.element(document.querySelector('#favorite-btn')).on('click', HandleFavoriteBtnClick);
+    angular.element(document.querySelector('#unfavorite-btn')).on('click', HandleUnFavoriteBtnClick);
 }]);
 </script>
 
