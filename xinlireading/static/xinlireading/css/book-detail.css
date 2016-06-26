@@ -88,3 +88,11 @@
     z-index: 1000;
     text-align: center;
 }
+
+.btn-link-custom {
+    padding: 0px
+}
+
+.btn-link-custom .tag:hover, .btn-link-custom  .tag:focus   {
+    color: #505050
+}

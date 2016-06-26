@@ -3,11 +3,10 @@
 
 {% block content %}
 {% load staticfiles %}
-
+<!-- <script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script> -->
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/bulma/bulma.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/font-awesome/font-awesome.min.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-detail.css' %}" />
-<script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
-
-<!-- <form id="myForm" ng-app="app" ng-controller="Ctrl" method="post" action="{$ '/book/' + book_id + '/activity/' + activity_id + '/sign/' $}"> -->
 
 <form id="myForm" ng-app="app" ng-controller="Ctrl">
 
@@ -20,7 +19,20 @@
                 <div class="left-container">
 
                     <div style="height:33px;">
-                        <p style="font-size:24px;">{{book.title}}</p>
+                        <p style="font-size:24px; float:left; background-color:yellow">{{book.title}}</p>
+                        <div style="float:right; background-color:none;">
+                            <a href="" class="btn btn-link btn-link-custom">
+                                <span class="tag">
+                                    <span class="icon is-small"><i class="fa fa-heart"></i></span>收藏
+                                </span>
+                                <span class="tag is-warning">
+                                    <span class="icon is-small"><i class="fa fa-heart"></i></span>已收藏
+                                </span>
+                            </a>
+                            <span class="tag is-success">即将开始</span>
+                            <span class="tag is-danger">已开始</span>
+
+                        </div>
                     </div>
 
                     <div style="height:179px;margin-top:12px;">
@@ -33,6 +45,7 @@
                             <p>出版日期: {{book.publish_date|date:'Y-m-d'}}</p>
                             <p>价格: {{book.price}}</p>
                         </div>
+
                     </div>
 
                     <!-- <hr> -->
