@@ -39,11 +39,10 @@ body {
     font-size: 15px;
     /*font-weight: lighter;*/
     padding-top: 28px;
-
+    color: #505050;
 }
-
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    color: gray;
+    color: black;
 }
 
 .dropdown-menu > li > a {

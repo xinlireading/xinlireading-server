@@ -58,17 +58,17 @@
 
       <div class="col-md-9">
           <div style="margin-top:34px; background-color:white;">
-              <div style="padding:25px 20px; padding-top:30px; padding-bottom:0px; font-size:18px; font-weight:bold">我的读书小组</div>
+              <div style="padding:25px 20px; padding-top:30px; padding-bottom:0px; font-size:18px; font-weight:bold">我的活动</div>
               <div style="padding:17px 20px; font-size:14px; font-weight:bold">即将开始</div>
               <div style="padding: 0px 20px; font-size:13px;">
                   <ul>
                       {% for m in membership %}
                           <a href="/book/{{m.reading_group.activity.book.id}}/activity/{{m.reading_group.activity.id}}/sign/">
                               <li>
-                                  <div style="float:left;color:#1fc8db;font-weight:bold">《{{ m.reading_group.activity.book.title }}》:</div>
-                                  <div style="float:left;color:#1fc8db;font-weight:bold; margin:0px 5px">{{ m.reading_group.activity.title }}</div>
-                                  <div style="float:left;font-size:12px;margin:0px 10px; padding-top:1px">{{ m.reading_group.activity.start_date|date:'活动时间: Y-m-d' }}</div>
-                                  <div style="font-size:12px;margin:0px 10px; padding-top:1px">{{ m.reading_group.activity.duration }}天</div>
+                                  <div style="float:left; color:#1fc8db; font-weight:bold">《{{ m.reading_group.activity.book.title }}》:</div>
+                                  <div style="float:left; color:#1fc8db; font-weight:bold; margin:0px 5px">{{ m.reading_group.activity.title }}</div>
+                                  <div style="float:left; margin:0px 10px;">{{ m.reading_group.activity.start_date|date:'活动时间: Y-m-d' }}</div>
+                                  <div style="margin:0px 10px;">{{ m.reading_group.activity.duration }}天</div>
                                   <hr />
                               </li>
                           </a>
