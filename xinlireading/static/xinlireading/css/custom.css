@@ -54,15 +54,26 @@ body {
   height: 30px;
   width: 30px;
 }
+
 .glyphicon-menu-down-custom {
   font-size: 10px;
   color: #737373;
 }
+
+.btn-default-header img {
+    vertical-align: middle;
+}
+
+.btn-default-header span {
+    width: 10px;
+    height: 10px;
+}
+
 .btn-default-header {
   border-width: 0px;
   border-radius: 0px;
   height: 66px;
-  width: 70px;
+  width: 75px;
   padding-top: 15px;
   padding-left: 15px;
   margin-right: 50px;
@@ -105,6 +116,18 @@ body {
   border-radius: 0px;
   margin-left: 0px;
   margin-right: 10px;
+}
+
+.navbar-nav-custom {}
+.navbar-inverse .navbar-nav > .active > a {
+    background-color: white;
+    color: gray;
+    font-size: 17px;
+}
+
+.navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: white;
+    color: #3a3a3a
 }
 /*.btn-primary-custom.disabled:hover, .btn-primary-custom.disabled:active {
     background-color: red;
@@ -183,7 +206,7 @@ body {
   color: white
 }*/
 
-.footer {
+.footer-custom {
   height: 60px;
   width: 100%;
   min-width: 1000px;
