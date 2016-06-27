@@ -17,7 +17,7 @@
 
     {% csrf_token %}
     <div class="container-fluid">
-        <div style="font-size:24px; margin-left:20px; margin-top:20px">小组报名详情</div>
+        <div style="font-size:24px; margin-left:20px; margin-top:20px">活动报名详情</div>
         <div class="row" style="background-color:#f2f2f2">
             <div class="col-md-9">
                 <div class="left-container">
@@ -54,8 +54,9 @@
                     </div>
 
                     <div style="margin:25px">
-                        <div style="float:left;">小组微信群二维码：</div><div style="color:#FF2828">(注意: 请及时扫码入群)</div>
+                        <div style="float:left; color:green; font-weight:bold;">{{membership.reading_group.name}} </div><div>微信群二维码：</div>
                         <img src="/media/{{membership.reading_group.wechatGroupImage}}" style="height:120px; width:120px; display:block;" />
+                        <div style="color:#FF2828; font-size:10px;">注意: 请及时扫码入群</div>
                     </div>
 
                     <hr>
