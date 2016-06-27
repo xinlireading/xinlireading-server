@@ -146,6 +146,10 @@ class Note(models.Model):
 class UserFavoriteBook(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)
+	
+	# def create(cls, user, book):
+	# 	instance = cls(user=user, book=book)
+	# 	return instance
 
 	def __str__(self):
 		 return self.book.title + ": " + self.user.username

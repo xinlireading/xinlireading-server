@@ -33,8 +33,8 @@
                                     </span>
                                 </a>
                             </div>
-                            <span class="tag is-success">即将开始</span>
-                            <span class="tag is-danger">已开始</span>
+                            <!-- <span class="tag is-success">即将开始</span>
+                            <span class="tag is-danger">已开始</span> -->
 
                         </div>
                     </div>
@@ -245,41 +245,33 @@ app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', fu
     angular.element(document.querySelector('#sign-activity-btn')).on('click', signActivityButtonClick);
 
 
-    var HandleToggleFavoriteClick = function(isFavorite) {
-        console.log('HandleToggleFavoriteClick');
-        // $scope.disableFavoriteButton = {'visibility': 'hidden'};
-        // $scope.disableUnFavoriteButton = {'visibility': 'visible'};
+    var toggleButonStatus = function(isFavorite) {
         $("#favorite-btn").css('display', isFavorite ? 'none' : 'block');
         $("#unfavorite-btn").css('display', !isFavorite ? 'none' : 'block');
-
-        if (isFavorite) {
-            console.log('add favorite');
-        } else {
-            console.log('remove favorite');
-        }
-
+    };
+    var sendToServer = function(isFavorite) {
         var url = '/book/' + $scope.book_id +'/';
         $http({
             method: 'POST',
             url: url,
-            data: { 'favorite': $scope.isFavorite ? 1 : 0}
+            data: { 'favorite': isFavorite ? 1 : 0}
         }).then(function successCallback(response) {
             console.log(response.data);
         }, function errorCallback(response) {
             console.log(response.data);
         });
+    };
+
+    var HandleToggleFavoriteClick = function() {
         $scope.isFavorite = !$scope.isFavorite;
+        toggleButonStatus($scope.isFavorite);
+        sendToServer($scope.isFavorite);
     };
-    var HandleFavoriteBtnClick = function() {
-        HandleToggleFavoriteClick(true);
-    };
-    var HandleUnFavoriteBtnClick = function() {
-        HandleToggleFavoriteClick(false);
-    };
-    angular.element(document.querySelector('#favorite-btn')).on('click', HandleFavoriteBtnClick);
-    angular.element(document.querySelector('#unfavorite-btn')).on('click', HandleUnFavoriteBtnClick);
-    HandleToggleFavoriteClick($scope.isFavorite);
-    // console.log();
+
+    angular.element(document.querySelector('#favorite-btn')).on('click', HandleToggleFavoriteClick);
+    angular.element(document.querySelector('#unfavorite-btn')).on('click', HandleToggleFavoriteClick);
+
+    toggleButonStatus($scope.isFavorite);
 }]);
 </script>
 

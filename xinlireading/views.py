@@ -129,8 +129,6 @@ class SigninView(View):
 			return redirect('/account/invalid/')
 
 class DashboardView(LoginRequiredMixin, View):
-	login_url = '/account/signin/'
-	# redirect_field_name = 'redirect_to'
 	template_name = 'xinlireading/dashboard.html'
 
 	def get(self, request, *args, **kwargs):
@@ -179,36 +177,36 @@ class BaseHeaderView(View):
 		form = BaseHeaderForm(instance=request.user.userprofile)
 		return render(request, self.template_name, {'form': form})
 
-class BooksView(View):
+class BooksView(LoginRequiredMixin, View):
 	template_name = "xinlireading/books.html"
 	def get(self, request, *args, **kwargs):
 		return render(request, self.template_name, {'books': Book.objects.all()})
 
-class BookDetailView(View):
+class BookDetailView(LoginRequiredMixin, View):
 	template_name = "xinlireading/book-detail.html"
 	def get(self, request, *args, **kwargs):
 		book_id = self.kwargs['book_id']
 		book = get_object_or_404(Book, pk=book_id)
-		# form = BookDetailForm(instance=book)
-		# print(form)
-		# return render(request, self.template_name, {'form': form})
-		book_user_relation = UserFavoriteBook.objects.filter(book=book, user=request.user).first()
-		if book_user_relation == None:
-			isFavorite = 0
-		else:
-			isFavorite = 1
-		print(book_user_relation);
+		userFavoriteBook = UserFavoriteBook.objects.filter(book=book,user__id=request.user.id).first()
+		isFavorite = 0 if userFavoriteBook == None else 1
 		return render(request, self.template_name, {'book': book, 'isFavorite': isFavorite})
 
 	def post(self, request, *args, **kwargs):
 		body_unicode = request.body.decode('utf-8')
 		body_dic = json.loads(body_unicode)
-		print(body_dic['favorite'])
+		# print(body_dic['favorite'])
 		favorite = bool(body_dic['favorite'])
 		print(favorite)
-		# TODO: Save the favorite
-		
-		return HttpResponse(favorite)
+		book_id = self.kwargs['book_id']
+		book = get_object_or_404(Book, pk=book_id)
+		if favorite:
+			userFavoriteBook = UserFavoriteBook(book=book, user=request.user)
+			userFavoriteBook.save()
+		else:
+			print('delete')
+			UserFavoriteBook.objects.filter(book=book, user=request.user).first().delete()
+
+		return HttpResponse('success')
 
 class ActivitySignView(View):
 	template_name = "xinlireading/activity-sign.html"
