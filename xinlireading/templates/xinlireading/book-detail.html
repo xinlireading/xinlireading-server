@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/font-awesome/font-awesome.min.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-detail.css' %}" />
 
-<form id="myForm" ng-app="app" ng-controller="Ctrl">
+<form id="myForm" ng-controller="Ctrl">
 
     <div id="message" style="display:none" ng-class="messageClass" role="alert" ng-bind="error"></div>
 
@@ -162,14 +162,14 @@
 </form>
 
 <script type="text/javascript">
-var app = angular.module('app', []);
-app.config(function($httpProvider, $interpolateProvider, $locationProvider) {
-  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-  $interpolateProvider.startSymbol('{$');
-  $interpolateProvider.endSymbol('$}');
-  // $locationProvider.html5Mode(true);
-});
+// var app = angular.module('app', []);
+// app.config(function($httpProvider, $interpolateProvider, $locationProvider) {
+//   $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+//   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+//   $interpolateProvider.startSymbol('{$');
+//   $interpolateProvider.endSymbol('$}');
+//   // $locationProvider.html5Mode(true);
+// });
 
 app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', function ($scope, $element, $http, $timeout, $window) {
 

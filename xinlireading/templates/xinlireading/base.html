@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-- <title>心理读书会: 在线读书小组</title> -->
-    <title>{% block title %}心理读书会: 在线读书小组{% endblock %}</title>
-		{% load staticfiles %}
-		<link rel="shortcut icon" type="image/x-icon" href="{% static 'xinlireading/images/icon.ico' %}" />
-
-	</head>
 	{% load staticfiles %}
+	<head>
+    <title>{% block title %}心理读书会: 在线读书小组{% endblock %}</title>
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'xinlireading/images/icon.ico' %}" />
+	</head>
 	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/base.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
 	<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'xinlireading/js/base-angularapp-settings.js' %}"></script>
 
-  <body style="background-color:#f2f2f2">
-
-	{% include "xinlireading/base-header.html" %}
-
-    {% block content %}
-
-    {% endblock %}
-
+	<body style="background-color:#f2f2f2" ng-app="app">
+		{% include "xinlireading/base-header.html" %}
+		{% block content %}
+		{% endblock %}
 		{% include "xinlireading/base-footer.html" %}
 	<body>
 </html>

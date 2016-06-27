@@ -4,20 +4,18 @@
 {% block content %}
 {% load staticfiles %}
 {% load widget_tweaks %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/ngImgCrop/ng-img-crop.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/edit-profile.css' %}" />
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
-<!-- <script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script> -->
-<script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
+<!-- <script src="{% static 'xinlireading/js/angular.min.js' %}"></script> -->
 <script src="{% static 'xinlireading/ng-file-upload/ng-file-upload-shim.min.js' %}"></script>
 <script src="{% static 'xinlireading/ng-file-upload/ng-file-upload.min.js' %}"></script>
 <script src="{% static 'xinlireading/ngImgCrop/ng-img-crop.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/ngImgCrop/ng-img-crop.css' %}">
 
-<form id="myForm" method="post" action="" data-toggle="validator" role="form" ng-app="app" ng-controller="Ctrl">
+<form id="myForm" method="post" action="" data-toggle="validator" role="form" ng-controller="Ctrl">
   {% csrf_token %}
-
 <div >
 
   <div class="div-root-container">
@@ -239,16 +237,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 })
 
-var app = angular.module('app', ['ngImgCrop', 'ngFileUpload']);
-app.config(function($httpProvider, $interpolateProvider) {
-  // csrftoken for django.
-  $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-  $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-  // django and argular use the same '{{' tag, so need to change one to '{%'.
-  $interpolateProvider.startSymbol('{$');
-  $interpolateProvider.endSymbol('$}');
-});
-
+// var app = angular.module('app', ['ngImgCrop', 'ngFileUpload']);
+app.requires.push('ngImgCrop');
+app.requires.push('ngFileUpload');
 app.controller('Ctrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
   $scope.uploadPic = function(file) {
     console.log('uploadPic');

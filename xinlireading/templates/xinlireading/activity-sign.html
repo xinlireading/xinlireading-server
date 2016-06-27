@@ -2,19 +2,13 @@
 {% block title %}{{membership.reading_group.activity.title}}{% endblock %}
 
 {% block content %}
+
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-detail.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/activity-sign.css' %}" />
-<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 
-<!-- <form id="myForm" ng-app="app" ng-controller="Ctrl" method="post" action="{$ '/book/' + book_id + '/activity/' + activity_id + '/sign/' $}"> -->
-
-<form id="myForm" ng-app="app" ng-controller="Ctrl">
-
+<form id="myForm">
     <div id="message" style="display:none" ng-class="messageClass" role="alert" ng-bind="error"></div>
-
     {% csrf_token %}
     <div class="container-fluid">
         <div style="font-size:24px; margin-left:20px; margin-top:20px">活动报名详情</div>
@@ -22,25 +16,18 @@
             <div class="col-md-9">
                 <div class="left-container">
                     <div style="height:auto; margin:15px; padding:20px; background-color:#F6FBFD;">
-                        <!-- <div style="width:calc(100% - 0px); height:calc(100% - 0px); margin:22px 0px; background-color:#F6FBFD"> -->
-                            <div style="width:100%; height:30px">
-                                <div style="font-weight:bold; float:left">所在小组:</div><div style="color:green; font-weight:bold; float:left; margin-left:5px">{{membership.reading_group.name}}</div>
-                                <div style="float:left">即将开始</div>
-                            </div>
-
-                            <div>该小组已准备就绪，可按约定的时间如期开始。</div>
-                            <div style="margin-top:3px">请准备好书籍，按时参加。</div>
-                        <!-- </div> -->
+                        <div style="width:100%; height:30px">
+                            <div style="font-weight:bold; float:left">所在小组:</div><div style="color:green; font-weight:bold; float:left; margin-left:5px">{{membership.reading_group.name}}</div>
+                            <div style="float:left">即将开始</div>
+                        </div>
+                        <div>该小组已准备就绪，可按约定的时间如期开始。</div>
+                        <div style="margin-top:3px">请准备好书籍，按时参加。</div>
                     </div>
-
                     <hr >
                     <div style="height:auto; margin:15px; padding:20px; background-color:#FFFBFB;">
-                        <!-- <div style="width:calc(100% - 0px); height:calc(100% - 0px); margin:22px 0px; background-color:#F6FBFD"> -->
-                            <div style="font-weight:bold; float:left; height:30px; width:100%">规则</div>
-                            <div>{{membership.reading_group.activity.rule|safe}}</div>
-                        <!-- </div> -->
+                        <div style="font-weight:bold; float:left; height:30px; width:100%">规则</div>
+                        <div>{{membership.reading_group.activity.rule|safe}}</div>
                     </div>
-
                     <hr>
                     <div class="row" style="margin:10px">
                         <div class="col-md-4">
@@ -52,13 +39,11 @@
                             <div style="font-size:13px; margin-top:4px; font-weight:lighter; color:#9B9B9B">持续时间</div>
                         </div>
                     </div>
-
                     <div style="margin:25px">
                         <div style="float:left; color:green; font-weight:bold;">{{membership.reading_group.name}} </div><div>微信群二维码：</div>
                         <img src="/media/{{membership.reading_group.wechatGroupImage}}" style="height:120px; width:120px; display:block;" />
                         <div style="color:#FF2828; font-size:10px;">注意: 请及时扫码入群</div>
                     </div>
-
                     <hr>
                     <div>
                         <div style="font-size:18px; margin-left:25px;">相关书籍</div>
@@ -76,7 +61,6 @@
                                 </div>
                             </a>
                     </div>
-
                     <div style="height:50px; width:100%"></div>
                 </div>
             </div>
@@ -84,7 +68,6 @@
                 <div class="right-container">
                     <p style="font-size:14px;font-weight:bold">需要帮助？</p>
                     <p style="font-size:13px;">请添加客服微信: 心理读书会-小书童</p>
-                    <!-- <button id="start-sign-activity-btn" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">报名这本书的读书活动</button> -->
                 </div>
             </div>
         </div>

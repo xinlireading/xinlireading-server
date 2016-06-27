@@ -2,7 +2,7 @@
 <!-- <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script> -->
 <!-- <script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script> -->
 
-<div class="div-header-container">
+<div class="div-header-container" ng-controller="headerCtrl">
   <nav class="navbar navbar-inverse navbar-static-top navbar-static-top-custom">
     <div class="container-fluid">
       <div class="navbar-header navbar-header-custom">
@@ -68,23 +68,23 @@
 //   $interpolateProvider.endSymbol('$}');
 // });
 //
-// app.controller('Ctrl', ['$scope', '$http', '$timeout', '$window', function ($scope, $http, $timeout, $window) {
-//     var handleLogoutBtnClick = function() {
-//         // console.log('handleLogoutBtnClick');
-//         $http({
-//             method: 'POST',
-//             url: '/account/logout/'
-//         }).then(function successCallback(response) {
-//             console.log('successCallback');
-//             $window.location.href = "/account/dashboard/"//"/account/signin/"
-//             // $window.location.reload();
-//         }, function errorCallback(response) {
-//             console.log('errorCallback');
-//         });
-//
-//     };
-//     angular.element(document.querySelector('#logout-btn')).on('click', handleLogoutBtnClick);
-//
-// }]);
+app.controller('headerCtrl', ['$scope', '$http', '$timeout', '$window', function ($scope, $http, $timeout, $window) {
+    var handleLogoutBtnClick = function() {
+        console.log('handleLogoutBtnClick');
+        $http({
+            method: 'POST',
+            url: '/account/logout/'
+        }).then(function successCallback(response) {
+            console.log('successCallback');
+            $window.location.href = "/account/dashboard/"//"/account/signin/"
+            // $window.location.reload();
+        }, function errorCallback(response) {
+            console.log('errorCallback');
+        });
+
+    };
+    angular.element(document.querySelector('#logout-btn')).on('click', handleLogoutBtnClick);
+
+}]);
 
 </script>

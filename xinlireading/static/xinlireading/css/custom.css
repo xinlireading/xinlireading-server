@@ -48,6 +48,13 @@ body {
 .dropdown-menu > li > a {
     font-size: 13px;
 }
+.dropdown-menu {
+    margin-top: 0px;
+}
+.dropdown-menu > li {
+    margin-top: 6px;
+    height: 25px;
+}
 
 .img-user-profile-photo-header {
   height: 30px;
