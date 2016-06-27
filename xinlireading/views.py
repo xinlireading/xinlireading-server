@@ -132,8 +132,8 @@ class DashboardView(LoginRequiredMixin, View):
 	template_name = 'xinlireading/dashboard.html'
 
 	def get(self, request, *args, **kwargs):
-		form = DashboardForm(instance=request.user.userprofile)
-		return render(request, self.template_name, {'form': form})
+		membership = ReadingGroupMembership.objects.filter(user=request.user)
+		return render(request, self.template_name, {'membership': membership})
 
 	# Logout
 	def post(self, request, *args, **kwargs):

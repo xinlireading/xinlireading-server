@@ -2,7 +2,9 @@
 .div-user-info-container {
   /*background-color: yellow;*/
   display: table-cell;
-  width: 350px;
+  width: 300px;
+  padding-left: 30px;
+  padding-top: 30px;
 }
 
 .div-group-info-container {
@@ -23,8 +25,8 @@
 .div-base-user-info-panel {
   /*background-color: #5d8aa8;*/
   height: 110px;
-  margin-left: 50px;
-  margin-top: 30px;
+  margin-left: 0px;
+  margin-top: 0px;
 }
 
 .div-my-posts-total-panel {
@@ -35,8 +37,15 @@
 .div-my-books-total-panel {
   /*background-color: #efdecd;*/
   height: 200px;
+  /*padding-left: 40px;*/
 }
 
+.col-md-3 {
+    padding-left: 0px;
+}
+.col-md-8 {
+    padding-left: 0px;
+}
 .img-user-profile-photo {
   height: 90px;
   width: 90px;
@@ -99,21 +108,21 @@
     border-radius: 0px;
     text-align: left;
     height: 36px;
-    width: 290px;
+    width: 100%;
     padding: 0px;
     padding-left: 10px;
     padding-top: 10px;
     margin-bottom: 20px;
-    margin-left: 50px;
-    margin-right: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
 
 }
 
 .list-group-item-custom {
   border-radius: 0px;
   border-width: 0px;
-  margin-left: 10px;
-  margin-right: 20px;
+  margin-left: 0px;
+  margin-right: 0px;
   padding: 0px;
 }
 .list-group-item-custom:first-child {
@@ -145,4 +154,11 @@
 .list-group-item-custom .badge {
   float: right;
   margin-right: 10px;
+}
+hr {
+    margin: 10px 0px;
+}
+
+a, a:hover, a:focus {
+    color: #3A3A3A
 }

@@ -9,77 +9,22 @@
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/dashboard.css' %}" />
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
-<!-- <p>{{ user.get_username }}</p>
-<p>{{ user.email }}</p>
-<p>{{ user.password }}</p>
-<p>{{ user.userprofile.is_activated }}</p>
-<form action="/account/logout/" method="post" id="logout_form">
-  {% csrf_token %}
-  <input type="submit" value="Logout now" />
-</form> -->
+
 <div class="container-fluid">
-
-  <!-- <div class="div-user-info-container">
-
-    <div class="div-base-user-info-panel">
-      <div>
-        <div class="div-user-info-photo">
-          <img class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{ form.avatar_url.value|default:"avatar/avatar.png" }}' />
-        </div>
-        <div class="div-user-info-name">
-          <label class="label-user-profile-name">{{ form.name.value }}</label><br />
-          <div style="margin-top:10px">
-            <span class="label-user-profile-level">一年级</span></br />
-            <span class="label-user-profile-reading-total">共看过 12 本书</span>
-        </div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <a type="submit" class="btn btn-default btn-defult-edit-userinfo" href="/settings/profile/">
-        <span class="glyphicon glyphicon-cog"></span> 修改资料
-      </a>
-    </div>
-
-    <div class="div-my-posts-total-panel">
-      <ul>
-        <li class="list-group-item list-group-item-custom"><label class="title">本月</label></li>
-        <li class="list-group-item list-group-item-custom">
-          <label>已发打卡笔记</label><span class="badge">32</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="div-my-books-total-panel">
-      <ul>
-        <li class="list-group-item list-group-item-custom"><label class="title">我的书籍</label></li>
-        <li class="list-group-item list-group-item-custom"><label>已看</label><span class="badge">2</span></li>
-        <li class="list-group-item list-group-item-custom"><label>收藏</label><span class="badge">23</span></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="div-group-info-container">
-    <div>
-    </div>
-  </div> -->
-
   <div class="row">
-      <div style="height:auto" class="col-md-4">
+      <div style="height:auto; min-height:520px" class="col-md-3">
           <div class="div-user-info-container">
 
             <div class="div-base-user-info-panel">
               <div>
                 <div class="div-user-info-photo">
-                  <img class="img-circle img-user-profile-photo" src='/media/{{ form.avatar_url.value|default:"avatar/avatar.png" }}' />
+                  <img class="img-circle img-user-profile-photo" src='/media/{{ request.user.userprofile.avatar_url|default:"avatar/avatar.png" }}' />
                 </div>
                 <div class="div-user-info-name">
-                  <label class="label-user-profile-name">{{ form.name.value }}</label><br />
+                  <label class="label-user-profile-name">{{ request.user.userprofile.name }}</label><br />
                   <div style="margin-top:10px">
-                    <span class="label-user-profile-level">一年级</span></br />
-                    <span class="label-user-profile-reading-total">参与过12次读书小组</span>
+                    <!-- <span class="label-user-profile-level">一年级</span></br /> -->
+                    <!-- <span class="label-user-profile-reading-total">参与过12次读书小组</span> -->
                 </div>
                 </div>
               </div>
@@ -91,14 +36,14 @@
               </a>
             </div>
 
-            <div class="div-my-posts-total-panel">
+            <!-- <div class="div-my-posts-total-panel">
               <ul>
                 <li class="list-group-item list-group-item-custom"><label class="title">本月</label></li>
                 <li class="list-group-item list-group-item-custom">
                   <label>已发打卡笔记</label><span class="badge">32</span>
                 </li>
               </ul>
-            </div>
+            </div> -->
 
             <div class="div-my-books-total-panel">
               <ul>
@@ -111,8 +56,26 @@
           </div>
       </div>
 
-      <div class="col-md-8">
-
+      <div class="col-md-9">
+          <div style="margin-top:34px; background-color:white;">
+              <div style="padding:25px 20px; padding-top:30px; padding-bottom:0px; font-size:18px; font-weight:bold">我的读书小组</div>
+              <div style="padding:17px 20px; font-size:14px; font-weight:bold">即将开始</div>
+              <div style="padding: 0px 20px; font-size:13px;">
+                  <ul>
+                      {% for m in membership %}
+                          <a href="/book/{{m.reading_group.activity.book.id}}/activity/{{m.reading_group.activity.id}}/sign/">
+                              <li>
+                                  <div style="float:left;color:#1fc8db;font-weight:bold">《{{ m.reading_group.activity.book.title }}》:</div>
+                                  <div style="float:left;color:#1fc8db;font-weight:bold; margin:0px 5px">{{ m.reading_group.activity.title }}</div>
+                                  <div style="float:left;font-size:12px;margin:0px 10px; padding-top:1px">{{ m.reading_group.activity.start_date|date:'活动时间: Y-m-d' }}</div>
+                                  <div style="font-size:12px;margin:0px 10px; padding-top:1px">{{ m.reading_group.activity.duration }}天</div>
+                                  <hr />
+                              </li>
+                          </a>
+                      {% endfor %}
+                  <ul>
+              </div>
+          </div>
       </div>
   </div>
 

@@ -1,3 +1,10 @@
 .btn-link-custom:hover, .btn-link-custom:focus   {
     text-decoration: none;
 }
+
+ul {
+    padding-left: 0px;
+}
+li {
+    list-style-type: none;
+}
