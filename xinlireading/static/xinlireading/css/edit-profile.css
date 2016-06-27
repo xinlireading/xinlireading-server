@@ -19,7 +19,7 @@
 .div-baseinfo-label-panel {
   height: 60px;
   background-color: #FAFAFA;
-  margin: 0px 70px;
+  margin: 0px 50px;
   padding-left: 15px;
   padding-top: 18px;
 }
@@ -33,9 +33,11 @@
   /*height: 320px;*/
   /*width: auto;*/
   background-color: white;
-  margin: 2px 70px;
+  margin: 2px 50px;
 }
-
+.div-userinfo-panel label {
+    margin-top: 7px;
+}
 
 
 .div-userinfo-base-panel {
@@ -43,7 +45,7 @@
   width: 100%;
 }
 .div-userinfo-base-panel label {
-  font-weight: bold;
+  /*font-weight: bold;*/
   float: right;
   margin-top: 15px;
 }
@@ -98,7 +100,7 @@
 
 .div-labels-panel {
   display: table-cell;
-  width: 70px;
+  width: 50px;
 }
 
 .div-labels-panel div {
@@ -279,7 +281,7 @@
 .div-savebtn-panel {
   height: 60px;
   background-color: white;
-  margin: 0px 70px;
+  margin: 0px 50px;
 }
 
 .div-savebtn-panel .btn-primary-custom {

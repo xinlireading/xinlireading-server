@@ -4,7 +4,6 @@
 {% block content %}
 {% load staticfiles %}
 <!-- <script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script> -->
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/bulma/bulma.min.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/font-awesome/font-awesome.min.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/book-detail.css' %}" />
 
@@ -14,7 +13,7 @@
 
     {% csrf_token %}
     <div class="container-fluid">
-        <div class="row" style="background-color:#f2f2f2">
+        <div class="row">
             <div class="col-md-9">
                 <div class="left-container">
 
@@ -24,12 +23,12 @@
                             <div style="float:left;">
                                 <a id="favorite-btn" class="btn btn-link btn-link-custom" style="display:none">
                                     <span class="tag">
-                                        <span class="icon is-small"><i class="fa fa-heart"></i></span>收藏
+                                        <span class="icon is-small" style="margin-right:3px"><i class="fa fa-heart"></i></span>收藏
                                     </span>
                                 </a>
                                 <a id="unfavorite-btn" class="btn btn-link btn-link-custom" style="display:none">
                                     <span class="tag is-warning">
-                                        <span class="icon is-small"><i class="fa fa-heart"></i></span>已收藏
+                                        <span class="icon is-small" style="margin-right:3px"><i class="fa fa-heart"></i></span>已收藏
                                     </span>
                                 </a>
                             </div>
@@ -69,7 +68,7 @@
                         <p style="font-size:14px; font-weight:bold">相关读书活动</p>
                         <ul style="margin-top:15px;font-size:13px;">
                             {% ifequal book.activitys.all.count 0 %}
-                                <div>无相关活动</div>
+                                <p>无相关活动</p>
                             {% else %}
                                 {% for activity in book.activitys.all %}
                                     <li style="height:60px; margin:1px">
@@ -114,7 +113,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">报名读书小组</h4>
               </div>
-              <div  class="modal-body" style="text-align:center; padding:25px; background-color:#f2f2f2;">
+              <div  class="modal-body" style="text-align:center; padding:25px; background-color:#F8F8F8;">
                 <div>
                   <div style="font-size:18px; margin-top:0px; margin-bottom:12px;">
                       <button class="btn btn-link" style="float:left" id="back-btn"><span class="glyphicon glyphicon-menu-left" ></span></button>

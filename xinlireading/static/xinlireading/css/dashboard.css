@@ -87,14 +87,12 @@
 }
 .label-user-profile-level {
   font-size: 13px;
-  font-weight: lighter;
   padding: 0px;
   margin: 0px;
 }
 
 .label-user-profile-reading-total {
   font-size: 13px;
-  font-weight: lighter;
   padding: 0px;
   margin: 0px;
 }
@@ -102,7 +100,6 @@
 /*Edit user profile*/
 .btn-defult-edit-userinfo {
     border-width: 0px;
-    color: black;
     font-size: 12px;
     font-weight: normal;
     border-radius: 0px;
@@ -142,7 +139,7 @@
 
 
 .list-group-item-custom .title {
-  font-weight: bold;
+  /*font-weight: bold;*/
   font-size: 12px;
 }
 .list-group-item-custom label {

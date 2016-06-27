@@ -26,7 +26,6 @@
   color: rgba(255, 255, 255, 0.7);;
   font-size: 17px;
   padding: 25px;
-  font-weight: lighter;
 
 }
 .blackboard .btn-primary-custom {
@@ -60,8 +59,4 @@
   height:246px;
   /*background-color:red;*/
   margin: 10px;
-}
-
-div {
-    font-weight: lighter;
 }

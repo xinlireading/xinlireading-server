@@ -12,7 +12,7 @@
     {% csrf_token %}
     <div class="container-fluid">
         <div style="font-size:24px; margin-left:20px; margin-top:20px">活动报名详情</div>
-        <div class="row" style="background-color:#f2f2f2">
+        <div class="row">
             <div class="col-md-9">
                 <div class="left-container">
                     <div style="height:auto; margin:15px; padding:20px; background-color:#F6FBFD;">
@@ -32,11 +32,11 @@
                     <div class="row" style="margin:10px">
                         <div class="col-md-4">
                             <div style="font-weight:bold; font-size:19px;">{{membership.reading_group.activity.start_date|date:'Y-m-d'}}</div>
-                            <div style="font-size:13px; margin-top:4px; font-weight:lighter; color:#9B9B9B">开始时间</div>
+                            <div style="font-size:13px; margin-top:4px; color:#9B9B9B">开始时间</div>
                         </div>
                         <div class="col-md-4">
                             <div style="font-weight:bold; font-size:19px;">{{membership.reading_group.activity.duration}}天</div>
-                            <div style="font-size:13px; margin-top:4px; font-weight:lighter; color:#9B9B9B">持续时间</div>
+                            <div style="font-size:13px; margin-top:4px; color:#9B9B9B">持续时间</div>
                         </div>
                     </div>
                     <div style="margin:25px">

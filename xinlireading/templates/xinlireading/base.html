@@ -6,17 +6,29 @@
 		<link rel="shortcut icon" type="image/x-icon" href="{% static 'xinlireading/images/icon.ico' %}" />
 	</head>
 	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/base.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/bulma/bulma.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/base.css' %}" />
+
 	<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'xinlireading/js/base-angularapp-settings.js' %}"></script>
 
-	<body style="background-color:#f2f2f2" ng-app="app">
+	<!-- <script>
+	window.addEventListener('resize', resize, false);
+	function resize() {
+		if (window.innerHeight < 900px) {
+
+		}
+	}
+	</script> -->
+	<body style="background-color:#F2F2F2;" ng-app="app">
 		{% include "xinlireading/base-header.html" %}
+		<div id="root-div" style="min-height:calc(100% - 127px)">
 		{% block content %}
 		{% endblock %}
+		</div>
 		{% include "xinlireading/base-footer.html" %}
 	<body>
 </html>

@@ -8,3 +8,20 @@ ul {
 li {
     list-style-type: none;
 }
+
+body {
+    font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft Yahei","Helvetica","Arial","Verdana";
+    /*color: #505050;*/
+    /*color: #1fc8db*/
+    color: #3A3A3A;
+}
+body, html {
+    height:100%;
+}
+
+.xl-title {
+    color: #3A3A3A
+}
+hr {
+    border-top-color: #F2F2F2
+}
