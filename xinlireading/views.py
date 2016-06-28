@@ -92,7 +92,7 @@ class SignupView(View):
 			form.save()
 			new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
 			login(request, new_user)
-			return redirect('/dashboard/')
+			return redirect('/account/dashboard/')
 		context = {
 					'is_signup': True,
 					 'form': form

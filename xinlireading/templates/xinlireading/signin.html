@@ -3,49 +3,75 @@
 {% block title %}登陆{% endblock %}
 
 {% block content %}
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <!-- {% load staticfiles %} -->
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" /> -->
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" /> -->
 <form method="post" action="">
   {% csrf_token %}
-  <div class="div-content-signup-container">
-    <div class="div-content-signup-panel">
-      <p class="title">登陆</p>
-      <p class="subtitle">用电子邮箱登陆</p>
+  <div class="div-content-signup-container" >
+      <div class="div-content-signup-panel" id="signin-panel">
+        <p class="title">登陆</p>
+        <p class="subtitle">用电子邮箱登陆</p>
 
-      <div class="form-group form-group-custom">
-        <div class="input-group">
-          <div class="input-group-addon">
-            <span class="glyphicon glyphicon-envelope"></span>
+        <div class="form-group form-group-custom">
+          <div class="input-group">
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-envelope"></span>
+            </div>
+            <input type="email" class="form-control" name="username" placeholder="Email">
           </div>
-          <input type="email" class="form-control" name="username" placeholder="Email">
         </div>
-      </div>
 
-      <div class="form-group form-group-custom">
-        <div class="input-group">
-          <div class="input-group-addon">
-            <span class="glyphicon glyphicon-lock"></span>
+        <div class="form-group form-group-custom">
+            <div class="input-group">
+                <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-lock"></span>
+                </div>
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+        </div>
+
+        <div class="has-error">
+          <div class="checkbox checkbox-custom">
+            <label>
+              <input class="checkbox" type="checkbox" id="checkboxError" name="remember_me">
+              保持我在这台电脑的登陆状态。
+            </label>
           </div>
-          <input type="password" class="form-control" name="password" placeholder="Password">
-      </div>
-      </div>
+        </div>
 
-      <div class="has-error">
-    <div class="checkbox checkbox-custom">
-      <label>
-        <input class="checkbox" type="checkbox" id="checkboxError" name="remember_me">
-        保持我在这台电脑的登陆状态。
-      </label>
-    </div>
+
+        <button type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">登陆</button>
+
+        <a type="button" class="btn btn-link btn-link-custom" style="font-size: 12px;" id="fotgetpassword-btn">忘记密码？</a>
+
+      </div>
+      <div class="div-content-signup-panel" id="forgetpassword-panel">
+        <p class="title">重置密码</p>
+        <p class="subtitle">在下面输入您的电子邮件地址，我们将会给您发送一封包含重置密码链接的邮件。请确保您输入的电子邮件地址与您注册的电子邮件地址一致</p>
+        <div class="form-group form-group-custom">
+          <div class="input-group">
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-envelope"></span>
+            </div>
+            <input type="email" class="form-control" name="username" placeholder="Email">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">提交</button>
+      </div>
   </div>
 
-
-      <button type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">登陆</button>
-
-      <p class="copyright"><a>忘记密码？</a></p>
-    </div>
-  </div>
 </form>
+
+<script>
+    $( document ).ready(function() {
+        $("#forgetpassword-panel").css('display', 'none');
+    });
+    $("#fotgetpassword-btn").click(function() {
+        $("#signin-panel").css('display', 'none');
+        $("#forgetpassword-panel").css('display', 'block');
+    });
+</script>
 {% endblock %}
