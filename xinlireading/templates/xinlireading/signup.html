@@ -1,21 +1,8 @@
 {% extends 'xinlireading/base-reg.html' %}
-
 {% block title %}注册{% endblock %}
-
 {% block content %}
-
-{% load staticfiles %}
-<!-- <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" /> -->
-<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/validator-custom.css' %}" />
-
-<!-- <script src="http://code.jquery.com/jquery.min.js"></script> -->
-<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
-
 <form method="post" action="" data-toggle="validator" role="form" name="myForm">
-  {% csrf_token %}
-  <div class="div-content-signup-container">
+    {% csrf_token %}
     <div class="div-content-signup-panel">
       <p class="title">注册</p>
       <p class="subtitle">用电子邮箱注册</p>
@@ -69,6 +56,5 @@
       </div>
       <p class="copyright">创建帐户表示您接受我们的<a>服务条款</a>。</p>
     </div>
-  </div>
 </form>
 {% endblock %}

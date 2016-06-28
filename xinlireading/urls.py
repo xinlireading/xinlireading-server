@@ -9,6 +9,7 @@ urlpatterns = [
 	url(r'^account/signup/$', SignupView.as_view(), name='signup'),
 	url(r'^account/signin/$', SigninView.as_view(), name='signin'),
 	url(r'^account/logout/$', DashboardView.as_view(), name='logout'),
+	url(r'^account/resetpassword/$', views.reset_password, name='reset-password'),
 	url(r'^invalid/', views.invalid, name='invalid'),
 	# url(r'^account/', DashboardView.as_view(), name='dashboard'),
 	url(r'^account/dashboard/$', DashboardView.as_view(), name='dashboard'),

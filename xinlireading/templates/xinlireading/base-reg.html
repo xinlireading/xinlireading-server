@@ -8,14 +8,19 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/base.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/validator-custom.css' %}" />
 
 		<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'xinlireading/js/base-angularapp-settings.js' %}"></script>
+		<script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
+
 	</head>
 
-  <body>
+  <body ng-app="app">
 
 		<nav class="navbar navbar-inverse navbar-static-top navbar-static-top-custom">
-      <div class="container-fluid">
+      <div class="container-fluid" >
         <div class="navbar-header navbar-header-custom">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -38,10 +43,10 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
+<div style="min-height:calc(100% - 124px); background-color:rgba(0, 0, 0, 0.85);">
     {% block content %}
     {% endblock %}
-
+</div>
 		{% include "xinlireading/base-footer.html" %}
 	<body>
 </html>

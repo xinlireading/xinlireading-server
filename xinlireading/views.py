@@ -64,6 +64,23 @@ def home(request):
 	}
 	return render(request, 'xinlireading/home.html', context)
 
+def reset_password(request):
+	print('reset_password');
+	if request.method == "POST":
+		print('POST');
+		print(request);
+		body_unicode = request.body.decode('utf-8')
+		body_dic = json.loads(body_unicode)
+		# print(body_dic['favorite'])
+		email = str(body_dic['email'])
+		# password = str(body_dic['password'])
+		# remember_me = bool(body_dic['remember_me'])
+		print(email);
+		# print(password);
+		# print(remember_me);
+		return HttpResponse('ok');
+
+
 def invalid(request):
 	return render(request, 'xinlireading/invalid.html', None)
 
@@ -115,18 +132,30 @@ class SigninView(View):
 		# return redirect('/invalid/')
 
 		# Method 2:
-		if not request.POST.get('remember_me', None):
-			request.session.set_expiry(0)
+		# if not request.POST.get('remember_me', None):
+		# 	request.session.set_expiry(0)
+		#
+		# username = request.POST.get('username')
+		# password = request.POST.get('password')
 
-		username = request.POST.get('username')
-		password = request.POST.get('password')
+
+		body_unicode = request.body.decode('utf-8')
+		body_dic = json.loads(body_unicode)
+		username = str(body_dic['email'])
+		password = str(body_dic['password'])
+		remember_me = bool(body_dic['remember_me'])
+		if remember_me:
+			request.session.set_expiry(0)
 		user = authenticate(username=username, password=password)
 		print(user)
 		if user is not None:
 			login(request, user)
-			return redirect('/account/dashboard/')
+			# return redirect('/account/dashboard/')
+			return HttpResponse('login success!')
 		else:
-			return redirect('/account/invalid/')
+			# return redirect('/account/invalid/')
+			return HttpResponse('用户名密码不匹配!', status=500)
+
 
 class DashboardView(LoginRequiredMixin, View):
 	template_name = 'xinlireading/dashboard.html'
