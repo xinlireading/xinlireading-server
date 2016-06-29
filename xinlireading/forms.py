@@ -24,22 +24,13 @@ class CustomUserCreationForm(UserCreationForm):
     # }
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        # self.fields.pop('password2')
-        # del self.fields['password1']
-        # del self.fields['password2']
-        # self.fields['password1'].required = False
-        # self.fields['password2'].required = False
-        # self.fields['username'].error_messages = {
-        #     'required': self.error_messages['required_username'],
-        #     'invalid': self.error_messages['invalid_username'],
-        #     'unique': self.error_messages['duplicate_username']
-        # }
-
+        self.fields.pop('password2')
+        
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         user.email = self.cleaned_data['username']
-        # user.is_activated = False
+
         if commit:
             user.save()
             user_profile = UserProfile.objects.create(user=user, is_activated=False)

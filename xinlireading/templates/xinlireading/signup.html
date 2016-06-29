@@ -19,6 +19,16 @@
       <div class="form-group form-group-custom">
         <div class="input-group">
           <div class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </div>
+          <input data-error="3 至 20 个字符之间但不能有多于 5 个数字。" data-minlength="3" maxlength=20 class="form-control" name="nickname" placeholder="Full Name"  required />
+        </div>
+        <div class="help-block custom-help-block with-errors"></div>
+      </div>
+
+      <div class="form-group form-group-custom">
+        <div class="input-group">
+          <div class="input-group-addon">
             <span class="glyphicon glyphicon-envelope"></span>
           </div>
           <input type="email" data-error="请输入一个有效的电子邮件地址" class="form-control" name="username" placeholder="Email"  required />
@@ -35,19 +45,6 @@
                  data-minlength="8" maxlength=20 data-error="密码必须介于 8 至 20 个字符之间；请注意大小写！" required />
         </div>
         <div class="help-block with-errors"></div>
-
-      </div>
-
-      <div class="form-group form-group-custom">
-        <div class="input-group">
-          <div class="input-group-addon">
-            <span class="glyphicon glyphicon-lock"></span>
-          </div>
-          <input type="password" class="form-control" name="password2" placeholder="Confirm Password"
-                 data-match="#password1" data-match-error="两次输入的密码不一致" data-error="密码必须介于 8 至 20 个字符之间；请注意大小写！"
-           required />
-      </div>
-      <div class="help-block with-errors"></div>
 
       </div>
 

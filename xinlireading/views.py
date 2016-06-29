@@ -85,9 +85,6 @@ def invalid(request):
 def success(request):
 	return render(request, 'xinlireading/success.html', None)
 
-# def signup(request):
-#	 context = {'is_signup': True }
-#	 return render(request, 'xinlireading/signup.html', context)
 class SignupView(View):
 	template_name = 'xinlireading/signup.html'
 	def get(self, request, *args, **kwargs):
@@ -95,17 +92,14 @@ class SignupView(View):
 		return render(request, self.template_name, context)
 
 	def post(self, request, *args, **kwargs):
-		print('post')
-		username = request.POST.get('username')
+		username = request.POST.get('nickname')
 		password = request.POST.get('password1')
-		# print(username + ' password: ' + password)
-
-		# form = XLRRegistrationForm(request.POST)
 		form = CustomUserCreationForm(request.POST)
-		print(form.errors)
 		if form.is_valid():
 			form.save()
 			new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+			new_user.userprofile.name = request.POST.get('nickname')
+			new_user.userprofile.save()
 			login(request, new_user)
 			return redirect('/account/dashboard/')
 		context = {
@@ -129,7 +123,6 @@ class SigninView(View):
 		if remember_me:
 			request.session.set_expiry(0)
 		user = authenticate(username=username, password=password)
-		print(user)
 		if user is not None:
 			login(request, user)
 			return HttpResponse('success')
