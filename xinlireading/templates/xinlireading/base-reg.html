@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- <title>心理读书会: 在线读书小组</title> -->
     <title>{% block title %}心理读书会: 在线读书小组{% endblock %}</title>
 		{% load staticfiles %}
 		<link rel="shortcut icon" type="image/x-icon" href="{% static 'xinlireading/images/icon.ico' %}" />
@@ -9,44 +8,43 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/base.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/validator-custom.css' %}" />
-
 		<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'xinlireading/js/base-angularapp-settings.js' %}"></script>
 		<script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
-
 	</head>
 
-  <body ng-app="app">
+  <body  ng-app="app">
+	  <div id="root-div">
+		<!-- Header -->
+		<nav class="navbar navbar-inverse navbar-fixed-top navbar-static-top-custom">
+	      <div class="container-fluid" >
+	        <div class="navbar-header navbar-header-custom">
+	          <a class="navbar-brand" href="/home/">心理读书会</a>
+	        </div>
+			<div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav navbar-right navbar-right-custom">
+	            {% if is_signin %}
+					<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/account/signup/'">注册</button>
+	            {% endif %}
+	            {% if is_signup %}
+					<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/account/signin/'">登陆</button>
+	            {% endif %}
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+    	</nav>
 
-		<nav class="navbar navbar-inverse navbar-static-top navbar-static-top-custom">
-      <div class="container-fluid" >
-        <div class="navbar-header navbar-header-custom">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/home/">心理读书会</a>
-        </div>
+		<!-- Content -->
+		<div style="min-height:calc(100vh - 120px); background-color:rgba(0, 0, 0, 0.85);">
+		    {% block content %}
+		    {% endblock %}
+		</div>
 
-				<div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-right navbar-right-custom">
-            {% if is_signin %}
-						<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/account/signup/'">注册</button>
-            {% endif %}
-            {% if is_signup %}
-						<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/account/signin/'">登陆</button>
-            {% endif %}
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-	<div style="min-height:calc(100vh - 126px); background-color:rgba(0, 0, 0, 0.85);">
-	    {% block content %}
-	    {% endblock %}
+		<!-- Footer -->
+		<div style="position:fixed; bottom:0; left:0; width:100%">
+			{% include "xinlireading/base-footer.html" %}
+		</div>
 	</div>
-	{% include "xinlireading/base-footer.html" %}
 	<body>
 </html>
