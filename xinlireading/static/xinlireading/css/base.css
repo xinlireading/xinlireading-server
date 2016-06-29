@@ -31,3 +31,10 @@ hr {
     background-color: #DE5D4D;
     color: white
 }
+
+
+.btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus {
+    background-color: #D7D7D7;
+    border-color: #D7D7D7;
+    color: #9B9B9B;
+}

@@ -73,7 +73,7 @@
                                 {% for activity in book.activitys.all %}
                                     <li style="height:60px; margin:1px">
                                         <div style="float:left;width:calc(100% - 130px);">
-                                            <div style="font-weight:bold; color:#3a3a3a"><a href="">{{activity.title}}</a></div>
+                                            <div style="font-weight:bold; color:#3a3a3a"><a data-toggle="modal" data-target="#myModal">{{activity.title}}</a></div>
                                             <div style="font-size:12px; color:#505050">{{activity.intro}}</div>
                                         </div>
                                         <div style="float:left; width:130px" >
