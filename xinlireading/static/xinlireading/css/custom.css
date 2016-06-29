@@ -291,9 +291,9 @@ ul.ul-content li {
 }
 
 .div-content-signup-panel .subtitle {
-  font-size: 12px;
+  font-size: 13px;
   /*margin-left: 15px;*/
-  margin: 15px;
+  margin: 18px;
   /*padding-top: 15px;*/
   color: #444444;
 }
@@ -323,18 +323,11 @@ ul.ul-content li {
   margin-top: 10px;
 }
 
-.btn-primary-custom-submit[disabled] {
+.btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus {
     background-color: #D7D7D7;
     border-color: #D7D7D7;
     color: #9B9B9B;
 }
-.btn-primary-custom-submit[disabled]:hover {
-  background-color: #D7D7D7;
-  border-color: #D7D7D7;
-  color: #9B9B9B;
-
-}
-
 .has-error .checkbox-custom {
   color: #838383;
   margin-left: 15px;

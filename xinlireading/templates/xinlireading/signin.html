@@ -3,7 +3,7 @@
 {% block content %}
 <form action="" method="POST" data-toggle="validator" role="form" name="form">
 
-  <div class="div-content-signup-panel" id="signin-panel" ng-controller="Ctrl">
+  <div class="div-content-signup-panel" id="signin_container" ng-controller="Ctrl">
     <p class="title">登陆</p>
     <p class="subtitle">用电子邮箱登陆</p>
     <div id="error-message-signin" style="color:#CA232A; height:30px; padding-top:0px; text-align:center; font-size:13px; display:none;">电子邮件或密码输入不正确。请注意密码是区分大小写的。</div>
@@ -21,8 +21,9 @@
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-lock"></span>
             </div>
-            <input type="password" class="form-control" name="password" placeholder="Password" ng-model="password">
+            <input type="password" class="form-control" name="password" placeholder="Password" ng-model="password" data-error="请输入密码" required />
         </div>
+        <div class="help-block custom-help-block with-errors"></div>
     </div>
     <div class="has-error">
       <div class="checkbox checkbox-custom">
@@ -37,34 +38,47 @@
     </div>
     <a type="button" class="btn btn-link btn-link-custom" style="font-size: 12px;" id="fotgetpassword-btn">忘记密码？</a>
   </div>
+</form>
 
-  <div class="div-content-signup-panel" id="forgetpassword-panel" style="display:none">
+<form action="" method="POST" data-toggle="validator" role="form" name="reset_password_form">
+  <div class="div-content-signup-panel" id="reset_password_container" style="display:block">
     <button id="close_reset_password_panel" type="button" class="close" data-dismiss="modal" style="margin-right:10px; margin-top:6px">&times;</button>
-    <p class="title">重置密码</p>
-    <p class="subtitle">在下面输入您的电子邮件地址，我们将会给您发送一封包含重置密码链接的邮件。请确保您输入的电子邮件地址与您注册的电子邮件地址一致</p>
-    <div id="error-message-reset-password" style="color:#CA232A; height:30px; padding-left:15px; font-size:13px; display:none">该电子邮件地址不存在。</div>
-    <div class="form-group form-group-custom">
-      <div class="input-group">
-        <div class="input-group-addon">
-          <span class="glyphicon glyphicon-envelope"></span>
+    <div style="display:block" id="reset_password_panel">
+        <p class="title">重置密码</p>
+        <p class="subtitle">在下面输入您的电子邮件地址，我们将会给您发送一封包含重置密码链接的邮件。请确保您输入的电子邮件地址与您注册的电子邮件地址一致</p>
+        <div id="reset_password_msg_error" style="color:#CA232A; height:30px; padding-left:15px; font-size:13px; display:none">该电子邮件地址不存在。</div>
+        <div class="form-group form-group-custom">
+          <div class="input-group">
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-envelope"></span>
+            </div>
+            <input type="email" class="form-control" name="username" placeholder="Email" ng-model="email_reset_password" data-error="请输入一个有效的电子邮件地址" required />
+          </div>
+          <div class="help-block custom-help-block with-errors"></div>
         </div>
-        <input type="email" class="form-control" name="username" placeholder="Email" ng-model="email_reset_password">
-      </div>
+        <div class="form-group">
+            <button id="reset-password-btn" type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">提交</button>
+        </div>
     </div>
-    <button id="reset-password-btn" type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">提交</button>
+    <div id="reset_password_msg_success" style="display:none">
+        <p class="title"></p>
+        <p class="subtitle" >含有重置密码链接的邮件发送到您的电子邮箱，请注意查收。由于您所处网络的不同状况，邮件的接收时间可能会有所不同。</p>
+    </div>
   </div>
-
 </form>
 
 <script>
-    $( document ).ready(function() {
-        $("#forgetpassword-panel").css('display', 'none');
+    $(document).ready(function() {
+        $("#reset_password_container").css('display', 'none');
     });
     $("#fotgetpassword-btn").click(function() {
-        $("#signin-panel").css('display', 'none');
-        $("#forgetpassword-panel").css('display', 'block');
+        $("#signin_container").css('display', 'none');
+        $("#reset_password_container").css('display', 'block');
     });
     $('form').submit(function(event){
+        event.preventDefault();
+    });
+    $('reset_password_form').submit(function(event){
         event.preventDefault();
     });
 
@@ -82,29 +96,42 @@
                     'remember_me': $scope.remember_me ? 1 : 0
                 }
             }).then(function successCallback(response) {
-                $window.location.href = "/account/dashboard/";
+                if (response.data == 'success') {
+                    $("#error-message-signin").css('display', 'none');
+                    $window.location.href = "/account/dashboard/";
+                } else {
+                    $("#error-message-signin").css('display', 'block');
+                }
             }, function errorCallback(response) {
-                $("#error-message-signin").css('display', 'none');
+                console.log(response.data);
             });
         };
         var handleResetPasswordBtnClick = function() {
-            console.log('handleResetPasswordBtnClick');
+            if (!$scope.email_reset_password) {
+                return;
+            }
+
             $http({
                 method: 'POST',
                 url: '/account/resetpassword/',
                 data: { 'email': $scope.email_reset_password }
             }).then(function successCallback(response) {
-                console.log(response.data);
-                $("#error-message-reset-password").css('display', 'none');
+                if (response.data == 'success') {
+                    $("#reset_password_panel").css('display', 'none');
+                    $("#reset_password_msg_success").css('display', 'block');
 
+                } else {
+                    $("#reset_password_msg_error").css('display', 'block');
+                }
             }, function errorCallback(response) {
                 console.log(response.data);
-                $("#error-message-reset-password").css('display', 'block');
             });
         };
         var handleCloseResetPasswordBtnClick = function() {
-            $("#signin-panel").css('display', 'block');
-            $("#forgetpassword-panel").css('display', 'none');
+            $("#signin_container").css('display', 'block');
+            $("#reset_password_container").css('display', 'none');
+            $("#reset_password_msg_success").css('display', 'none');
+            $("#reset_password_panel").css('display', 'block');
         };
         angular.element(document.querySelector('#signin-btn')).on('click', handleSigninBtnClick);
         angular.element(document.querySelector('#reset-password-btn')).on('click', handleResetPasswordBtnClick);

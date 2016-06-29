@@ -71,15 +71,13 @@ def reset_password(request):
 		print(request);
 		body_unicode = request.body.decode('utf-8')
 		body_dic = json.loads(body_unicode)
-		# print(body_dic['favorite'])
 		email = str(body_dic['email'])
-		# password = str(body_dic['password'])
-		# remember_me = bool(body_dic['remember_me'])
-		print(email);
-		# print(password);
-		# print(remember_me);
-		return HttpResponse('ok');
-
+		user = User.objects.filter(email=email).first()
+		print(user);
+		if user is not None:
+			return HttpResponse('success');
+		else:
+			return HttpResponse('not found');
 
 def invalid(request):
 	return render(request, 'xinlireading/invalid.html', None)
@@ -123,22 +121,6 @@ class SigninView(View):
 		return render(request, self.template_name, self.context)
 
 	def post(self, request, *args, **kwargs):
-
-		# Method 1:
-		# form = SigninForm(request.POST)
-		# print(form)
-		# if form.is_valid():
-		#	 return redirect('/success/')
-		# return redirect('/invalid/')
-
-		# Method 2:
-		# if not request.POST.get('remember_me', None):
-		# 	request.session.set_expiry(0)
-		#
-		# username = request.POST.get('username')
-		# password = request.POST.get('password')
-
-
 		body_unicode = request.body.decode('utf-8')
 		body_dic = json.loads(body_unicode)
 		username = str(body_dic['email'])
@@ -150,11 +132,9 @@ class SigninView(View):
 		print(user)
 		if user is not None:
 			login(request, user)
-			# return redirect('/account/dashboard/')
-			return HttpResponse('login success!')
+			return HttpResponse('success')
 		else:
-			# return redirect('/account/invalid/')
-			return HttpResponse('用户名密码不匹配!', status=500)
+			return HttpResponse('用户名密码不匹配!')
 
 
 class DashboardView(LoginRequiredMixin, View):
