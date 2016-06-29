@@ -25,3 +25,9 @@ body, html {
 hr {
     border-top-color: #F2F2F2
 }
+.alert {
+    margin-bottom: 0px;
+    text-align: center;
+    background-color: #DE5D4D;
+    color: white
+}
