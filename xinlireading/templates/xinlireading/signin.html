@@ -1,7 +1,7 @@
 {% extends 'xinlireading/base-reg.html' %}
 {% block title %}登陆{% endblock %}
 {% block content %}
-<form action="" method="POST" data-toggle="validator" role="form" name="form">
+<form action="" method="POST" data-toggle="validator" role="form" name="signin_form">
 
   <div class="div-content-signup-panel" id="signin_container" ng-controller="Ctrl">
     <p class="title">登陆</p>
@@ -41,7 +41,7 @@
 </form>
 
 <form action="" method="POST" data-toggle="validator" role="form" name="reset_password_form">
-  <div class="div-content-signup-panel" id="reset_password_container" style="display:block">
+  <div class="div-content-signup-panel" id="reset_password_container" style="display:none">
     <button id="close_reset_password_panel" type="button" class="close" data-dismiss="modal" style="margin-right:10px; margin-top:6px">&times;</button>
     <div style="display:block" id="reset_password_panel">
         <p class="title">重置密码</p>
@@ -75,7 +75,7 @@
         $("#signin_container").css('display', 'none');
         $("#reset_password_container").css('display', 'block');
     });
-    $('form').submit(function(event){
+    $('signin_form').submit(function(event){
         event.preventDefault();
     });
     $('reset_password_form').submit(function(event){
