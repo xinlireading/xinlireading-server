@@ -1,0 +1,172 @@
+{% extends 'xinlireading/base-reg.html' %}
+{% block title %}登陆{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+<form action="/accounts/login/" method="POST" data-toggle="validator" role="form" name="form">
+    {% csrf_token %}
+
+  <div class="div-content-signup-panel" id="signin_container" ng-controller="Ctrl">
+    <p class="title">登陆</p>
+    <p class="subtitle">用电子邮箱登陆</p>
+
+    <!-- <div id="error-message-signin" style="color:#CA232A; height:30px; padding-top:0px; text-align:center; font-size:13px; display:block;">{{ form.non_field_errors }}</div> -->
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div id="error-message-signin" style="color:#CA232A; height:30px; padding-top:0px; text-align:center; font-size:13px; display:block;">
+                {% ifequal error "The login and/or password you specified are not correct." %}
+                    电子邮件或密码输入不正确。请注意密码是区分大小写的。
+                {% endifequal %}
+                {% ifequal error "Too many failed login attempts. Try again later." %}
+                    尝试登陆次数太多，请稍后再试。
+                {% endifequal %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="form-group form-group-custom">
+      <div class="input-group">
+        <div class="input-group-addon">
+          <span class="glyphicon glyphicon-envelope"></span>
+        </div>
+        <!-- <input type="email" class="form-control" name="login" placeholder="Email" ng-model="email" data-error="请输入一个有效的电子邮件地址" value="{{form.login.value}}" required /> -->
+        <!-- <input  class="form-control" name="login" placeholder="Email"  data-error="请输入一个有效的电子邮件地址"  /> -->
+        <input class="form-control" name="login" placeholder="Email" data-error="请输入一个有效的电子邮件地址" value="{{form.login.value|default_if_none:""}}" />
+
+      </div>
+      <div class="help-block custom-help-block with-errors"></div>
+    </div>
+
+    <div class="form-group form-group-custom">
+        <div class="input-group">
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-lock"></span>
+            </div>
+            <input type="password" class="form-control" name="password" placeholder="Password" ng-model="password" data-error="请输入密码" required />
+        </div>
+        <div class="help-block custom-help-block with-errors"></div>
+    </div>
+    <div class="has-error">
+      <div class="checkbox checkbox-custom">
+        <label>
+            <!-- <input class="checkbox" type="checkbox" id="checkboxError" name="remember_me" ng-model="remember_me"> -->
+          <input class="checkbox" type="checkbox" id="checkboxError" name="remember" ng-model="remember_me">
+          保持我在这台电脑的登陆状态。
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" id="signin_submit_btn" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">登陆</button>
+    </div>
+    <a type="button" class="btn btn-link btn-link-custom" style="font-size: 12px;" id="fotgetpassword-btn">忘记密码？</a>
+  </div>
+</form>
+
+    <form action="" method="POST" data-toggle="validator" role="form" name="reset_password_form">
+  <div class="div-content-signup-panel" id="reset_password_container" style="display:block">
+    <button id="reset_password_close_btn" type="button" class="close" data-dismiss="modal" style="margin-right:10px; margin-top:6px">&times;</button>
+    <div style="display:block" id="reset_password_panel">
+        <p class="title">重置密码</p>
+        <p class="subtitle">在下面输入您的电子邮件地址，我们将会给您发送一封包含重置密码链接的邮件。请确保您输入的电子邮件地址与您注册的电子邮件地址一致</p>
+
+        <div id="reset_password_msg_error" style="color:#CA232A; height:30px; padding-left:15px; font-size:13px; display:none">
+            该电子邮件地址不存在。
+        </div>
+        <div class="form-group form-group-custom">
+          <div class="input-group">
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-envelope"></span>
+            </div>
+            <!-- <input type="email" class="form-control" name="email" placeholder="Email" ng-model="email_reset_password" data-error="请输入一个有效的电子邮件地址" required /> -->
+              <!-- render_field reset_password_form.email|attr:"type:email"|attr:"name:email"|attr:"required"|attr:"data-error:请输入一个有效的电子邮件地址"|attr:"placeholder:Email" class+="form-control"   -->
+              <input type="email" class="form-control" name="email" placeholder="Email" ng-model="email_reset_password"  data-error="请输入一个有效的电子邮件地址" required />
+
+
+          </div>
+          <div class="help-block custom-help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <button id="reset_password_submit_btn" type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">提交</button>
+        </div>
+    </div>
+    <div id="reset_password_msg_success" style="display:none">
+        <p class="title"></p>
+        <p class="subtitle" >含有重置密码链接的邮件发送到您的电子邮箱，请注意查收。由于您所处网络的不同状况，邮件的接收时间可能会有所不同。</p>
+    </div>
+  </div>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $("#reset_password_container").css('display', 'none');
+    });
+    $("#fotgetpassword-btn").click(function() {
+        $("#signin_container").css('display', 'none');
+        $("#reset_password_container").css('display', 'block');
+    });
+
+    app.controller('Ctrl', ['$scope', '$element', '$http', '$window', function ($scope, $element, $http, $window) {
+        var handleSigninBtnClick = function() {
+            console.log($scope.email);
+            console.log($scope.password);
+            console.log($scope.remember_me ? 1 : 0);
+            $http({
+                method: 'POST',
+                url: '/account/signin/',
+                data: {
+                    'email': $scope.email,
+                    'password': $scope.password,
+                    'remember_me': $scope.remember_me ? 1 : 0
+                }
+            }).then(function successCallback(response) {
+                if (response.data == 'success') {
+                    $("#error-message-signin").css('display', 'none');
+                    $window.location.href = "/account/dashboard/";
+                } else {
+                    $("#error-message-signin").css('display', 'block');
+                }
+            }, function errorCallback(response) {
+                console.log(response.data);
+            });
+        };
+        var handleResetPasswordBtnClick = function() {
+            console.log('handleResetPasswordBtnClick');
+            // if (!$scope.email_reset_password) {
+            //     return;
+            // }
+
+            // return;
+            $http({
+                method: 'POST',
+                url: '/accounts/password/reset/',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                data: { email: $scope.email_reset_password },
+            }).then(function successCallback(response) {
+                if (response.data.match("The e-mail address is not assigned to any user account")) {
+                    $("#reset_password_msg_error").css('display', 'block');
+                } else if (response.data.match("We have sent you an e-mail.")) {
+                    $("#reset_password_panel").css('display', 'none');
+                    $("#reset_password_msg_success").css('display', 'block');
+                }
+            }, function errorCallback(response) {
+                console.log(response.data);
+            });
+        };
+        var handleCloseResetPasswordBtnClick = function() {
+            $("#signin_container").css('display', 'block');
+            $("#reset_password_container").css('display', 'none');
+            $("#reset_password_msg_success").css('display', 'none');
+            $("#reset_password_panel").css('display', 'block');
+        };
+        // angular.element(document.querySelector('#signin_submit_btn')).on('click', handleSigninBtnClick);
+        angular.element(document.querySelector('#reset_password_submit_btn')).on('click', handleResetPasswordBtnClick);
+        angular.element(document.querySelector('#reset_password_close_btn')).on('click', handleCloseResetPasswordBtnClick);
+    }]);
+
+</script>
+{% endblock %}
