@@ -235,3 +235,19 @@ class ActivitySignView(View):
 		return HttpResponse('报名成功!', status=201)
 
 		# return render_to_response(self.template_name, None)
+
+
+from allauth.account.views import LoginView
+from allauth.account.forms import LoginForm, ResetPasswordForm
+class JointLoginResetPasswordView(LoginView):
+	form_class = LoginForm
+	# reset_password_form = ResetPasswordForm
+
+	def __init__(self, **kwargs):
+		super(JointLoginResetPasswordView, self).__init__(*kwargs)
+
+	def get_context_data(self, **kwargs):
+		context = super(JointLoginResetPasswordView, self).get_context_data(**kwargs)
+		# context['resetpasswordform'] = get_form_class(app_settings.FORMS, 'resetpassword', self.reset_password_form)
+		context['reset_password_form'] = ResetPasswordForm()
+		return context
