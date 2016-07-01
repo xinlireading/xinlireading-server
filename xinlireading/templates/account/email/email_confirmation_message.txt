@@ -1,11 +1,11 @@
 您好!
 
 感谢您注册心理读书会。
-{% load account %}{% user_email user as user_email %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
-你的用户名为：{{ user_email }}。请点击以下链接激活帐号：
+{% load account %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+请点击以下链接激活帐号：
 {{ activate_url }}
 {% endblocktrans %}{% endautoescape %}
-如果以上链接无法点击，请将上面的地址复制到你的浏览器(如IE)的地址栏进入心里读书会。 （该链接在48小时内有效，48小时后需要重新注册）
+如果以上链接无法点击，请将上面的地址复制到你的浏览器(如IE)的地址栏进入心里读书会。（该链接在48小时内有效，48小时后需要重新注册）
 
 
 谢谢，

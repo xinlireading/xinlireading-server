@@ -1,25 +1,144 @@
 <!DOCTYPE html>
 <html>
 	{% load staticfiles %}
-	<head>
-    <title>{% block title %}心理读书会: 在线读书小组{% endblock %}</title>
-		<link rel="shortcut icon" type="image/x-icon" href="{% static 'xinlireading/images/icon.ico' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/bulma/bulma.min.css' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/base.css' %}" />
-		<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'xinlireading/js/base-angularapp-settings.js' %}"></script>
-	</head>
+<head>
+<title>{% block title %}心理读书会: 在线读书小组{% endblock %}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'xinlireading/images/icon.ico' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/bulma/bulma.min.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/base.css' %}" />
+	<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'xinlireading/js/base-angularapp-settings.js' %}"></script>
+</head>
 
-	<body ng-app="app">
-		{% include "xinlireading/base-header.html" %}
-		<div id="root-div" style="min-height:calc(100vh - 60px);">
-			{% block content %}
-		    {% endblock %}
-		</div>
-		{% include "xinlireading/base-footer.html" %}
-	<body>
+<body ng-app="app">
+	{% include "xinlireading/base-header.html" %}
+	<div id="root-div" ng-controller="BaseCtrl" style="min-height:calc(100vh - 60px);">
+		{% block content %}
+	    {% endblock %}
+	</div>
+	{% include "xinlireading/base-footer.html" %}
+
+	<!-- Modal -->
+    <div class="modal fade" id="emailConfirmModal" role="dialog">
+
+		<!-- <form id="email_form" action="" method="post"> -->
+		  <div class="modal-dialog" style="padding-top:100px">
+	        <!-- Modal content-->
+	        <div class="modal-content">
+				<!-- Header -->
+			  <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal">&times;</button>
+	            <h4 class="modal-title">确认您的电子邮件</h4>
+	          </div>
+			  <!-- Body -->
+			  <div  class="modal-body" style="text-align:left; padding:25px; background-color:#F2F2;">
+				  <div style="
+					font-size: 13px;
+					background-color: #DFF0D8;
+					padding: 15px;
+					margin: 10px 0px;
+					color: #4D8C4D;
+					display: none
+					" id="email_send_success_message">一封确认邮件已发送至您的邮箱{{request.user.email}}</div>
+	            <div style="
+				    font-size: 15px;
+				    font-weight: bold;
+				">继续操作之前请先确认您的电子邮件...</div>
+				<div style="
+				    height: auto;
+				    background-color: #f6fbfd;
+				    padding: 20px 20px;
+				    margin: 10px 0px;
+				    font-size: 13px;
+				">我们已发送一封确认邮件至 {$email$}，请点击其中的链接验证您的电子邮件地址。</div>
+				<input name="email" type="hidden" value="{{request.user.email}}" />
+				<div style="
+				    font-size: 13px;
+				    margin: 5px 0px;
+				    margin-top: 15px;
+				">仍有问题？</div>
+					<ul style="margin-left: 30px; font-size: 13px;">
+						<li style="list-style-type:initial">请记住检查您的垃圾邮件文件夹</li>
+						<li style="list-style-type:initial">
+							<button style="color:#337ab7; font-size:13px; padding:0px;" class="btn btn-link btn-link-custom" type="button" id="email_send_btn" name="action_send">再次发送确认邮件</button>
+						</li>
+						<li style="list-style-type:initial">
+							<button id="change_email_btn" style="color:#337ab7; font-size:13px; padding:0px;" class="btn btn-link btn-link-custom" type="button">更改您的电子邮件地址</button>
+							<div id="change_email_input" class="input-group" style="margin-top:10px; visibility:hidden">
+						      <input type="text" class="form-control" placeholder="New Email">
+						      <span class="input-group-btn">
+						        <button id="email_add_btn" class="btn btn-default" type="submit" name="action_add">提交</button>
+						      </span>
+						    </div>
+						</li>
+					</ul>
+	          </div>
+			  <!-- Footer -->
+	          <div id="modal-footer" class="modal-footer" style="background-color:white; display:block">
+	            <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">稍后处理</button>
+	          </div>
+
+	        </div>
+	      </div>
+		<!-- </form> -->
+    </div>
+<body>
+
+	<script>
+		$("#change_email_btn").click(function() {
+			$("#change_email_input").css('visibility', 'visible');
+		});
+
+		// $("#email_send_btn").click(function() {
+		//
+		// });
+		//
+		// $("#email_add_btn").click(function() {
+		//
+		// });
+		app.controller('BaseCtrl', ['$scope', '$element', '$http', '$timeout', '$window', function ($scope, $element, $http, $timeout, $window) {
+			console.log('**********************************************************');
+			$scope.email = {{request.user.email}};
+			var handleEmailBaseMethod = function(data) {
+				$http({
+	                method: 'POST',
+	                url: '/accounts/email/',
+	                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+	                transformRequest: function(obj) {
+	                    var str = [];
+	                    for(var p in obj)
+	                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+	                    return str.join("&");
+	                },
+	                data: data,
+	            }).then(function successCallback(response) {
+	                if (response.data.match("Confirmation e-mail sent to")) {
+	                    $("#email_send_success_message").css('display', 'block');
+	                }
+	            }, function errorCallback(response) {
+	                console.log(response.data);
+	            });
+			};
+
+
+			var handleResetConfirmEmailBtnClick = function() {
+				// handleEmailBaseMethod('action_send');
+				handleEmailBaseMethod({ email: '{{request.user.email}}', action_send:'' });
+			};
+			angular.element(document.querySelector('#email_send_btn')).on('click', handleResetConfirmEmailBtnClick);
+
+
+			var handleAddNewEmailBtnClick = function() {
+				// handleEmailBaseMethod('action_add');
+				handleEmailBaseMethod({ email: $scope.email, action_add });
+			};
+			angular.element(document.querySelector('#email_add_btn')).on('click', handleAddNewEmailBtnClick);
+
+
+		}]);
+	</script>
 </html>

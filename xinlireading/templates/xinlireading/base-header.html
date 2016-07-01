@@ -3,9 +3,11 @@
 <!-- <script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script> -->
 
 <div class="div-header-container" ng-controller="headerCtrl">
-    <div id="message" style="display:none; z-index:10000" class="alert alert-danger navbar-fixed-top" role="alert">
-        您尚未验证电子邮件地址. 您必须验证您的电子邮件方可使用所有的功能！ <a class="btn btn-link" style="color:white; font-size:14px; padding-top:3px; padding-left:0px; text-decoration:underline" href="/account/email/">没有收到电子邮件？</a>
+    {% if not request.user.profile.account_verified %}
+    <div id="message" style="display:block; z-index:10000" class="alert alert-danger navbar-fixed-top" role="alert">
+        您尚未验证电子邮件地址. 您必须验证您的电子邮件方可使用所有的功能！ <a class="btn btn-link" style="color:white; font-size:14px; padding-top:3px; padding-left:0px; text-decoration:underline" data-toggle="modal" data-target="#emailConfirmModal">没有收到电子邮件？</a>
     </div>
+    {% endif %}
   <nav class="navbar navbar-inverse navbar-fixed-top navbar-static-top-custom ">
     <div class="container-fluid">
       <div class="navbar-header navbar-header-custom">
