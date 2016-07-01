@@ -30,7 +30,7 @@
               <div class="input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
               </div>
-              <input data-error="3 至 20 个字符之间但不能有多于 5 个数字。" data-minlength="3" maxlength=20 class="form-control" name="username" placeholder="User Name" value="{{form.username.value|default_if_none:""}}" required />
+              <input data-error="3 至 20 个字符之间但不能有多于 5 个数字。" data-minlength="3" maxlength=20 class="form-control" name="username" placeholder="User Name" value="{{form.username.value|default_if_none:""}}" autocomplete="new-password" required />
             </div>
             <div class="help-block custom-help-block with-errors"></div>
           </div>
@@ -40,7 +40,7 @@
               <div class="input-group-addon">
                 <span class="glyphicon glyphicon-envelope"></span>
               </div>
-              <input type="email" data-error="请输入一个有效的电子邮件地址" class="form-control" name="email" placeholder="Email" value="{{form.email.value|default_if_none:""}}"  required />
+              <input type="email" data-error="请输入一个有效的电子邮件地址" class="form-control" name="email" placeholder="Email" value="{{form.email.value|default_if_none:""}}" autocomplete="new-password" required />
             </div>
             <div class="help-block custom-help-block with-errors"></div>
           </div>
@@ -51,7 +51,7 @@
                 <span class="glyphicon glyphicon-lock"></span>
               </div>
               <input type="password" class="form-control" id="password1" name="password1" placeholder="Password"
-                     data-minlength="8" maxlength=20 data-error="密码必须介于 8 至 20 个字符之间；请注意大小写！" value="{{form.password1.value|default_if_none:""}}" required />
+                     data-minlength="8" maxlength=20 data-error="密码必须介于 8 至 20 个字符之间；请注意大小写！" value="{{form.password1.value|default_if_none:""}}" autocomplete="new-password" required />
             </div>
             <div class="help-block with-errors"></div>
 
