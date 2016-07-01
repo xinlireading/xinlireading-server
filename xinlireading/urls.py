@@ -4,7 +4,7 @@ from django.contrib.auth.views import login
 from xinlireading.views import TestCreateStudentView, SignupView, SigninView, DashboardView, EditProfileView, BookDetailView, BooksView, ActivitySignView
 
 urlpatterns = [
-	# url(r'^/', views.home, name='home'),
+	url(r'^$', views.home, name='home'),
 	url(r'^home/$', views.home, name='home'),
 	url(r'^account/signup/$', SignupView.as_view(), name='signup'),
 	url(r'^account/signin/$', SigninView.as_view(), name='signin'),

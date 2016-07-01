@@ -76,10 +76,10 @@ app.controller('headerCtrl', ['$scope', '$http', '$timeout', '$window', function
         console.log('handleLogoutBtnClick');
         $http({
             method: 'POST',
-            url: '/account/logout/'
+            url: '/accounts/logout/'
         }).then(function successCallback(response) {
             console.log('successCallback');
-            $window.location.href = "/account/dashboard/"//"/account/signin/"
+            $window.location.href = "/accounts/profile/"//"/account/signin/"
             // $window.location.reload();
         }, function errorCallback(response) {
             console.log('errorCallback');
