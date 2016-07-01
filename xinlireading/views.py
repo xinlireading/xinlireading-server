@@ -250,4 +250,5 @@ class JointLoginResetPasswordView(LoginView):
 		context = super(JointLoginResetPasswordView, self).get_context_data(**kwargs)
 		# context['resetpasswordform'] = get_form_class(app_settings.FORMS, 'resetpassword', self.reset_password_form)
 		context['reset_password_form'] = ResetPasswordForm()
+		context['is_signin'] = 'yes'
 		return context

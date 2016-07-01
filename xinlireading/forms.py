@@ -64,6 +64,11 @@ class BookDetailForm(ModelForm):
 
 # Replace allauth SignupForm
 class SignupForm(Form):
+    def __init__(self, *args, **kwargs):
+        super(SignupForm, self).__init__(*args, **kwargs)
+        # self.fields.pop('username')
+        self.fields.pop('password2')
+
     def signup(self, request, user):
         user_profile = UserProfile.objects.create(user=user)
         user_profile.name = user.username
