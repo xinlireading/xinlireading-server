@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 migrations/
 xinlireadingsite/settings.pyxinlireadingsite/settings.py
+xinlireadingsite/settings.py
