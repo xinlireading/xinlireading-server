@@ -1,42 +1,22 @@
-{% load staticfiles %}
-<!-- <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script> -->
-<!-- <script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script> -->
-
 <div class="div-header-container" ng-controller="headerCtrl">
-    {% if not request.user.profile.account_verified %}
-    <div id="message" style="display:block; z-index:10000" class="alert alert-danger navbar-fixed-top" role="alert">
-        您尚未验证电子邮件地址. 您必须验证您的电子邮件方可使用所有的功能！ <a class="btn btn-link" style="color:white; font-size:14px; padding-top:3px; padding-left:0px; text-decoration:underline" data-toggle="modal" data-target="#emailConfirmModal">没有收到电子邮件？</a>
-    </div>
-    {% endif %}
-  <nav class="navbar navbar-inverse navbar-fixed-top navbar-static-top-custom ">
+  <nav class="navbar navbar-inverse navbar-fixed-top navbar-static-top-custom">
+
+      <!-- Error Message -->
+      {% if not request.user.profile.account_verified %}
+      <div id="message" style="z-index:10000; display:block; font-size:14px" class="alert alert-danger" role="alert">
+          您尚未验证电子邮件地址. 您必须验证您的电子邮件方可使用所有的功能！ <a class="btn btn-link" style="color:white; font-size:14px; padding-top:3px; padding-left:0px; text-decoration:underline" data-toggle="modal" data-target="#emailConfirmModal">没有收到电子邮件？</a>
+      </div>
+      {% endif %}
+
     <div class="container-fluid">
       <div class="navbar-header navbar-header-custom">
-        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button> -->
         <a class="navbar-brand" href="/books/">心理读书会</a>
       </div>
-
-      <div id="navbar">
-          <ul class="nav navbar-nav navbar-nav-custom">
-            <!-- <li class="active"><a href="#">找书</a></li> -->
-        </ul>
-      </div>
-
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li>
-              <a style="font-size:14px;" href="/books/">热门书籍</a>
-          </li>
-          <li>
-              <a style="font-size:14px;" href="/books/">热门活动</a>
-          </li>
-          <li>
-              <a style="font-size:14px;" href="/account/dashboard/">我的活动</a>
-          </li>
+          <li><a style="font-size:14px;" href="/books/">热门书籍</a></li>
+          <li><a style="font-size:14px;" href="/books/">热门活动</a></li>
+          <li><a style="font-size:14px;" href="/account/dashboard/">我的活动</a></li>
           <li>
             <div>
               <button type="button" class="btn btn-default btn-default-header" data-toggle="dropdown">
@@ -47,13 +27,9 @@
             <ul class="dropdown-menu">
                 <li><a href="/account/dashboard">个人中心</a></li>
                 <li><a href="/settings/profile/">修改资料</a></li>
-                <!-- <li><a href="#">Something else here</a></li> -->
-                <!-- <li role="separator" class="divider"></li> -->
-                <!-- <li><a href="#">Separated link</a></li> -->
                 <li role="separator" class="divider"></li>
                 <li><a id="logout-btn" href="">退出</a></li>
             </ul>
-
             </div>
           </li>
         </ul>
@@ -63,16 +39,6 @@
 </div>
 
 <script>
-// var app = angular.module('app', []);
-// app.config(function($httpProvider, $interpolateProvider) {
-//   // csrftoken for django.
-//   $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-//   $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-//   // django and argular use the same '{{' tag, so need to change one to '{%'.
-//   $interpolateProvider.startSymbol('{$');
-//   $interpolateProvider.endSymbol('$}');
-// });
-//
 app.controller('headerCtrl', ['$scope', '$http', '$timeout', '$window', function ($scope, $http, $timeout, $window) {
     var handleLogoutBtnClick = function() {
         console.log('handleLogoutBtnClick');
@@ -81,7 +47,7 @@ app.controller('headerCtrl', ['$scope', '$http', '$timeout', '$window', function
             url: '/accounts/logout/'
         }).then(function successCallback(response) {
             console.log('successCallback');
-            $window.location.href = "/accounts/profile/"//"/account/signin/"
+            $window.location.href = "/accounts/profile/"
             // $window.location.reload();
         }, function errorCallback(response) {
             console.log('errorCallback');
@@ -89,7 +55,6 @@ app.controller('headerCtrl', ['$scope', '$http', '$timeout', '$window', function
 
     };
     angular.element(document.querySelector('#logout-btn')).on('click', handleLogoutBtnClick);
-
 }]);
 
 </script>

@@ -1,31 +1,43 @@
-{% extends "account/base.html" %}
 
-{% load i18n %}
-{% load account %}
+{% extends 'xinlireading/base_clear.html' %}
+{% block base_content %}
 
-{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+<div ng-controller="EmailCtrl" style="background-color:black; min-width:100vh; min-height:100vh;" data-ng-init="init()">
+</div>
 
+<script>
+    app.controller('EmailCtrl', ['$scope', '$element', '$http', '$window', function ($scope, $element, $http, $window) {
+        var confirmEmail = function() {
+            console.log('confirmEmail');
+            return;
+            $http({
+                method: 'POST',
+                url: '/accounts/password/reset/',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                data: { email: $scope.email_reset_password },
+            }).then(function successCallback(response) {
+                if (response.data.match("The e-mail address is not assigned to any user account")) {
+                    $("#reset_password_msg_error").css('display', 'block');
+                } else if (response.data.match("We have sent you an e-mail.")) {
+                    $("#reset_password_panel").css('display', 'none');
+                    $("#reset_password_msg_success").css('display', 'block');
+                }
+            }, function errorCallback(response) {
+                console.log(response.data);
+            });
+        };
+        $scope.init = function() {
+			console.log('%%% email_conform.html EmailCtrl init() %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+			$scope.$parent.loading(false);
 
-{% block content %}
-<h1>{% trans "Confirm E-mail Address" %}</h1>
-
-{% if confirmation %}
-
-{% user_display confirmation.email_address.user as user_display %}
-
-<p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
-
-<form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-{% csrf_token %}
-    <button type="submit">{% trans 'Confirm' %}</button>
-</form>
-
-{% else %}
-
-{% url 'account_email' as email_url %}
-
-<p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
-
-{% endif %}
+        };
+    }]);
+</script>
 
 {% endblock %}

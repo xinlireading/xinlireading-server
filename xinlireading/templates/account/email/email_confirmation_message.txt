@@ -2,6 +2,13 @@
 
 感谢您注册心理读书会。
 {% load account %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+
+{% if confirmation %}
+
+{% user_display confirmation.email_address.user as user_display %}
+
+<p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
+{% endif %}
 请点击以下链接激活帐号：
 {{ activate_url }}
 {% endblocktrans %}{% endautoescape %}
