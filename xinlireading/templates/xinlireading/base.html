@@ -69,7 +69,7 @@
 						<li style="list-style-type:initial">
 							<button id="change_email_btn" style="color:#337ab7; font-size:13px; padding:0px;" class="btn btn-link btn-link-custom" type="button">更改您的电子邮件地址</button>
 							<div id="change_email_input" class="input-group" style="margin-top:10px; visibility:hidden">
-						      <input type="text" class="form-control" placeholder="New Email">
+						      <input id="new_email" type="text" class="form-control" placeholder="New Email">
 						      <span class="input-group-btn">
 						        <button id="email_add_btn" class="btn btn-default" type="submit" name="action_add">提交</button>
 						      </span>
@@ -102,7 +102,7 @@
 		// });
 		app.controller('BaseCtrl', ['$scope', '$element', '$http', '$timeout', '$window', function ($scope, $element, $http, $timeout, $window) {
 			console.log('**********************************************************');
-			$scope.email = {{request.user.email}};
+			$scope.email = '{{request.user.email}}';
 			var handleEmailBaseMethod = function(data) {
 				$http({
 	                method: 'POST',
