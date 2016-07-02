@@ -2,7 +2,7 @@
   <nav class="navbar navbar-inverse navbar-fixed-top navbar-static-top-custom">
 
       <!-- Error Message -->
-      {% if not request.user.profile.account_verified %}
+      {% if not email_valid %}
       <div id="message" style="z-index:10000; display:block; font-size:14px" class="alert alert-danger" role="alert">
           您尚未验证电子邮件地址. 您必须验证您的电子邮件方可使用所有的功能！ <a class="btn btn-link" style="color:white; font-size:14px; padding-top:3px; padding-left:0px; text-decoration:underline" data-toggle="modal" data-target="#emailConfirmModal">没有收到电子邮件？</a>
       </div>

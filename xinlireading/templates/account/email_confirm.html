@@ -1,18 +1,23 @@
-
 {% extends 'xinlireading/base_clear.html' %}
+{% block base_title %}激活帐户{% endblock %}
 {% block base_content %}
 
-<div ng-controller="EmailCtrl" style="background-color:black; min-width:100vh; min-height:100vh;" data-ng-init="init()">
+<div ng-controller="EmailCtrl" style="background-color:white; min-width:100vh; min-height:100vh;" data-ng-init="init()">
+    {% if confirmation %}
+    {% endif %}
 </div>
 
 <script>
     app.controller('EmailCtrl', ['$scope', '$element', '$http', '$window', function ($scope, $element, $http, $window) {
         var confirmEmail = function() {
             console.log('confirmEmail');
+            var url = '/accounts/confirm-email/{{confirmation.key}}/'
+            console.log(url);
             return;
+
             $http({
                 method: 'POST',
-                url: '/accounts/password/reset/',
+                url: url,
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 transformRequest: function(obj) {
                     var str = [];
@@ -20,21 +25,22 @@
                     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                     return str.join("&");
                 },
-                data: { email: $scope.email_reset_password },
             }).then(function successCallback(response) {
-                if (response.data.match("The e-mail address is not assigned to any user account")) {
-                    $("#reset_password_msg_error").css('display', 'block');
-                } else if (response.data.match("We have sent you an e-mail.")) {
-                    $("#reset_password_panel").css('display', 'none');
-                    $("#reset_password_msg_success").css('display', 'block');
-                }
+                // if (response.data.match("The e-mail address is not assigned to any user account")) {
+                //     $("#reset_password_msg_error").css('display', 'block');
+                // } else if (response.data.match("We have sent you an e-mail.")) {
+                //     $("#reset_password_panel").css('display', 'none');
+                //     $("#reset_password_msg_success").css('display', 'block');
+                // }
+                $window.location.href = "/accounts/profile/"
             }, function errorCallback(response) {
                 console.log(response.data);
             });
         };
         $scope.init = function() {
 			console.log('%%% email_conform.html EmailCtrl init() %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-			$scope.$parent.loading(false);
+			$scope.$parent.loading(true);
+            confirmEmail();
 
         };
     }]);

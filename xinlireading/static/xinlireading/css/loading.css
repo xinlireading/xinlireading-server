@@ -8,9 +8,9 @@
     border-radius: 100%;
     height: 50px;
     width: 50px;
-    -webkit-animation: rot .5s infinite linear;
-    -moz-animation: rot .5s infinite linear;
-    animation: rot .5s infinite linear;
+    -webkit-animation: rot 0.5s infinite linear;
+    -moz-animation: rot 0.5s infinite linear;
+    animation: rot 0.5s infinite linear;
 }
 @keyframes rot {
     from {

@@ -9,6 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from .models import Book, Activity, ReadingGroup, ReadingGroupMembership, UserFavoriteBook
+from allauth.account.models import EmailAddress
+
 # from django.conf import settings
 import os
 import uuid
@@ -57,10 +59,12 @@ def test(request):
 
 # Create your views here.
 def home(request):
+
 	context = {
 		'is_signup': True,
 		'is_signin': True,
-		'books': Book.objects.all()
+		'books': Book.objects.all(),
+		'email_valid': True
 	}
 	return render(request, 'xinlireading/home.html', context)
 
@@ -135,7 +139,8 @@ class DashboardView(LoginRequiredMixin, View):
 
 	def get(self, request, *args, **kwargs):
 		membership = ReadingGroupMembership.objects.filter(user=request.user)
-		return render(request, self.template_name, {'membership': membership})
+		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+		return render(request, self.template_name, {'membership': membership, 'email_valid': email_valid})
 
 	# Logout
 	def post(self, request, *args, **kwargs):
@@ -152,7 +157,8 @@ class EditProfileView(LoginRequiredMixin, View):
 		form = EditProfileForm(instance=request.user.userprofile)
 		print(request.user.userprofile.intro);
 		userprofile = request.user.userprofile;
-		return render(request, self.template_name, { 'form': form })
+		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+		return render(request, self.template_name, { 'form': form, 'email_valid': email_valid })
 
 	def post(self, request, *args, **kwargs):
 		form = EditProfileForm(request.POST, instance=request.user.userprofile);
@@ -182,7 +188,8 @@ class BaseHeaderView(View):
 class BooksView(LoginRequiredMixin, View):
 	template_name = "xinlireading/books.html"
 	def get(self, request, *args, **kwargs):
-		return render(request, self.template_name, {'books': Book.objects.all()})
+		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+		return render(request, self.template_name, { 'books': Book.objects.all(), 'email_valid': email_valid })
 
 class BookDetailView(LoginRequiredMixin, View):
 	template_name = "xinlireading/book-detail.html"
@@ -191,7 +198,8 @@ class BookDetailView(LoginRequiredMixin, View):
 		book = get_object_or_404(Book, pk=book_id)
 		userFavoriteBook = UserFavoriteBook.objects.filter(book=book,user__id=request.user.id).first()
 		isFavorite = 0 if userFavoriteBook == None else 1
-		return render(request, self.template_name, {'book': book, 'isFavorite': isFavorite})
+		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+		return render(request, self.template_name, { 'book': book, 'isFavorite': isFavorite, 'email_valid': email_valid })
 
 	def post(self, request, *args, **kwargs):
 		body_unicode = request.body.decode('utf-8')
@@ -218,7 +226,8 @@ class ActivitySignView(View):
 		activity_id = self.kwargs['activity_id']
 		membership = ReadingGroupMembership.objects.filter(user=request.user, reading_group__activity__id=activity_id).first()
 		print(membership)
-		return render(request, self.template_name, {'membership': membership})
+		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+		return render(request, self.template_name, { 'membership': membership, 'email_valid': email_valid })
 
 	def post(self, request, *args, **kwargs):
 		activity_id = self.kwargs['activity_id']
