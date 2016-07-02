@@ -2,7 +2,7 @@
 <html>
 	{% load staticfiles %}
 <head>
-<title>{% block title %}心理读书会: 在线读书小组{% endblock %}</title>
+<title>{% block base_title %}心理读书会: 在线读书小组{% endblock %}</title>
 	<link rel="shortcut icon" type="image/x-icon" href="{% static 'xinlireading/images/icon.ico' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
@@ -89,13 +89,13 @@
 		<!-- </form> -->
     </div>
 
-	<div id="loading_view" style="position:fixed;left:0px;right:0px;top:0px;bottom:0px;background-color:white;z-index:99999; display:block">
+	<div id="loading_view" style="position:fixed;left:0px;right:0px;top:0px;bottom:0px;background-color:white;z-index:99999; display:none">
 		<div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
 			<div style="width: 50px; height: 50px; margin: 0 auto">
 				<div class="loading"></div>
 			</div>
-			<h3 style="margin:15px 0px; padding-left:15px; font-weight: bold; font-size:20px; color:black">请稍等...</h3>
-			<h4 style="color:black">心理读书会，一个静下来读书的地方。</h4>
+			<h3 style="margin:12px 0px; margin-top:25px; padding-left:15px; font-weight: normal; font-size:20px; color:black">请稍等...</h3>
+			<h4 style="color:black; font-size:15px; ">心理读书会，一个静下来读书的地方。</h4>
 		</div>
 	</div>
 
@@ -107,6 +107,7 @@
 		});
 		app.controller('BaseCtrl', ['$scope', '$element', '$http', '$timeout', '$window', function ($scope, $element, $http, $timeout, $window) {
 			var handleEmailBaseMethod = function(data) {
+				console.log('handleEmailBaseMethod');
 				$http({
 	                method: 'POST',
 	                url: '/accounts/email/',
@@ -142,9 +143,8 @@
 
 
 			$scope.loading = function(show) {
-				alert('loading()');
 				if (show) {
-					$("#loading_view").css('display', 'bloc');
+					$("#loading_view").css('display', 'block');
 				} else {
 					$("#loading_view").css('display', 'none');
 				}
