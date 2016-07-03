@@ -6,8 +6,12 @@
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/books.css' %}" />
 
 <div style="padding:20px 0px 0px 44px">
-    <p style="font-size:28px">热门书籍</p>
-    <p style="font-size:13px; color:#3A3A3A">寻找你想看的书。在书的详情页里查看可参加的小组。</p>
+    {% ifequal request.path '/reading/books/' %}
+        <p style="font-size:28px">我的书籍</p>
+    {% else %}
+        <p style="font-size:28px">热门书籍</p>
+        <p style="font-size:13px; color:#3A3A3A">寻找你想看的书。在书的详情页里查看可参加的小组。</p>
+    {% endifequal %}
 </div>
 <div class="container-fluid">
     <div class="row">
@@ -35,15 +39,6 @@
                                 <div>豆瓣评分: {{book.price}}</div>
 
                             </div>
-                            <!-- <div></div> -->
-                            <!-- <div class="div-reading-info-panel">
-                                <div>本书已有 120 组员读过</div>
-                                <div>正在阅读的小组 5</div>
-                                <div>
-                                    <div style="float:left">正在招募的小组 3</div>
-                                    <button style="float:left; width:36px; height:20px; font-size:11px" type="button" class="btn btn-primary btn-primary-custom">加入</button>
-                                </div>
-                            </div> -->
                         </div>
                     </a>
                 </li>
@@ -51,7 +46,7 @@
             </ul>
 
         </div>
-        <div class="col-md-3" style="height:800px">
+        <div class="col-md-3" style="min-height:200px">
 
         </div>
     </div>
