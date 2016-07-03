@@ -188,8 +188,18 @@ class BaseHeaderView(View):
 class BooksView(LoginRequiredMixin, View):
 	template_name = "xinlireading/books.html"
 	def get(self, request, *args, **kwargs):
+		# print(kwargs);
+		print(request.path);
+		if request.path == '/books/':
+			books = Book.objects.all()
+		elif request.path == '/reading/books/':
+			favoriteBooks = Book.objects.filter(userfavoritebook__user=request.user)
+			readingBooks = Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user)
+			books = favoriteBooks|readingBooks
+
+
 		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
-		return render(request, self.template_name, { 'books': Book.objects.all(), 'email_valid': email_valid })
+		return render(request, self.template_name, { 'books': books, 'email_valid': email_valid })
 
 class BookDetailView(LoginRequiredMixin, View):
 	template_name = "xinlireading/book-detail.html"

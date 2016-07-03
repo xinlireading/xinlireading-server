@@ -17,6 +17,7 @@ urlpatterns = [
 	url(r'^settings/profile/$', EditProfileView.as_view(), name='edit-profile'),
     url(r'^upload/$', views.upload, name='upload'),
 	url(r'^books/$', BooksView.as_view(), name='books'),
+	url(r'^reading/books/$', BooksView.as_view(), name='mybooks'),
 	url(r'^book/(?P<book_id>[0-9]+)/$', BookDetailView.as_view(), name='book-detail'),
 	url(r'^book/(?P<book_id>[0-9]+)/activity/(?P<activity_id>[0-9]+)/sign/$', ActivitySignView.as_view(), name='activity-sign'),
 ]
