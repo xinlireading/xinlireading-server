@@ -30,7 +30,7 @@ hr {
     margin-bottom: 0px;
     text-align: center;
 }
-.alert-warning {
+.alert-danger {
     background-color: #DE5D4D;
     color: white
 }
