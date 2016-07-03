@@ -18,6 +18,8 @@
 
 <body ng-app="app">
 	<div ng-controller="BaseCtrl" data-ng-init="init()" style="min-height:calc(100vh - 60px);">
+		<div id="message" style="display:none; z-index:1031" ng-class="messageClass" role="alert" ng-bind="message"></div>
+
 		<!-- Base Content -->
 		{% block base_content %}
 
@@ -152,6 +154,28 @@
 			$scope.init = function() {
 				console.log('*** base_clear.html BaseCtrl init() *******************************************************');
 				// $scope.loading(false);
+				// $scope.showSuccessMessage('激活成功')
+			};
+
+			var showMessage = function(msg, type) {
+				// alert(msg);
+				$scope.message = msg;
+				if (type == 'success') {
+					$scope.messageClass = "alert alert-success navbar-fixed-top";
+				} else if (type == 'warning') {
+					$scope.messageClass = "alert alert-warning navbar-fixed-top";
+				}
+				$("#message").css('display', 'block');
+				// $timeout(function () {
+	            //     $("#message").css('display', 'none');
+				// 	console.log('hidden');
+	            // }, 1000);
+			};
+			$scope.showSuccessMessage = function(msg) {
+				showMessage(msg, 'success');
+			};
+			$scope.showWarningMessage = function(msg) {
+				showMessage(msg, 'warning');
 			};
 		}]);
 	</script>
