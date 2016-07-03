@@ -113,7 +113,7 @@
 
             $http({
                 method: 'POST',
-                url: '/account/resetpassword/',
+                url: '/accounts/password/reset/',
                 data: { 'email': $scope.email_reset_password }
             }).then(function successCallback(response) {
                 if (response.data == 'success') {

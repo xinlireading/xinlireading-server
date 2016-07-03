@@ -162,8 +162,8 @@
 				$scope.message = msg;
 				if (type == 'success') {
 					$scope.messageClass = "alert alert-success navbar-fixed-top";
-				} else if (type == 'warning') {
-					$scope.messageClass = "alert alert-warning navbar-fixed-top";
+				} else if (type == 'danger') {
+					$scope.messageClass = "alert alert-danger navbar-fixed-top";
 				}
 				$("#message").css('display', 'block');
 				// $timeout(function () {
@@ -175,7 +175,7 @@
 				showMessage(msg, 'success');
 			};
 			$scope.showWarningMessage = function(msg) {
-				showMessage(msg, 'warning');
+				showMessage(msg, 'danger');
 			};
 		}]);
 	</script>
