@@ -8,13 +8,8 @@
 </div>
 
 <script>
-    app.controller('EmailCtrl', ['$scope', '$element', '$http', '$window', function ($scope, $element, $http, $window) {
+    app.controller('EmailCtrl', ['$scope', '$element', '$http', '$window', '$timeout', function ($scope, $element, $http, $window, $timeout) {
         var confirmEmail = function() {
-            console.log('confirmEmail');
-            var url = '/accounts/confirm-email/{{confirmation.key}}/'
-            console.log(url);
-            return;
-
             $http({
                 method: 'POST',
                 url: url,
@@ -26,13 +21,11 @@
                     return str.join("&");
                 },
             }).then(function successCallback(response) {
-                // if (response.data.match("The e-mail address is not assigned to any user account")) {
-                //     $("#reset_password_msg_error").css('display', 'block');
-                // } else if (response.data.match("We have sent you an e-mail.")) {
-                //     $("#reset_password_panel").css('display', 'none');
-                //     $("#reset_password_msg_success").css('display', 'block');
-                // }
-                $window.location.href = "/accounts/profile/"
+                $scope.$parent.loading(false);
+                $scope.$parent.showSuccessMessage('激活成功');
+                $timeout(function () {
+                    $window.location.href = "/accounts/profile/"
+                }, 800);
             }, function errorCallback(response) {
                 console.log(response.data);
             });
@@ -41,7 +34,6 @@
 			console.log('%%% email_conform.html EmailCtrl init() %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
 			$scope.$parent.loading(true);
             confirmEmail();
-
         };
     }]);
 </script>
