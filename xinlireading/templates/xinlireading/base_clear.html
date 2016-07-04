@@ -111,8 +111,8 @@
 		app.controller('BaseCtrl', ['$scope', '$element', '$http', '$timeout', '$window', function ($scope, $element, $http, $timeout, $window) {
 			$scope.email = '{{request.user.email}}';
 
-			var handleEmailBaseMethod = function(data) {
-				console.log('handleEmailBaseMethod');
+			var handleEmailBaseMethod = function(data, callback) {
+				console.log('1. handleEmailBaseMethod');
 				$http({
 	                method: 'POST',
 	                url: '/accounts/email/',
@@ -125,29 +125,51 @@
 	                },
 	                data: data,
 	            }).then(function successCallback(response) {
-					console.log('successCallback');
+					console.log('2. successCallback');
+					callback('success');
 	                if (response.data.match("Confirmation e-mail sent to")) {
 	                    $("#email_send_success_message").css('display', 'block');
 	                }
 	            }, function errorCallback(response) {
-	                console.log(response.data);
+					console.log('2. errorCallback');
+					callback('error');
+
 	            });
 			};
 
 			var handleResetConfirmEmailBtnClick = function() {
 				$scope.email = '{{request.user.email}}';
-				handleEmailBaseMethod({ email: '{{request.user.email}}', action_send:'' });
+				handleEmailBaseMethod({ email: '{{request.user.email}}', action_send:'' }, function(result) {} );
 			};
 			angular.element(document.querySelector('#email_send_btn')).on('click', handleResetConfirmEmailBtnClick);
 
 
 			var handleAddNewEmailBtnClick = function() {
-				handleEmailBaseMethod({ email: $("#new_email").val(), action_add:'' });
-				handleEmailBaseMethod({ email: $("#new_email").val(), action_primary:''});
-				handleEmailBaseMethod({ email: $scope.email, action_remove:''});
-				$scope.email = $("#new_email").val();
+				handleEmailBaseMethod({ email: $("#new_email").val(), action_add:'' }, function(result) {
+					if (result == "success") {
+						console.log('a. add new email success');
+						setNewEmailPrimary();
+					}
+				});
 			};
 			angular.element(document.querySelector('#email_add_btn')).on('click', handleAddNewEmailBtnClick);
+
+			var setNewEmailPrimary = function() {
+				handleEmailBaseMethod({ email: $("#new_email").val(), action_primary:''}, function(result) {
+					if (result == "success") {
+						console.log('b. set new email primary success');
+						removeOldEmail();
+					}
+				});
+			}
+			var removeOldEmail = function() {
+				handleEmailBaseMethod({ email: $scope.email, action_remove:''}, function(result) {
+					if (result == "success") {
+						console.log('c. del old email success');
+						$scope.email = $("#new_email").val();
+					}
+				});
+			}
 
 
 			$scope.loading = function(show) {

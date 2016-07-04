@@ -71,5 +71,6 @@ class SignupForm(Form):
 
     def signup(self, request, user):
         user_profile = UserProfile.objects.create(user=user)
-        user_profile.name = user.username
+        # user_profile.name = user.username
+        user_profile.name = user.email.split('@')[0];
         user_profile.save()
