@@ -8,6 +8,7 @@
         <div class="div-content-signup-panel">
           <p class="title">注册</p>
           <p class="subtitle">用电子邮箱注册</p>
+          {{ form.errors }}
           {% if form.errors %}
             {% for field in form %}
               {% for error in field.errors %}
@@ -25,7 +26,7 @@
           {% endif %}
 
 
-          <div class="form-group form-group-custom">
+          <!-- <div class="form-group form-group-custom">
             <div class="input-group">
               <div class="input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
@@ -33,7 +34,9 @@
               <input data-error="3 至 20 个字符之间但不能有多于 5 个数字。" data-minlength="3" maxlength=20 class="form-control" name="username" placeholder="User Name" value="{{form.username.value|default_if_none:""}}" autocomplete="new-password" required />
             </div>
             <div class="help-block custom-help-block with-errors"></div>
-          </div>
+          </div> -->
+
+          <input id="username" name="username" type="hidden" >
 
           <div class="form-group form-group-custom">
             <div class="input-group">
@@ -63,4 +66,7 @@
           <p class="copyright">创建帐户表示您接受我们的<a>服务条款</a>。</p>
         </div>
 </form>
+<script>
+document.getElementById("username").value = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
+</script>
 {% endblock %}
