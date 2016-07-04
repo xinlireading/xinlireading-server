@@ -5,20 +5,23 @@
 <form action="/accounts/login/" method="POST" data-toggle="validator" role="form" name="form">
     {% csrf_token %}
 
-  <div class="div-content-signup-panel" id="signin_container" ng-controller="Ctrl">
+  <div class="div-content-signup-panel" id="signin_container" ng-controller="Ctrl" data-ng-init="init()">
     <p class="title">登陆</p>
     <p class="subtitle">用电子邮箱登陆</p>
 
-    <!-- <div id="error-message-signin" style="color:#CA232A; height:30px; padding-top:0px; text-align:center; font-size:13px; display:block;">{{ form.non_field_errors }}</div> -->
     {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
             <div id="error-message-signin" style="color:#CA232A; height:30px; padding-top:0px; text-align:center; font-size:13px; display:block;">
                 {% ifequal error "The login and/or password you specified are not correct." %}
                     电子邮件或密码输入不正确。请注意密码是区分大小写的。
                 {% endifequal %}
+                {% ifequal error "The e-mail address and/or password you specified are not correct." %}
+                    电子邮件或密码输入不正确。请注意密码是区分大小写的。
+                {% endifequal %}
                 {% ifequal error "Too many failed login attempts. Try again later." %}
                     尝试登陆次数太多，请稍后再试。
                 {% endifequal %}
+                <!-- error -->
             </div>
         {% endfor %}
     {% endif %}
@@ -28,9 +31,7 @@
         <div class="input-group-addon">
           <span class="glyphicon glyphicon-envelope"></span>
         </div>
-        <!-- <input type="email" class="form-control" name="login" placeholder="Email" ng-model="email" data-error="请输入一个有效的电子邮件地址" value="{{form.login.value}}" required /> -->
-        <!-- <input  class="form-control" name="login" placeholder="Email"  data-error="请输入一个有效的电子邮件地址"  /> -->
-        <input class="form-control" name="login" placeholder="Email" data-error="请输入一个有效的电子邮件地址" value="{{form.login.value|default_if_none:""}}" />
+        <input id="email_input" class="form-control" name="login" placeholder="Email" type="email" data-error="请输入一个有效的电子邮件地址" value="{{form.login.value|default_if_none:""}}" required>
 
       </div>
       <div class="help-block custom-help-block with-errors"></div>
@@ -41,14 +42,13 @@
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-lock"></span>
             </div>
-            <input type="password" class="form-control" name="password" placeholder="Password" ng-model="password" data-error="请输入密码" required />
+            <input type="password" class="form-control" name="password" placeholder="Password" ng-model="password" data-error="请输入密码">
         </div>
         <div class="help-block custom-help-block with-errors"></div>
     </div>
     <div class="has-error">
       <div class="checkbox checkbox-custom">
         <label>
-            <!-- <input class="checkbox" type="checkbox" id="checkboxError" name="remember_me" ng-model="remember_me"> -->
           <input class="checkbox" type="checkbox" id="checkboxError" name="remember" ng-model="remember_me">
           保持我在这台电脑的登陆状态。
         </label>
@@ -76,10 +76,7 @@
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-envelope"></span>
             </div>
-            <!-- <input type="email" class="form-control" name="email" placeholder="Email" ng-model="email_reset_password" data-error="请输入一个有效的电子邮件地址" required /> -->
-              <!-- render_field reset_password_form.email|attr:"type:email"|attr:"name:email"|attr:"required"|attr:"data-error:请输入一个有效的电子邮件地址"|attr:"placeholder:Email" class+="form-control"   -->
-              <input type="email" class="form-control" name="email" placeholder="Email" ng-model="email_reset_password"  data-error="请输入一个有效的电子邮件地址" required />
-
+              <input id="password" type="email" class="form-control" name="email" placeholder="Email" ng-model="email_reset_password"  data-error="请输入一个有效的电子邮件地址" required>
 
           </div>
           <div class="help-block custom-help-block with-errors"></div>
@@ -105,36 +102,7 @@
     });
 
     app.controller('Ctrl', ['$scope', '$element', '$http', '$window', function ($scope, $element, $http, $window) {
-        var handleSigninBtnClick = function() {
-            console.log($scope.email);
-            console.log($scope.password);
-            console.log($scope.remember_me ? 1 : 0);
-            $http({
-                method: 'POST',
-                url: '/account/signin/',
-                data: {
-                    'email': $scope.email,
-                    'password': $scope.password,
-                    'remember_me': $scope.remember_me ? 1 : 0
-                }
-            }).then(function successCallback(response) {
-                if (response.data == 'success') {
-                    $("#error-message-signin").css('display', 'none');
-                    $window.location.href = "/account/dashboard/";
-                } else {
-                    $("#error-message-signin").css('display', 'block');
-                }
-            }, function errorCallback(response) {
-                console.log(response.data);
-            });
-        };
         var handleResetPasswordBtnClick = function() {
-            console.log('handleResetPasswordBtnClick');
-            // if (!$scope.email_reset_password) {
-            //     return;
-            // }
-
-            // return;
             $http({
                 method: 'POST',
                 url: '/accounts/password/reset/',
@@ -166,6 +134,9 @@
         // angular.element(document.querySelector('#signin_submit_btn')).on('click', handleSigninBtnClick);
         angular.element(document.querySelector('#reset_password_submit_btn')).on('click', handleResetPasswordBtnClick);
         angular.element(document.querySelector('#reset_password_close_btn')).on('click', handleCloseResetPasswordBtnClick);
+
+        $scope.init = function() {
+        };
     }]);
 
 </script>

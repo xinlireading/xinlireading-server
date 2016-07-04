@@ -1,6 +1,8 @@
 {% extends 'xinlireading/base_clear.html' %}
 {% block base_title %}激活帐户{% endblock %}
 {% block base_content %}
+{% load i18n %}
+{% load account %}
 
 <div ng-controller="EmailCtrl" style="background-color:white; min-width:100vh; min-height:100vh;" data-ng-init="init()">
     {% if confirmation %}
@@ -10,6 +12,7 @@
 <script>
     app.controller('EmailCtrl', ['$scope', '$element', '$http', '$window', '$timeout', function ($scope, $element, $http, $window, $timeout) {
         var confirmEmail = function() {
+            var url = '{% url 'account_confirm_email' confirmation.key %}';
             $http({
                 method: 'POST',
                 url: url,
@@ -27,7 +30,9 @@
                     $window.location.href = "/accounts/profile/"
                 }, 800);
             }, function errorCallback(response) {
-                console.log(response.data);
+                console.log('error');
+                $scope.$parent.loading(false);
+                $scope.$parent.showWarningMessage('链接已失效');
             });
         };
         $scope.init = function() {

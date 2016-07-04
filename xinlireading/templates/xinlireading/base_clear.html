@@ -16,11 +16,12 @@
 
 </head>
 
-<body ng-app="app">
-	<div ng-controller="BaseCtrl" data-ng-init="init()" style="min-height:calc(100vh - 60px);">
+<body ng-app="app" ng-controller="BaseCtrl" >
+	<div style="min-height:calc(100vh - 60px);">
 		<div id="message" style="display:none; z-index:1031" ng-class="messageClass" role="alert" ng-bind="message"></div>
 
 		<!-- Base Content -->
+
 		{% block base_content %}
 
 		{% endblock %}
@@ -47,7 +48,7 @@
 					margin: 10px 0px;
 					color: #4D8C4D;
 					display: none
-					" id="email_send_success_message">一封确认邮件已发送至您的邮箱{{request.user.email}}</div>
+					" id="email_send_success_message">一封确认邮件已发送至您的邮箱{$email$}</div>
 	            <div style="
 				    font-size: 15px;
 				    font-weight: bold;
@@ -108,6 +109,8 @@
 			$("#change_email_input").css('visibility', 'visible');
 		});
 		app.controller('BaseCtrl', ['$scope', '$element', '$http', '$timeout', '$window', function ($scope, $element, $http, $timeout, $window) {
+			$scope.email = '{{request.user.email}}';
+
 			var handleEmailBaseMethod = function(data) {
 				console.log('handleEmailBaseMethod');
 				$http({
@@ -131,8 +134,8 @@
 	            });
 			};
 
-
 			var handleResetConfirmEmailBtnClick = function() {
+				$scope.email = '{{request.user.email}}';
 				handleEmailBaseMethod({ email: '{{request.user.email}}', action_send:'' });
 			};
 			angular.element(document.querySelector('#email_send_btn')).on('click', handleResetConfirmEmailBtnClick);
@@ -140,6 +143,9 @@
 
 			var handleAddNewEmailBtnClick = function() {
 				handleEmailBaseMethod({ email: $("#new_email").val(), action_add:'' });
+				handleEmailBaseMethod({ email: $("#new_email").val(), action_primary:''});
+				handleEmailBaseMethod({ email: $scope.email, action_remove:''});
+				$scope.email = $("#new_email").val();
 			};
 			angular.element(document.querySelector('#email_add_btn')).on('click', handleAddNewEmailBtnClick);
 
@@ -151,14 +157,8 @@
 					$("#loading_view").css('display', 'none');
 				}
 			};
-			$scope.init = function() {
-				console.log('*** base_clear.html BaseCtrl init() *******************************************************');
-				// $scope.loading(false);
-				// $scope.showSuccessMessage('激活成功')
-			};
 
 			var showMessage = function(msg, type) {
-				// alert(msg);
 				$scope.message = msg;
 				if (type == 'success') {
 					$scope.messageClass = "alert alert-success navbar-fixed-top";
@@ -166,10 +166,6 @@
 					$scope.messageClass = "alert alert-danger navbar-fixed-top";
 				}
 				$("#message").css('display', 'block');
-				// $timeout(function () {
-	            //     $("#message").css('display', 'none');
-				// 	console.log('hidden');
-	            // }, 1000);
 			};
 			$scope.showSuccessMessage = function(msg) {
 				showMessage(msg, 'success');
@@ -177,6 +173,7 @@
 			$scope.showWarningMessage = function(msg) {
 				showMessage(msg, 'danger');
 			};
+
 		}]);
 	</script>
 </html>
