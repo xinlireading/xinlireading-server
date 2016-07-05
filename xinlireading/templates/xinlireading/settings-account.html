@@ -1,0 +1,110 @@
+{% extends 'xinlireading/base.html' %}
+{% block title %}帐户{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/settings-account.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/validator-custom.css' %}" />
+<script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
+
+
+<div style="padding:20px 0px 0px 44px;">
+        <p style="font-size:28px">账户设置</p>
+</div>
+<div style="margin:30px 44px;" ng-controller="SettingsCtrl" data-ng-init="init()">
+<table class="table table-custom">
+    <tr>
+        <td>电子邮件</td>
+        <td>{{request.user.email}}</td>
+        <!-- <td><span class="glyphicon glyphicon-pencil"></span></td> -->
+        <td></td>
+    </tr>
+    <tr>
+        <td>密码</td>
+        <td id="password_td" ng-hide="showChangePasswordPanel">******</td>
+
+        <td id="change_password_td" ng-show="showChangePasswordPanel">
+            <form id="changePasswordForm" role="form">
+            <div id="change_password_div">
+                <div class="form-group">
+                    <div>原密码</div>
+                    <input type="password" class="form-control" data-error="旧密码不能为空" ng-model="old_password" required>
+                    <div class="help-block custom-help-block with-errors"></div>
+                </div>
+
+                <div class="form-group">
+                    <div>新密码</div>
+                    <input id="password1" type="password" class="form-control" data-minlength="6" max-length="20" data-error="请输入6至20个字符" ng-model="password1" required>
+                    <div class="help-block custom-help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <div>确认新密码</div>
+                    <input id="password2" type="password" class="form-control" data-match="#password1" data-error="两次输入的密码不匹配" data-match-error="两次输入的密码不匹配" ng-model="password2" required>
+                    <div class="help-block custom-help-block with-errors"></div>
+                </div>
+                <div id="change_password_div_btn_div">
+                    <button id="change_password_cancel_btn" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel">取消</button>
+                    <button type="submit" id="change_password_submit_btn" class="btn btn-primary btn-primary-custom">确认</button>
+
+                </div>
+            </div>
+            </form>
+        </td>
+        <td><span id="change_password_pencil_span" class="glyphicon glyphicon-pencil"></span></td>
+    </tr>
+</table>
+</div>
+
+<script>
+    app.controller('SettingsCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.showChangePasswordPanel = false;
+        var switchChangePasswordStatus = function() {
+            $scope.showChangePasswordPanel = !$scope.showChangePasswordPanel;
+            $scope.$apply();
+            if ($scope.showChangePasswordPanel) {
+                $('#changePasswordForm').validator();
+            }
+        };
+        var handleChangePasswordSubmitBtnClick = function() {
+            console.log('handleChangePasswordSubmitBtnClick');
+            if (angular.isUndefined($scope.old_password) || angular.isUndefined($scope.password1) || angular.isUndefined($scope.password2)) {
+                console.log('return');
+                return;
+            }
+
+            $http({
+                method: 'POST',
+                url: '/accounts/password/change/',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                data: { oldpassword: $scope.old_password, password1: $scope.password1, password2: $scope.password2 },
+            }).then(function successCallback(response) {
+
+                if (response.data.match("Password successfully changed.")) {
+                    $scope.$parent.showSuccessMessage("密码更新成功");
+                    $scope.showChangePasswordPanel = !$scope.showChangePasswordPanel;
+                } else if (response.data.match("Please type your current password.")) {
+                    $scope.$parent.showWarningMessage("原密码错误");
+                }
+            }, function errorCallback(response) {
+                console.log(response.data);
+            });
+        };
+
+        angular.element(document.querySelector('#change_password_pencil_span')).on('click', switchChangePasswordStatus);
+        angular.element(document.querySelector('#change_password_cancel_btn')).on('click', switchChangePasswordStatus);
+        angular.element(document.querySelector('#change_password_submit_btn')).on('click', handleChangePasswordSubmitBtnClick);
+
+        $scope.init = function() {
+            // console.log('aert')
+            // $scope.showChangePasswordPanel = true;
+            // $scope.$apply();
+        }
+    }]);
+</script>
+{% endblock %}

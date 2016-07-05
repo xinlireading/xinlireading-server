@@ -17,8 +17,8 @@
 </head>
 
 <body ng-app="app" ng-controller="BaseCtrl" >
-	<div style="min-height:calc(100vh - 60px);">
-		<div id="message" style="display:none; z-index:1031" ng-class="messageClass" role="alert" ng-bind="message"></div>
+	<div style="">
+		<div id="message" style="display:none; z-index:1031; " ng-class="messageClass" role="alert" ng-bind="message"></div>
 
 		<!-- Base Content -->
 
@@ -188,6 +188,10 @@
 					$scope.messageClass = "alert alert-danger navbar-fixed-top";
 				}
 				$("#message").css('display', 'block');
+
+				$timeout(function () {
+					$("#message").css('display', 'none');
+				}, 1500);
 			};
 			$scope.showSuccessMessage = function(msg) {
 				showMessage(msg, 'success');

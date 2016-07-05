@@ -6,7 +6,7 @@
 
 <!-- Content -->
 
-<div id="root-div" style="padding-top:{% if not request.user.profile.account_verified %} 120px {% else %} 60px {% endif %}">
+<div id="root-div" style="padding-top:{% if not email_valid %} 120px {% else %} 60px {% endif %}; min-height:calc(100vh - 60px)">
 {% block content %}
 
 {% endblock %}
