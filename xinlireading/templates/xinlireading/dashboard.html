@@ -47,7 +47,7 @@
 
             <div class="div-my-books-total-panel">
               <ul>
-                <li class="list-group-item list-group-item-custom" onclick="location.href='/reading/books/'"><label class="title" style="width:100%">我的书籍</label></li>
+                <li class="list-group-item list-group-item-custom" onclick="location.href='/reading/books/all/'"><label class="title" style="width:100%">我的书籍</label></li>
                 <li class="list-group-item list-group-item-custom"><label>已看</label><span class="badge">2</span></li>
                 <li class="list-group-item list-group-item-custom"><label>收藏</label><span class="badge">23</span></li>
               </ul>
@@ -58,9 +58,10 @@
 
       <div class="col-md-9">
           <div style="margin-top:34px; background-color:white;">
-              <div style="padding:25px 20px; padding-top:30px; padding-bottom:0px; font-size:18px;" class="xl-title">我的活动</div>
-              <div style="padding:17px 20px; font-size:14px;">即将开始</div>
-              <div style="padding: 0px 20px; font-size:13px;">
+              <div style="padding:25px 20px; padding-top:20px; padding-bottom:0px; font-size:18px; font-weight:bold" class="xl-title">我的活动</div>
+              <div style="padding:17px 20px; font-size:14px; margin-top:10px; font-weight:bold">即将开始</div>
+              <div style="padding: 0px 15px; font-size:13px; height:100vh">
+                  {% if membership %}
                   <ul>
                       {% for m in membership %}
                           <a href="/book/{{m.reading_group.activity.book.id}}/activity/{{m.reading_group.activity.id}}/sign/">
@@ -74,6 +75,9 @@
                           </a>
                       {% endfor %}
                   <ul>
+                  {% else %}
+                  <div style="color:gray; padding-left:5px">无相关活动</div>
+                  {% endif %}
               </div>
           </div>
       </div>

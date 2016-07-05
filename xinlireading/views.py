@@ -10,6 +10,7 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from .models import Book, Activity, ReadingGroup, ReadingGroupMembership, UserFavoriteBook
 from allauth.account.models import EmailAddress
+from itertools import chain
 
 # from django.conf import settings
 import os
@@ -66,6 +67,8 @@ def home(request):
 		'books': Book.objects.all(),
 		'email_valid': True
 	}
+	if (request.user):
+		return redirect('/accounts/profile/');
 	return render(request, 'xinlireading/home.html', context)
 
 def reset_password(request):
@@ -217,7 +220,8 @@ class BookDetailView(LoginRequiredMixin, View):
 		userFavoriteBook = UserFavoriteBook.objects.filter(book=book,user__id=request.user.id).first()
 		isFavorite = 0 if userFavoriteBook == None else 1
 		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
-		return render(request, self.template_name, { 'book': book, 'isFavorite': isFavorite, 'email_valid': email_valid })
+		signedActivities = Activity.objects.filter(readinggroup__readinggroupmembership__user=request.user)
+		return render(request, self.template_name, { 'book': book, 'isFavorite': isFavorite, 'email_valid': email_valid, 'signedActivities': signedActivities })
 
 	def post(self, request, *args, **kwargs):
 		body_unicode = request.body.decode('utf-8')

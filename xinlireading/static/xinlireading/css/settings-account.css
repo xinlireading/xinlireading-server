@@ -6,9 +6,6 @@
     width: 60%;
     margin: 2px 0px 10px 0px;
 }
-#change_password_div_btn_div {
-    margin-left: 15px
-}
 
 .table {
     font-size: 13px
@@ -33,4 +30,7 @@
 
 .table tr:first-child td {
     border-top: 0px
+}
+a {
+    color: black
 }
