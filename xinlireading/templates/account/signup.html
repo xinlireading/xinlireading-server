@@ -1,0 +1,72 @@
+{% extends 'xinlireading/base-reg.html' %}
+{% block title %}登陆{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+    <form action="/accounts/signup/" method="POST" data-toggle="validator" role="form">
+        {% csrf_token %}
+
+        <div class="div-content-signup-panel">
+          <p class="title">注册</p>
+          <p class="subtitle">用电子邮箱注册</p>
+          {{ form.errors }}
+          {% if form.errors %}
+            {% for field in form %}
+              {% for error in field.errors %}
+                  <p class="data-validate-error">
+                    {% if error == 'This username is already taken. Please choose another.' %}
+                        您输入的用户名已经被注册。请重新输入。
+                    {% endif %}
+                    {% if error == 'A user is already registered with this e-mail address.' %}
+                        您输入的电子邮件地址已被注册。请重新输入。
+                    {% endif %}
+                </p>
+
+              {% endfor %}
+            {% endfor %}
+          {% endif %}
+
+
+          <!-- <div class="form-group form-group-custom">
+            <div class="input-group">
+              <div class="input-group-addon">
+                <span class="glyphicon glyphicon-user"></span>
+              </div>
+              <input data-error="3 至 20 个字符之间但不能有多于 5 个数字。" data-minlength="3" maxlength=20 class="form-control" name="username" placeholder="User Name" value="{{form.username.value|default_if_none:""}}" autocomplete="new-password" required />
+            </div>
+            <div class="help-block custom-help-block with-errors"></div>
+          </div> -->
+
+          <input id="username" name="username" type="hidden" >
+
+          <div class="form-group form-group-custom">
+            <div class="input-group">
+              <div class="input-group-addon">
+                <span class="glyphicon glyphicon-envelope"></span>
+              </div>
+              <input type="email" data-error="请输入一个有效的电子邮件地址" class="form-control" name="email" placeholder="Email" value="{{form.email.value|default_if_none:""}}" autocomplete="new-password" required />
+            </div>
+            <div class="help-block custom-help-block with-errors"></div>
+          </div>
+
+          <div class="form-group form-group-custom">
+            <div class="input-group">
+              <div class="input-group-addon">
+                <span class="glyphicon glyphicon-lock"></span>
+              </div>
+              <input type="password" class="form-control" id="password1" name="password1" placeholder="Password"
+                     data-minlength="8" maxlength=20 data-error="密码必须介于 8 至 20 个字符之间；请注意大小写！" value="{{form.password1.value|default_if_none:""}}" autocomplete="new-password" required />
+            </div>
+            <div class="help-block with-errors"></div>
+
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-primary-custom btn-primary-custom-submit">注册</button>
+          </div>
+          <p class="copyright">创建帐户表示您接受我们的<a>服务条款</a>。</p>
+        </div>
+</form>
+<script>
+document.getElementById("username").value = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
+</script>
+{% endblock %}

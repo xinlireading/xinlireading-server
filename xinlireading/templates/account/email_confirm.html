@@ -1,0 +1,59 @@
+{% extends 'xinlireading/base_clear.html' %}
+{% block base_title %}激活帐户{% endblock %}
+{% block base_content %}
+{% load i18n %}
+{% load account %}
+
+<div ng-controller="EmailCtrl" style="background-color:white; min-width:100vh; min-height:100vh;" data-ng-init="init()">
+
+<input id="confirmation" value="{{confirmation}}" type="hidden" >
+</div>
+
+<script>
+    app.controller('EmailCtrl', ['$scope', '$element', '$http', '$window', '$timeout', function ($scope, $element, $http, $window, $timeout) {
+        var confirmEmail = function() {
+            var url = "/accounts/confirm-email/{{confirmation.key}}/";
+            console.log(url);
+            $http({
+                method: 'POST',
+                url: url,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+            }).then(function successCallback(response) {
+                console.log('success');
+                $scope.$parent.loading(false);
+                $scope.$parent.showSuccessMessage('激活成功');
+                $timeout(function () {
+                    $window.location.href = "/accounts/profile/"
+                }, 800);
+            }, function errorCallback(response) {
+                console.log('error');
+                $scope.$parent.loading(false);
+                $scope.$parent.showWarningMessage('链接已失效');
+                $timeout(function () {
+                    $window.location.href = "/accounts/profile/"
+                }, 800);
+            });
+        };
+        $scope.init = function() {
+			console.log('%%% email_conform.html EmailCtrl init() %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+			// $scope.$parent.loading(true);
+            if (document.getElementById("confirmation").value == 'None') {
+                $scope.$parent.loading(false);
+                $scope.$parent.showWarningMessage('链接已失效');
+                $timeout(function () {
+                    $window.location.href = "/accounts/profile/"
+                }, 800);
+            } else {
+                confirmEmail();
+            }
+        };
+    }]);
+</script>
+
+{% endblock %}

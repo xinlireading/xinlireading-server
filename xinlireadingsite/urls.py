@@ -17,11 +17,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from xinlireading.views import JointLoginResetPasswordView, DashboardView
 
 urlpatterns = [
 	url(r'^', include('xinlireading.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^accounts/login/$',JointLoginResetPasswordView.as_view(), name="login"),
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/profile/$', DashboardView.as_view(), name='dashboard'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

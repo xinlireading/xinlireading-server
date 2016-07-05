@@ -25,7 +25,7 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
         self.fields.pop('password2')
-        
+
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
@@ -61,3 +61,16 @@ class BookDetailForm(ModelForm):
     class Meta:
         model = Book
         fields = ['title', 'cover', 'publisher', 'publish_date', 'price', 'author', 'intro']
+
+# Replace allauth SignupForm
+class SignupForm(Form):
+    def __init__(self, *args, **kwargs):
+        super(SignupForm, self).__init__(*args, **kwargs)
+        # self.fields.pop('username')
+        self.fields.pop('password2')
+
+    def signup(self, request, user):
+        user_profile = UserProfile.objects.create(user=user)
+        # user_profile.name = user.username
+        user_profile.name = user.email.split('@')[0];
+        user_profile.save()

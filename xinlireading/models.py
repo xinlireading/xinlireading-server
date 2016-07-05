@@ -96,7 +96,6 @@ class UserProfile(models.Model):
 	    [(-1, '日')] + [(i, str(i)) for i in range(1, 32)]
 	)
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	is_activated = models.BooleanField(default=False)
 	name = models.CharField(max_length=100)
 	avatar_url = models.CharField(max_length=200, null=True, blank=True) #, default="avatar/avatar.png"
 	intro = models.CharField(max_length=200, null=True, blank=True)
@@ -146,7 +145,7 @@ class Note(models.Model):
 class UserFavoriteBook(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)
-	
+
 	# def create(cls, user, book):
 	# 	instance = cls(user=user, book=book)
 	# 	return instance

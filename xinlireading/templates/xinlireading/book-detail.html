@@ -104,7 +104,7 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal fade" id="myModal" role="dialog" style="margin-top:50px">
           <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -171,7 +171,7 @@
 // });
 
 app.controller('Ctrl', ['$scope', '$element', '$http', '$timeout', '$window', function ($scope, $element, $http, $timeout, $window) {
-
+    console.log('============================================');
     // $("#message").hide();
     $scope.book_id = {{ book.id }};
     $scope.activity_id = -1;
