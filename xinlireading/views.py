@@ -203,7 +203,7 @@ class BooksView(LoginRequiredMixin, View):
 			result = {
 				'current': Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user),
 				'favorite': Book.objects.filter(userfavoritebook__user=request.user),
-				'all': Book.objects.filter(userfavoritebook__user=request.user)|Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user),
+				'all': (Book.objects.filter(userfavoritebook__user=request.user)|Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user)).distinct(),
 				'finish': Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user),
 			}
 			type = self.kwargs['type']
