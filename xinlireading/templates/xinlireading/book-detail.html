@@ -82,9 +82,9 @@
                                         <div style="float:left; width:130px" >
                                             <div style="font-size:12px; color:#3A3A3A">活动时间: {{activity.start_date|date:'Y-m-d'}}</div>
                                             {% if activity in signedActivities %}
-                                            <button style="margin-left:30px; font-size:12px" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" disabled>参加</button>
+                                            <button style="margin-left:30px; font-size:12px" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" disabled>报名</button>
                                             {% else %}
-                                            <button id="signNowBtn" ng-click="handleSignNowBtnClick('{{activity.id}}')" style="margin-left:30px; font-size:12px" class="btn btn-primary btn-primary-custom">参加</button>
+                                            <button id="signNowBtn" ng-click="handleSignNowBtnClick('{{activity.id}}')" style="margin-left:30px; font-size:12px" class="btn btn-primary btn-primary-custom">报名</button>
                                             {% endif %}
                                         </div>
                                     </li>

@@ -17,8 +17,16 @@
                 <div class="left-container">
                     <div style="height:auto; margin:15px; padding:20px; background-color:#F6FBFD;">
                         <div style="width:100%; height:30px">
-                            <div style="font-weight:bold; float:left">所在小组:</div><div style="color:green; font-weight:bold; float:left; margin-left:5px">{{membership.reading_group.name}}</div>
-                            <div style="float:left">即将开始</div>
+                            <div style="font-weight:normal; float:left">所在小组:</div><div style="color:green; font-weight:normal; float:left; margin-left:5px">{{membership.reading_group.name}}</div>
+                            {% if membership.reading_group.activity.is_coming %}
+                            <span class="tag is-success" style="height:18px; font-size:11px; margin-left:20px">即将开始</span>
+                            {% endif %}
+                            {% if membership.reading_group.activity.is_running %}
+                            <span class="tag is-danger" style="height:18px; font-size:11px; margin-left:20px">正在进行</span>
+                            {% endif %}
+                            {% if membership.reading_group.activity.is_finished %}
+                            <span class="tag is-warning" style="height:18px; font-size:11px; margin-left:20px">活动结束</span>
+                            {% endif %}
                         </div>
                         <div>该小组已准备就绪，可按约定的时间如期开始。</div>
                         <div style="margin-top:3px">请准备好书籍，按时参加。</div>
@@ -29,8 +37,10 @@
                         <div>{{membership.reading_group.activity.rule|safe}}</div>
                     </div>
                     <hr>
+
                     <div class="row" style="margin:10px">
-                        <div class="col-md-4">
+
+                        <div class="col-md-8">
                             <div style="font-weight:bold; font-size:19px;">{{membership.reading_group.activity.start_date|date:'Y-m-d'}}</div>
                             <div style="font-size:13px; margin-top:4px; color:#9B9B9B">开始时间</div>
                         </div>
@@ -39,10 +49,22 @@
                             <div style="font-size:13px; margin-top:4px; color:#9B9B9B">持续时间</div>
                         </div>
                     </div>
+                    <div class="row" style="margin:10px; margin-top:20px;">
+
+                        <div class="col-md-8">
+                            <div style="font-weight:normal; font-size:16px;">{{membership.reading_group.activity.title}}</div>
+                            <div style="font-size:13px; margin-top:4px; color:#9B9B9B">活动名称</div>
+                        </div>
+                        <!-- <div class="col-md-4">
+                            <div style="font-weight:bold; font-size:19px;">{{membership.reading_group.activity.duration}}天</div>
+                            <div style="font-size:13px; margin-top:4px; color:#9B9B9B">持续时间</div>
+                        </div> -->
+                    </div>
+
+
                     <div style="margin:25px">
-                        <div style="float:left; color:green; font-weight:bold;">{{membership.reading_group.name}} </div><div>微信群二维码：</div>
+                        <div style="float:left; color:green; font-weight:normal; padding-right:3px">{{membership.reading_group.name}} </div><div>微信群二维码，请及时扫码入群：</div>
                         <img src="/media/{{membership.reading_group.wechatGroupImage}}" style="height:120px; width:120px; display:block;" />
-                        <div style="color:#FF2828; font-size:10px;">注意: 请及时扫码入群</div>
                     </div>
                     <hr>
                     <div>

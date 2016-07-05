@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from datetime import timedelta
 
 class TestStudent(models.Model):
 	name =  models.CharField(max_length=100)
@@ -74,6 +75,21 @@ class Activity(models.Model):
 		# return self.book.title + str(self.start_date) + " " + self.title
 		# return self.book.title + self.start_date.strftime("%Y-%m-%d %H:%M") + " " + self.title
 		return self.book.title + " - " + self.title + " " + self.start_date.strftime("%Y-%m-%d")
+
+	def is_coming(self):
+		if timezone.now() < self.start_date:
+			return True
+		return False
+
+	def is_finished(self):
+		if timezone.now() > self.start_date + timedelta(days=self.duration):
+			return True
+		return False
+
+	def is_running(self):
+		if timezone.now() > self.start_date and timezone.now() < self.start_date + timedelta(days=self.duration):
+			return True
+		return False
 
 
 # 会员
