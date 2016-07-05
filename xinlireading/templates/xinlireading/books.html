@@ -49,23 +49,27 @@
             </div> -->
 
             <ul style="margin-top:25px">
-                {% for book in books %}
-                <li class="li-book"><a href="/book/{{book.id}}">
-                        <div style="height:calc(166px + 16px); background-color:white; margin-bottom:1px; min-width:500px">
-                            <div style="width:100px; margin-left:16px; height:100%; float:left">
-                                <img src="/media/{{book.cover}}" style="margin-top:16px; height:147px; width:100px; display:block; background-color:green" />
-                            </div>
-                            <div class="div-book-info-panel">
-                                <div>{{book.title}}</div>
-                                <div>作者: {{book.author.name}}</div>
-                                <div>出版社: {{book.publisher}}</div>
-                                <div>豆瓣评分: {{book.price}}</div>
+                {% if books %}
+                    {% for book in books %}
+                    <li class="li-book"><a href="/book/{{book.id}}">
+                            <div style="height:calc(166px + 16px); background-color:white; margin-bottom:1px; min-width:500px">
+                                <div style="width:100px; margin-left:16px; height:100%; float:left">
+                                    <img src="/media/{{book.cover}}" style="margin-top:16px; height:147px; width:100px; display:block; background-color:green" />
+                                </div>
+                                <div class="div-book-info-panel">
+                                    <div>{{book.title}}</div>
+                                    <div>作者: {{book.author.name}}</div>
+                                    <div>出版社: {{book.publisher}}</div>
+                                    <div>豆瓣评分: {{book.price}}</div>
 
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-                {% endfor %}
+                        </a>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <div style="margin-left:30px; color:gray;">无相关书籍</div>
+                {% endif %}
             </ul>
 
         </div>
