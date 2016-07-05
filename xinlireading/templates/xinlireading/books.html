@@ -4,14 +4,37 @@
 {% block content %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/books.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/font-awesome/font-awesome.min.css' %}" />
 
 <div style="padding:20px 0px 0px 44px">
-    {% ifequal request.path '/reading/books/' %}
+    {% ifnotequal request.path '/books/' %}
         <p style="font-size:28px">我的书籍</p>
+        <div id="filterBtn">
+            <a id="favorite-btn" class="btn btn-link btn-link-custom" href="/reading/books/all/">
+                <span class="tag is-dark">
+                    显示所有
+                </span>
+            </a>
+            <a id="favorite-btn" class="btn btn-link btn-link-custom" href="/reading/books/favorite/">
+                <span class="tag is-warning">
+                    收藏
+                </span>
+            </a>
+            <a id="current-btn" class="btn btn-link btn-link-custom" href="/reading/books/current/">
+                <span class="tag is-danger">
+                    正在读
+                </span>
+            </a>
+            <a id="finish-btn" class="btn btn-link btn-link-custom" href="/reading/books/finish/">
+                <span class="tag is-success">
+                    已读
+                </span>
+            </a>
+        </div>
     {% else %}
         <p style="font-size:28px">热门书籍</p>
         <p style="font-size:13px; color:#3A3A3A">寻找你想看的书。在书的详情页里查看可参加的小组。</p>
-    {% endifequal %}
+    {% endifnotequal %}
 </div>
 <div class="container-fluid">
     <div class="row">

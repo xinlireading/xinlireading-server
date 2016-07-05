@@ -189,14 +189,22 @@ class BooksView(LoginRequiredMixin, View):
 	template_name = "xinlireading/books.html"
 	def get(self, request, *args, **kwargs):
 		# print(kwargs);
+		books = Book.objects.none()
+
+
+
 		print(request.path);
 		if request.path == '/books/':
 			books = Book.objects.all()
-		elif request.path == '/reading/books/':
-			favoriteBooks = Book.objects.filter(userfavoritebook__user=request.user)
-			readingBooks = Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user)
-			books = favoriteBooks|readingBooks
-
+		elif '/reading/books/' in request.path:
+			result = {
+				'current': Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user),
+				'favorite': Book.objects.filter(userfavoritebook__user=request.user),
+				'all': Book.objects.filter(userfavoritebook__user=request.user)|Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user),
+				'finish': Book.objects.filter(activitys__readinggroup__readinggroupmembership__user=request.user),
+			}
+			type = self.kwargs['type']
+			books = result[type];
 
 		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
 		return render(request, self.template_name, { 'books': books, 'email_valid': email_valid })

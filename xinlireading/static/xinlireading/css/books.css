@@ -30,3 +30,13 @@
     font-size: 13px;
     color: #505050
 }
+#filterBtn .btn {
+    padding: 0px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.tag {
+    font-size: 11px;
+    height:20px
+
+}
