@@ -271,3 +271,10 @@ class JointLoginResetPasswordView(LoginView):
 		context['reset_password_form'] = ResetPasswordForm()
 		context['is_signin'] = 'yes'
 		return context
+
+class SettingsAccountView(LoginRequiredMixin, View):
+	""" Account settings """
+	template_name = "xinlireading/settings-account.html"
+	def get(self, request, *args, **kwargs):
+		email_valid = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+		return render(request, self.template_name, { 'email_valid': email_valid })
