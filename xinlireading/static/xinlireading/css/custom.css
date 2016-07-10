@@ -222,7 +222,6 @@
 .social-icon {
   height: 35px;
   width: 35px;
-  margin-right: 15px;
 }
 
 ul.ul-content li {
@@ -260,9 +259,9 @@ ul.ul-content li {
 .footer-container .div-about-us {
   float: left;
   height: 35px;
-  width: 40%;
-  min-width: 190px;
-  padding-top: 7px;
+  /*width: 40%;*/
+  /*min-width: 190px;*/
+  /*padding-top: 7px;*/
 }
 .div-about-us .ul-content li {
   color: #909090;

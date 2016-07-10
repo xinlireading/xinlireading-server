@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/bootstrap.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/custom.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/base.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/reg.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/validator-custom.css' %}" />
 		<script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 		<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
@@ -15,7 +16,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	</head>
 
-  <body  ng-app="app">
+  <body  ng-app="app" style="background-color:rgba(0, 0, 0, 0.85);">
 	  <div id="root-div">
 		<!-- Header -->
 		<nav class="navbar navbar-inverse navbar-fixed-top navbar-static-top-custom">
@@ -25,9 +26,15 @@
 	        </div>
 			<div id="navbar" class="collapse navbar-collapse">
 	          <ul class="nav navbar-nav navbar-right navbar-right-custom">
-	            {% if is_signin %}
+				{% if is_signup and is_signin %}
+					<!-- Home -->
+					<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/accounts/signup/'">注册</button>
+  					<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/accounts/login/'">登陆</button>
+	            {% elif is_signin %}
+					<!-- Signup -->
 					<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/accounts/signup/'">注册</button>
 	            {% else %}
+					<!-- Login -->
 					<button type="button" class="btn btn-primary btn-primary-custom" onclick="location.href='/accounts/login/'">登陆</button>
 	            {% endif %}
 	          </ul>
@@ -36,13 +43,15 @@
     	</nav>
 
 		<!-- Content -->
-		<div style="min-height:calc(100vh - 120px); background-color:rgba(0, 0, 0, 0.85); padding-top:60px;">
+		<!-- min-height:calc(100vh - 120px); -->
+		<div style="padding-top:60px;">
 		    {% block content %}
 		    {% endblock %}
 		</div>
 
 		<!-- Footer -->
-		<div style="position:fixed; bottom:0; left:0; width:100%">
+		<!-- bottom:0;  -->
+		<div style="position:fixed; left:0;bottom:0; width:100%">
 			{% include "xinlireading/base-footer.html" %}
 		</div>
 	</div>

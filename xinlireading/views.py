@@ -67,7 +67,7 @@ def home(request):
 		'books': Book.objects.all(),
 		'email_valid': True
 	}
-	if (request.user):
+	if (not request.user.is_anonymous()):
 		return redirect('/accounts/profile/');
 	return render(request, 'xinlireading/home.html', context)
 
