@@ -49,27 +49,11 @@
 .label-user-profile-name {
   font-size: 20px;
   font-weight: normal;
-  /*margin: 0px;*/
-  /*padding: 0px;*/
   float: left;
   margin: 0px;
   padding: 0px;
 }
-/*
-.ul-base-user-info-panel {
-  height: 90px;
-  column-count: 2;
-  background: yellow;
-  margin: 0px;
-  padding: 0px;
-  text-align: left;
-  align-items: flex-start;
-}
 
-.ul-base-user-info-panel li {
-  list-style-type: none;
-  display: inline-block;
-}*/
 .div-user-info-photo {
   height: 90px;
   float: left
@@ -135,7 +119,6 @@
 
 
 .list-group-item-custom .title {
-  /*font-weight: bold;*/
   font-size: 12px;
 }
 .list-group-item-custom label {
