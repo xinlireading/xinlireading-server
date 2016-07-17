@@ -10,9 +10,8 @@
 <script type="text/javascript" src="{% static 'xinlireading/js/jquery-2.2.4.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'xinlireading/js/validator.js' %}"></script>
 
-<div class="container-fluid">
   <div class="row">
-      <div style="height:auto; min-height:520px" class="col-md-3">
+      <div class="col-md-3">
           <div class="div-user-info-container">
 
             <div class="div-base-user-info-panel">
@@ -60,7 +59,7 @@
           <div style="margin-top:34px; background-color:white;">
               <div style="padding:25px 20px; padding-top:20px; padding-bottom:0px; font-size:18px; font-weight:bold" class="xl-title">我的活动</div>
               <div style="padding:17px 20px; font-size:14px; margin-top:10px; font-weight:bold">即将开始</div>
-              <div style="padding: 0px 15px; font-size:13px; height:100vh">
+              <div style="padding: 0px 14px; font-size:13px;">
                   {% if membership %}
                   <ul>
                       {% for m in membership %}
@@ -83,5 +82,4 @@
       </div>
   </div>
 
-</div>
 {% endblock %}

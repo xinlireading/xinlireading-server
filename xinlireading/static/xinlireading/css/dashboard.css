@@ -1,9 +1,10 @@
 
 .div-user-info-container {
   /*background-color: yellow;*/
-  display: table-cell;
-  width: 300px;
-  padding-left: 30px;
+  /*display: table-cell;*/
+  /*width: 300px;*/
+  width: 100%;
+  /*padding-left: 30px;*/
   padding-top: 30px;
 }
 
@@ -36,16 +37,10 @@
 
 .div-my-books-total-panel {
   /*background-color: #efdecd;*/
-  height: 200px;
+  /*height: 200px;*/
   /*padding-left: 40px;*/
 }
 
-.col-md-3 {
-    padding-left: 0px;
-}
-.col-md-8 {
-    padding-left: 0px;
-}
 .img-user-profile-photo {
   height: 90px;
   width: 90px;

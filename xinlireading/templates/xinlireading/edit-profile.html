@@ -14,158 +14,156 @@
 
 <form id="myForm" method="post" action="" data-toggle="validator" role="form" ng-controller="Ctrl">
   {% csrf_token %}
-      <div class="div-root-container">
-        <!-- 修改资料 标题 -->
-        <div class="div-title-panel"><label class="xl-title">修改资料</label></div>
-        <!-- 基本信息 标题 -->
-        <div class="div-baseinfo-label-panel"><label>基本信息</label></div>
-          <div>
-            <!-- 用户信息 -->
-            <div class="div-userinfo-panel">
-              <div class="container-fluid">
+    <!-- 修改资料 标题 -->
+    <div class="div-title-panel page-title">修改资料</div>
+    <!-- 基本信息 标题 -->
+    <div class="div-baseinfo-label-panel"><label>基本信息</label></div>
+      <div>
+        <!-- 用户信息 -->
+        <div class="div-userinfo-panel">
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4 col-md-4 div-col-userphoto">
                   <div class="row">
-                    <div class="col-sm-4 col-md-4 div-col-userphoto">
-                      <div class="row">
-                        <!-- <img id="photoImage" class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{request.user.userprofile.avatar_url}}' > -->
-                        <img id="photoImage" class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{ form.avatar_url.value|default:"avatar/avatar.png" }}' >
-                        <input type="hidden" name="avatar_url" id="avatar_url">
-                      </div>
-                      <div class="row">
-                        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-link btn-link-custom"><span class="glyphicon glyphicon-pencil"></span>编辑头像</button>
-                      </div>
+                    <!-- <img id="photoImage" class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{request.user.userprofile.avatar_url}}' > -->
+                    <img id="photoImage" class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{ form.avatar_url.value|default:"avatar/avatar.png" }}' >
+                    <input type="hidden" name="avatar_url" id="avatar_url">
+                  </div>
+                  <div class="row">
+                    <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-link btn-link-custom"><span class="glyphicon glyphicon-pencil"></span>编辑头像</button>
+                  </div>
+                </div>
+                <div class="col-sm-8 col-md-8 div-col-userinfo">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label id="namelabel">名字</label>
                     </div>
-                    <div class="col-sm-8 col-md-8 div-col-userinfo">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <label id="namelabel">名字</label>
-                        </div>
-                        <div class="col-md-9">
-                          <div class="form-group">
-                              {% render_field form.name|attr:"required"|attr:"maxlength:20"|attr:"data-customlengthvalidator:true" class+="form-control" placeholder=" " %}
-                            <div class="help-block with-errors"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <label id="addresslabel">住在<label>
-                        </div>
-                        <div class="col-md-5">
-                          <!-- {% render_field form.name class+="form-control" placeholder=" " %} -->
-                          <div class="form-group">
-                              {% render_field form.address_country|attr:"required"|attr:"data-error:请输入你的住址" class+="form-control" placeholder=" " %}
-                            <div class="help-block with-errors"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <!-- {% render_field form.name class+="form-control" placeholder=" " %} -->
-                          <div class="form-group">
-                              {% render_field form.address_city|attr:"required"|attr:"data-error:请输入你的住址" class+="form-control" %}
-                            <div class="help-block with-errors"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <label id="birthlabel">出生日期</label>
-                        </div>
-                        <div class="col-md-5">
-                          <!-- {% render_field form.birth_year class+="form-control" placeholder=" " %} -->
-                          <div class="form-group">
-                              {% render_field form.birth_year|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
-                            <div class="help-block with-errors"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-2">
-                          <!-- {% render_field form.birth_month class+="form-control" placeholder=" " %} -->
-                          <div class="form-group">
-                              {% render_field form.birth_month|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
-                            <div class="help-block with-errors"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-2">
-                          <!-- {% render_field form.birth_day class+="form-control" placeholder=" " %} -->
-                          <div class="form-group">
-                              {% render_field form.birth_day|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
-                            <div class="help-block with-errors"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <label id="genderlabel">性别</label>
-                        </div>
-                        <div class="col-md-5">
-                          <!-- {% render_field form.gender class+="form-control" placeholder=" " %} -->
-                          <div class="form-group">
-                              {% render_field form.gender|attr:"required"|attr:"data-error:请选择您的性别" class+="form-control" placeholder=" " %}
-                            <div class="help-block with-errors"></div>
-                          </div>
-                          <!-- <select id="gender_select" class="form-control">
-                            <option>请选择你的性别</option>
-                            <option>女</option>
-                            <option>男</option>
-                          </select> -->
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-3">
-                          <label id="introlabel">个人简介</label>
-                        </div>
-                        <div class="col-md-9">
-                          <!-- {% render_field form.intro class+="form-control" placeholder=" " %} -->
-                          <div class="form-group">
-                              {% render_field form.intro class+="form-control" placeholder="介绍一下你自己吧" %}
-                            <div class="help-block with-errors"></div>
-                          </div>
-                        </div>
+                    <div class="col-md-9">
+                      <div class="form-group">
+                          {% render_field form.name|attr:"required"|attr:"maxlength:20"|attr:"data-customlengthvalidator:true" class+="form-control" placeholder=" " %}
+                        <div class="help-block with-errors"></div>
                       </div>
                     </div>
                   </div>
-              </div>
-            </div>
-
-            <!-- 保存按钮 -->
-            <div class="div-savebtn-panel">
-              <button id="saveButton" type="button" ng-click="save()" class="btn btn-primary btn-primary-custom">保存</button>
-            </div>
-          </div>
-      </div>
-
-      <!-- Modal -->
-      <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-          <!-- Modal content-->
-          <div class="modal-content modal-content-custom">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">编辑资料头像</h4>
-            </div>
-            <div class="modal-body">
-              <!-- <p>Some text in the modal.</p> -->
-              <input type="file" id="fileInput" accept="image/*" />
-              <p class="guide-message">若要裁剪图像，拖动或移动要截取的选择区域然后点击“保存”按钮。</p>
-              <div>
-                <div class="row">
-                  <div>
-                    <div class="col-md-8 uploadimage-container">
-                      <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label id="addresslabel">住在<label>
+                    </div>
+                    <div class="col-md-5">
+                      <!-- {% render_field form.name class+="form-control" placeholder=" " %} -->
+                      <div class="form-group">
+                          {% render_field form.address_country|attr:"required"|attr:"data-error:请输入你的住址" class+="form-control" placeholder=" " %}
+                        <div class="help-block with-errors"></div>
+                      </div>
                     </div>
                     <div class="col-md-4">
-                      <img id="croppedImage" ng-src="{$myCroppedImage$}" />
+                      <!-- {% render_field form.name class+="form-control" placeholder=" " %} -->
+                      <div class="form-group">
+                          {% render_field form.address_city|attr:"required"|attr:"data-error:请输入你的住址" class+="form-control" %}
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label id="birthlabel">出生日期</label>
+                    </div>
+                    <div class="col-md-5">
+                      <!-- {% render_field form.birth_year class+="form-control" placeholder=" " %} -->
+                      <div class="form-group">
+                          {% render_field form.birth_year|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <!-- {% render_field form.birth_month class+="form-control" placeholder=" " %} -->
+                      <div class="form-group">
+                          {% render_field form.birth_month|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <!-- {% render_field form.birth_day class+="form-control" placeholder=" " %} -->
+                      <div class="form-group">
+                          {% render_field form.birth_day|attr:"required"|attr:"data-error:请选择出生日期" class+="form-control" %}
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label id="genderlabel">性别</label>
+                    </div>
+                    <div class="col-md-5">
+                      <!-- {% render_field form.gender class+="form-control" placeholder=" " %} -->
+                      <div class="form-group">
+                          {% render_field form.gender|attr:"required"|attr:"data-error:请选择您的性别" class+="form-control" placeholder=" " %}
+                        <div class="help-block with-errors"></div>
+                      </div>
+                      <!-- <select id="gender_select" class="form-control">
+                        <option>请选择你的性别</option>
+                        <option>女</option>
+                        <option>男</option>
+                      </select> -->
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label id="introlabel">个人简介</label>
+                    </div>
+                    <div class="col-md-9">
+                      <!-- {% render_field form.intro class+="form-control" placeholder=" " %} -->
+                      <div class="form-group">
+                          {% render_field form.intro class+="form-control" placeholder="介绍一下你自己吧" %}
+                        <div class="help-block with-errors"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
-              <button id="save-photo-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">保存</button>
+          </div>
+        </div>
+
+        <!-- 保存按钮 -->
+        <div class="div-savebtn-panel">
+          <button id="saveButton" type="button" ng-click="save()" class="btn btn-primary btn-primary-custom">保存</button>
+        </div>
+      </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content modal-content-custom">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">编辑资料头像</h4>
+        </div>
+        <div class="modal-body">
+          <!-- <p>Some text in the modal.</p> -->
+          <input type="file" id="fileInput" accept="image/*" />
+          <p class="guide-message">若要裁剪图像，拖动或移动要截取的选择区域然后点击“保存”按钮。</p>
+          <div>
+            <div class="row">
+              <div>
+                <div class="col-md-8 uploadimage-container">
+                  <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+                </div>
+                <div class="col-md-4">
+                  <img id="croppedImage" ng-src="{$myCroppedImage$}" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel" data-dismiss="modal">取消</button>
+          <button id="save-photo-btn" type="button" class="btn btn-primary btn-primary-custom" data-dismiss="modal">保存</button>
+        </div>
       </div>
+    </div>
 </form>
 
 <script type="text/javascript">

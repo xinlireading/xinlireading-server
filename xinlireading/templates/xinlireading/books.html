@@ -6,9 +6,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/css/books.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'xinlireading/font-awesome/font-awesome.min.css' %}" />
 
-<div style="padding:20px 0px 0px 44px">
+<div>
     {% ifnotequal request.path '/books/' %}
-        <p style="font-size:28px">我的书籍</p>
+        <div class="page-title">我的书籍</div>
         <div id="filterBtn">
             <a id="favorite-btn" class="btn btn-link btn-link-custom" href="/reading/books/all/">
                 <span class="tag is-dark">
@@ -32,11 +32,10 @@
             </a>
         </div>
     {% else %}
-        <p style="font-size:28px">热门书籍</p>
+        <div class="page-title">热门书籍</div>
         <p style="font-size:13px; color:#3A3A3A">寻找你想看的书。在书的详情页里查看可参加的小组。</p>
     {% endifnotequal %}
 </div>
-<div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-md-9">
             <!-- <div style="background-color:white; height:100px;padding-top:27px">
@@ -48,7 +47,7 @@
                 </div>
             </div> -->
 
-            <ul style="margin-top:25px">
+            <ul style="margin-top:15px">
                 {% if books %}
                     {% for book in books %}
                     <li class="li-book"><a href="/book/{{book.id}}">
@@ -76,7 +75,6 @@
         <div class="col-md-3" style="min-height:200px">
 
         </div>
-    </div>
 </div>
 
 {% endblock %}

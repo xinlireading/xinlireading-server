@@ -10,12 +10,11 @@
 <form id="myForm">
     <div id="message" style="display:none" ng-class="messageClass" role="alert" ng-bind="error"></div>
     {% csrf_token %}
-    <div class="container-fluid">
-        <div style="font-size:24px; margin-left:20px; margin-top:20px">活动报名详情</div>
+        <div class="page-title">活动报名详情</div>
         <div class="row">
             <div class="col-md-9">
-                <div class="left-container">
-                    <div style="height:auto; margin:15px; padding:20px; background-color:#F6FBFD;">
+                <div class="left-container" style="padding:20px 20px">
+                    <div style="padding:5px; background-color:#F6FBFD;">
                         <div style="width:100%; height:30px">
                             <div style="font-weight:normal; float:left">所在小组:</div><div style="color:green; font-weight:normal; float:left; margin-left:5px">{{membership.reading_group.name}}</div>
                             {% if membership.reading_group.activity.is_coming %}
@@ -32,13 +31,13 @@
                         <div style="margin-top:3px">请准备好书籍，按时参加。</div>
                     </div>
                     <hr >
-                    <div style="height:auto; margin:15px; padding:20px; background-color:#FFFBFB;">
+                    <div style="height:auto; padding:5px; background-color:#FFFBFB;">
                         <div style="font-weight:bold; float:left; height:30px; width:100%">规则</div>
                         <div>{{membership.reading_group.activity.rule|safe}}</div>
                     </div>
                     <hr>
 
-                    <div class="row" style="margin:10px">
+                    <div class="row">
 
                         <div class="col-md-8">
                             <div style="font-weight:bold; font-size:19px;">{{membership.reading_group.activity.start_date|date:'Y-m-d'}}</div>
@@ -49,7 +48,7 @@
                             <div style="font-size:13px; margin-top:4px; color:#9B9B9B">持续时间</div>
                         </div>
                     </div>
-                    <div class="row" style="margin:10px; margin-top:20px;">
+                    <div class="row" style="margin-top:20px;">
 
                         <div class="col-md-8">
                             <div style="font-weight:normal; font-size:16px;">{{membership.reading_group.activity.title}}</div>
@@ -63,17 +62,17 @@
 
                     <hr>
 
-                    <div style="margin:25px">
+                    <div>
                         <div style="font-weight:bold; margin-bottom:10px">通讯工具：微信</div>
                         <div style="float:left; color:green; font-weight:normal; padding-right:3px"></div><div>所在小组微信群二维码，请及时扫码入群：</div>
                         <img src="/media/{{membership.reading_group.wechatGroupImage}}" style="height:120px; width:120px; display:block;" />
                     </div>
                     <hr>
                     <div>
-                        <div style="font-size:18px; margin-left:25px;">相关书籍</div>
+                        <div style="font-size:18px">相关书籍</div>
                         <a href="/book/{{membership.reading_group.activity.book.id}}">
-                                <div class="row" style="min-width:500px; margin-top:20px;">
-                                    <div class="col-md-4" style="width:140px; margin-left:25px; height:100%">
+                                <div class="row" style="min-width:500px; margin-top:10px;">
+                                    <div class="col-md-4" style="width:140px; height:100%">
                                         <img src="/media/{{membership.reading_group.activity.book.cover}}" style="height:178px; width:120px; display:block; background-color:green" />
                                     </div>
                                     <div class="col-md-4 div-book-info-panel">
@@ -85,7 +84,7 @@
                                 </div>
                             </a>
                     </div>
-                    <div style="height:50px; width:100%"></div>
+                    <!-- <div style="height:50px; width:100%"></div> -->
                 </div>
             </div>
             <div class="col-md-3 book-reading-info-panel">
@@ -95,5 +94,5 @@
                 </div>
             </div>
         </div>
-    </div>
+</form>
 {% endblock %}
