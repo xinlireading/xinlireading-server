@@ -65,3 +65,16 @@ hr {
     width: auto;
     margin: 0px;
 }*/
+
+.navbar-inverse .navbar-toggle {
+    background-color: white;
+    border-width: 0px;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: gray;
+    border-width: 0px;
+}
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color: white;
+    border-width: 0px;
+}

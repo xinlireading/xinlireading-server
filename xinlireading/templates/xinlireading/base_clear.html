@@ -13,17 +13,13 @@
 	<script type="text/javascript" src="{% static 'xinlireading/js/bootstrap.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'xinlireading/js/angular.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'xinlireading/js/base-angularapp-settings.js' %}"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
 </head>
 
-<body ng-app="app" ng-controller="BaseCtrl" >
+<body ng-app="app" ng-controller="BaseCtrl">
 	<div style="">
 		<div id="message" style="display:none; z-index:1031; " ng-class="messageClass" role="alert" ng-bind="message"></div>
-
-		<!-- Base Content -->
-
 		{% block base_content %}
-
 		{% endblock %}
 	</div>
 
