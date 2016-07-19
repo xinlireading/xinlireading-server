@@ -78,3 +78,24 @@ hr {
     background-color: white;
     border-width: 0px;
 }
+
+.nav {
+    display: inline;
+    text-align: left;
+}
+
+#navbar2 > ul > li > a {
+    padding-left:5px;
+    padding-top: 5px;
+}
+#navbar2 > ul {
+    margin: 0px;
+}
+
+#navbar2 {
+    border-top-color: lightgray;
+    border-top-width: 1px;
+    border-style: double;
+    padding-top: 10px;
+
+}
