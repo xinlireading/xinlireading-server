@@ -9,9 +9,10 @@
   width: 40%;
   min-width: 350px;
   max-width: 455px;
-  /*background-color: rgba(0, 0, 0, 0.6);*/
-  /*top:160px;*/
-  left:50px;
+  /*margin: 0px auto;*/
+  left:100px;
+  top:120px;
+  background-color: rgba(0, 0, 0, 0.6);
   text-align: center;
   position: absolute;
 }
@@ -50,13 +51,21 @@
   /*margin: 20px;*/
   /*width: calc(100% - 40px);*/
   padding: 20px 10px;
-  padding-left: 25px;
+  /*padding-left: 25px;*/
   list-style-type:none;
 }
 
 .book-container{
-  width:149px;
-  height:246px;
+    /*149px;*/
+  /*width:130px;*/
+  width:100%;
+  /*246px;*/
+  height:231px;
   /*background-color:red;*/
   margin: 10px;
+}
+
+#main-div .row {
+    padding-left: 0px;
+    padding-right: 0px;
 }

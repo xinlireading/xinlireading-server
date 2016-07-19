@@ -44,16 +44,13 @@
 
 		<!-- Content -->
 		<!-- min-height:calc(100vh - 120px); -->
-		<div style="padding-top:60px;">
+			<div id="root-div" class="container-fluid" style="padding-top:60px; min-height:calc(100vh - 55px); padding-left:0px; padding-right:0px">
 		    {% block content %}
 		    {% endblock %}
 		</div>
 
 		<!-- Footer -->
-		<!-- bottom:0;  -->
-		<div style="position:fixed; left:0;bottom:0; width:100%">
 			{% include "xinlireading/base-footer.html" %}
-		</div>
 	</div>
 	<body>
 </html>
