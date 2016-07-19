@@ -10,11 +10,10 @@
 
 <div class="page-title">账户设置</div>
 <div style="margin:0px 0px;" ng-controller="SettingsCtrl" data-ng-init="init()">
-<table class="table table-custom">
+<!-- <table class="table table-custom">
     <tr>
         <td>电子邮件</td>
         <td>{{request.user.email}}</td>
-        <!-- <td><span class="glyphicon glyphicon-pencil"></span></td> -->
         <td></td>
     </tr>
     <tr>
@@ -50,9 +49,47 @@
         </td>
         <td><a><span id="change_password_pencil_span" class="glyphicon glyphicon-pencil"></span></a></td>
     </tr>
-</table>
-</div>
+</table> -->
+<div id="setting-base-div">
+    <div class="row">
+        <div class="col-md-3">电子邮件</div>
+        <div class="col-md-9"><td>{{request.user.email}}</td></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">密码</div>
+        <div class="col-md-9">
+            <div ng-hide="showChangePasswordPanel"> ******
+                <a><span id="change_password_pencil_span" class="glyphicon glyphicon-pencil"></span></a>
+            </div>
+            <div id="change_password_td" ng-show="showChangePasswordPanel">
+                <div id="change_password_div">
+                    <div class="form-group">
+                        <div>原密码</div>
+                        <input type="password" class="form-control" data-error="旧密码不能为空" ng-model="old_password" required>
+                        <div class="help-block custom-help-block with-errors"></div>
+                    </div>
 
+                    <div class="form-group">
+                        <div>新密码</div>
+                        <input id="password1" type="password" class="form-control" data-minlength="6" max-length="20" data-error="请输入6至20个字符" ng-model="password1" required>
+                        <div class="help-block custom-help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <div>确认新密码</div>
+                        <input id="password2" type="password" class="form-control" data-match="#password1" data-error="两次输入的密码不匹配" data-match-error="两次输入的密码不匹配" ng-model="password2" required>
+                        <div class="help-block custom-help-block with-errors"></div>
+                    </div>
+                    <div>
+                        <button id="change_password_cancel_btn" class="btn btn-primary btn-primary-custom btn-primary-custom-cancel">取消</button>
+                        <button type="submit" id="change_password_submit_btn" class="btn btn-primary btn-primary-custom">确认</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <script>
     app.controller('SettingsCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.showChangePasswordPanel = false;

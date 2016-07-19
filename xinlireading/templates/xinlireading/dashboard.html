@@ -57,23 +57,42 @@
 
       <div class="col-md-9">
           <div style="margin-top:34px; background-color:white;">
-              <div style="padding:25px 20px; padding-top:20px; padding-bottom:0px; font-size:18px; font-weight:bold" class="xl-title">我的活动</div>
-              <div style="padding:17px 20px; font-size:14px; margin-top:10px; font-weight:bold">即将开始</div>
+              <div style="padding:25px 20px; padding-top:15px; padding-bottom:10px; font-size:18px; font-weight:bold" class="xl-title">我的活动</div>
+              <!-- <div style="padding:0px 20px; font-size:14px; margin-top:10px; font-weight:bold">即将开始</div> -->
               <div style="padding: 0px 14px; font-size:13px;">
                   {% if membership %}
-                  <ul>
+                  <!-- <ul id="my-activities">
                       {% for m in membership %}
                           <a href="/book/{{m.reading_group.activity.book.id}}/activity/{{m.reading_group.activity.id}}/sign/">
-                              <li>
+                              <li style="width:100%">
+                                <div style="width:100%">
                                   <div style="float:left; color:#1fc8db;">《{{ m.reading_group.activity.book.title }}》:</div>
                                   <div style="float:left; color:#1fc8db; margin:0px 5px">{{ m.reading_group.activity.title }}</div>
                                   <div style="float:left; margin:0px 10px;">{{ m.reading_group.activity.start_date|date:'活动时间: Y-m-d' }}</div>
                                   <div style="margin:0px 10px;">{{ m.reading_group.activity.duration }}天</div>
-                                  <hr />
+                                </div>
                               </li>
                           </a>
                       {% endfor %}
-                  <ul>
+                  </ul> -->
+                  <div class="container-fluid" style="padding-left:14px;">
+                      {% for m in membership %}
+                          <div class="row" style="padding-top:5px; padding-bottom:5px">
+                              <div class="col-md-5 col-sm-5 col-xs-12" style="padding-left:0px;">
+                                  <div>
+                                    <div style="float:left; color:#1fc8db;">《{{ m.reading_group.activity.book.title }}》:</div>
+                                    <div style="float:left; color:#1fc8db; margin:0px 5px">{{ m.reading_group.activity.title }}</div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left:0px">
+                                  <div>
+                                      <div style="float:left; margin:0px 10px;">{{ m.reading_group.activity.start_date|date:'活动时间: Y-m-d' }}</div>
+                                      <div style="margin:0px 10px;">{{ m.reading_group.activity.duration }}天</div>
+                                  </div>
+                              </div>
+                          </div>
+                      {% endfor %}
+                  </div>
                   {% else %}
                   <div style="color:gray; padding-left:5px">无相关活动</div>
                   {% endif %}

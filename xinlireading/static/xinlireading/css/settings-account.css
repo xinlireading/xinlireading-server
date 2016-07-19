@@ -1,36 +1,38 @@
-.table-custom tr:hover {
-    background-color: white
-}
 
 #change_password_div input {
     width: 60%;
     margin: 2px 0px 10px 0px;
 }
 
-.table {
-    font-size: 13px
-}
-
-.table tr {
-    height: 60px
-}
-
-.table tr td:first-child {
-    font-weight: bold;
-    width: 300px;
-}
-.table tr td:last-child {
-    width: 50px;
-}
-
-.table > tbody > tr > td {
-    border-color: #e4e4e4;
-    padding: 22px 10px;
-}
-
-.table tr:first-child td {
-    border-top: 0px
-}
-a {
+#setting-base-div a {
     color: black
+}
+
+#setting-base-div {
+    background-color: white;
+    font-size: 13px;
+}
+#setting-base-div .row {
+    margin:0px 0px;
+    border-spacing: 5px;
+    border-bottom: 1px solid #e4e4e4;
+}
+#setting-base-div .row > div {
+    padding: 5px 15px
+}
+#setting-base-div .row > div:first-child{
+    font-weight: bold;
+}
+
+#setting-base-div .row:first-child {
+    /*margin-top:10px;*/
+}
+
+#setting-base-div .row:last-child {
+    /*margin-bottom: 10px;*/
+    border-width: 0px;
+}
+
+#setting-base-div .row a {
+    float:right
 }

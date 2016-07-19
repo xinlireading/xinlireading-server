@@ -25,7 +25,7 @@
             <li><a href="/books/">热门活动</a></li>
             <li><a href="/account/dashboard">个人中心</a></li>
             <li><a href="/settings/account/">帐户设置</a></li>
-            <li><a id="logout-btn" href="">退出</a></li>
+            <li><a id="logout-btn-2" href="">退出</a></li>
           </ul>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
@@ -76,6 +76,7 @@ app.controller('headerCtrl', ['$scope', '$http', '$timeout', '$window', function
 
     };
     angular.element(document.querySelector('#logout-btn')).on('click', handleLogoutBtnClick);
+    angular.element(document.querySelector('#logout-btn-2')).on('click', handleLogoutBtnClick);
 }]);
 
 </script>
