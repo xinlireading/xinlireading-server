@@ -5,3 +5,36 @@
 #navbar2 li a {
     color: white
 }
+
+.nav {
+    background: transparent
+}
+
+.div-content-signup-panel {
+  width: 366px;
+  max-width: 100%;
+  height: 392px;
+  background-color: white;
+  margin: 0 auto;
+}
+
+.div-content-signup-panel .title {
+  font-size: 20px;
+  margin-left: 15px;
+  padding-top: 22px;
+  color: #444444;
+}
+
+.div-content-signup-panel .subtitle {
+  font-size: 13px;
+  /*margin-left: 15px;*/
+  margin: 18px;
+  /*padding-top: 15px;*/
+  color: #444444;
+}
+
+.div-content-signup-panel .copyright {
+  font-size: 12px;
+  margin-left: 15px;
+  color: #444444;
+}

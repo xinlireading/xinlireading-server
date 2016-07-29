@@ -281,33 +281,7 @@ ul.ul-content li {
   content: none;
 }
 
-.div-content-signup-panel {
-  width: 366px;
-  height: 392px;
-  background-color: white;
-  margin: 0 auto;
-}
 
-.div-content-signup-panel .title {
-  font-size: 20px;
-  margin-left: 15px;
-  padding-top: 22px;
-  color: #444444;
-}
-
-.div-content-signup-panel .subtitle {
-  font-size: 13px;
-  /*margin-left: 15px;*/
-  margin: 18px;
-  /*padding-top: 15px;*/
-  color: #444444;
-}
-
-.div-content-signup-panel .copyright {
-  font-size: 12px;
-  margin-left: 15px;
-  color: #444444;
-}
 
 .form-group-custom {
   padding: 0px 15px;
@@ -322,10 +296,11 @@ ul.ul-content li {
 }
 
 .btn-primary-custom-submit {
-  width: 340px;
+  width: 92%;
   height: 40px;
-  margin: 0px 13px;
+  margin: 0 calc((100% - 92%)/2);
   margin-top: 10px;
+  text-align: center;
 }
 
 .has-error .checkbox-custom {
