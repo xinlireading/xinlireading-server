@@ -17,8 +17,10 @@
     <!-- 修改资料 标题 -->
     <div class="div-title-panel page-title">修改资料</div>
     <!-- 基本信息 标题 -->
-    <div class="div-baseinfo-label-panel"><label>基本信息</label></div>
-      <div>
+    <div class="div-baseinfo-label-panel"><label>基本信息</label>
+    </div>
+
+    <div>
         <!-- 用户信息 -->
         <div class="div-userinfo-panel">
           <div class="container-fluid">
@@ -27,7 +29,7 @@
                   <div class="row">
                     <!-- <img id="photoImage" class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{request.user.userprofile.avatar_url}}' > -->
                     <img id="photoImage" class="img-circle img-user-profile-photo" src='http://127.0.0.1:8000/media/{{ form.avatar_url.value|default:"avatar/avatar.png" }}' >
-                    <input type="hidden" name="avatar_url" id="avatar_url">
+                    <input type="hidden" name="avatar_url" id="avatar_url" value="{{form.avatar_url.value}}">
                   </div>
                   <div class="row">
                     <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-link btn-link-custom"><span class="glyphicon glyphicon-pencil"></span>编辑头像</button>
@@ -128,8 +130,8 @@
         <div class="div-savebtn-panel">
           <button id="saveButton" type="button" ng-click="save()" class="btn btn-primary btn-primary-custom">保存</button>
         </div>
-      </div>
-  </div>
+    </div>
+
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -149,7 +151,7 @@
             <div class="row">
               <div>
                 <div class="col-md-8 uploadimage-container">
-                  <img-crop image="myImage" result-image="{$myCroppedImage$}"></img-crop>
+                  <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
                 </div>
                 <div class="col-md-4">
                   <img id="croppedImage" ng-src="{$myCroppedImage$}" />
@@ -164,6 +166,7 @@
         </div>
       </div>
     </div>
+  </div>
 </form>
 
 <script type="text/javascript">
